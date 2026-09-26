@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Mathatised eSports</title>
+  <meta name="description" content="Contact Mathatised eSports for tournament questions, partnerships, sponsorship, hosting an event, media enquiries or joining the team. Send a message or join our Discord.">
+  <meta name="theme-color" content="#16223f">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mathatised eSports">
+  <meta property="og:title" content="Contact | Mathatised eSports">
+  <meta property="og:description" content="Get in touch with Mathatised eSports.">
+  <meta property="og:image" content="/assets/img/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>try{if(localStorage.getItem("mx-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+</head>
+<body data-page="contact">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header id="site-header" class="site-header"></header>
+
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-inner">
+        <div>
+          <p class="eyebrow">Contact</p>
+          <h1 id="hero-title">Get in touch.</h1>
+          <p class="lead">For general inquiries, partnerships, tournament questions, collaboration, media or anything else, we're one message away.</p>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="#contact-form">Send a Message</a>
+            <a class="btn btn-light" data-link="email">Email Us</a>
+            <a class="btn btn-light" data-link="discord">Join Discord</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Contact options">
+      <div class="container contact-grid">
+        <!-- CONTACT FORM -->
+        <article class="card form-card" id="contact-form">
+          <p class="eyebrow eyebrow--sm">Message us</p>
+          <h2>Send us a message</h2>
+          <p>Fill this in and it lands straight in our inbox. We'll reply to the email you give us.</p>
+
+          <form data-form data-subject="Mathatised website — Contact" novalidate>
+            <div class="form-grid">
+              <div class="field">
+                <label for="c-name">Your name <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" id="c-name" name="name" type="text" autocomplete="name" required maxlength="120">
+              </div>
+              <div class="field">
+                <label for="c-email">Email address <span class="req" aria-hidden="true">*</span></label>
+                <input class="input" id="c-email" name="email" type="email" autocomplete="email" required maxlength="160">
+              </div>
+              <div class="field">
+                <label for="c-topic">Topic <span class="req" aria-hidden="true">*</span></label>
+                <select class="input" id="c-topic" name="topic" required data-render="contact-topics"></select>
+              </div>
+              <div class="field">
+                <label for="c-org">Team or organisation <span class="hint">(optional)</span></label>
+                <input class="input" id="c-org" name="organisation" type="text" autocomplete="organization" maxlength="160">
+              </div>
+              <div class="field field--full">
+                <label for="c-discord">Discord username <span class="hint">(optional)</span></label>
+                <input class="input" id="c-discord" name="discord" type="text" maxlength="80">
+              </div>
+              <div class="field field--full">
+                <label for="c-message">Message <span class="req" aria-hidden="true">*</span></label>
+                <textarea class="input" id="c-message" name="message" required maxlength="5000" placeholder="Tell us what you need."></textarea>
+              </div>
+            </div>
+            <div class="hp" aria-hidden="true"><label for="c-honey">Leave this empty</label><input id="c-honey" type="text" name="_honey" tabindex="-1" autocomplete="off"></div>
+            <div class="form-actions">
+              <button class="btn btn-gold" type="submit"><span data-icon="send"></span>Send Message</button>
+              <p class="form-privacy">Fields marked * are required. We only use your details to reply to you.</p>
+            </div>
+            <div class="form-status" role="status" aria-live="polite" tabindex="-1" hidden></div>
+          </form>
+        </article>
+
+        <div class="contact-aside">
+          <article class="card contact-card">
+            <span class="card-icon" data-icon="mail"></span>
+            <h2>Email</h2>
+            <p>The fastest route for partnerships, media and anything that needs a written reply.</p>
+            <a class="contact-email" data-link="email" data-email-text>mathatisedesports@gmail.com</a>
+            <ul class="dot-list">
+              <li>Tournament and registration questions</li>
+              <li>Partnerships, sponsorship and collaboration</li>
+              <li>Hosting an event with us</li>
+              <li>Media and broadcast enquiries</li>
+              <li>Joining the Mathatised team</li>
+            </ul>
+          </article>
+
+          <article class="card contact-card">
+            <span class="card-icon" data-icon="discord"></span>
+            <h2>Join the Discord community</h2>
+            <p>Registration news, match schedules, seeding updates and everything about our competitions goes out in Discord first. It's also the quickest way to reach the team.</p>
+            <a class="btn btn-gold btn-sm" data-link="discord">Join Discord</a>
+            <div class="divider"></div>
+            <p class="eyebrow eyebrow--sm">Follow Mathatised eSports</p>
+            <div data-render="socials"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--tight" style="padding-top:0" aria-labelledby="compete-title">
+      <div class="container">
+        <div class="strip reveal">
+          <div>
+            <h2 id="compete-title">Looking to compete?</h2>
+            <p>Start with the Championship Series format and bring your team.</p>
+          </div>
+          <div class="strip-actions">
+            <a class="btn btn-gold" href="mecs.html">Explore MECS</a>
+            <a class="btn btn-outline" href="join-us.html">Join the Team</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="site-footer"></footer>
+</body>
+</html>
