@@ -363,7 +363,7 @@ dl, dd { margin: 0; }
 .cta-band h2 { color: #fff; font-size: clamp(1.7rem, 3vw, 2.4rem); max-width: 24ch; margin: 0 auto; }
 .cta-band p { color: var(--on-navy-muted); margin: 18px auto 0; max-width: 56ch; font-size: 1.05rem; }
 .cta-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 34px; }
-.cta-band--light { background: var(--bg); color: var(--text); border-top: 1px solid var(--border); }
+.cta-band--light { background: var(--bg); color: var(--text); }
 .cta-band--light::before { opacity: 0.12; }
 [data-theme="dark"] .cta-band--light::before { filter: none; opacity: 0.12; }
 .cta-band--light h2 { color: var(--heading); }
