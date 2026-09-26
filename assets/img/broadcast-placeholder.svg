@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 550" role="img" aria-label="Broadcast artwork placeholder">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1c2a4d"/>
+      <stop offset="1" stop-color="#0a1229"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f0d68f"/>
+      <stop offset="0.5" stop-color="#d4ae55"/>
+      <stop offset="1" stop-color="#a47f2c"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="550" fill="url(#bg)"/>
+  <g fill="#ffffff" fill-opacity="0.03">
+    <path d="M0 0 L300 0 L120 550 L0 550 Z"/>
+    <path d="M560 0 L800 0 L800 550 L700 550 Z"/>
+  </g>
+  <g stroke="#d4ae55" stroke-opacity="0.35" fill="none">
+    <path d="M40 60 L260 30 L380 170 L200 300 L60 240 Z M260 30 L200 300 M40 60 L380 170"/>
+    <path d="M520 360 L700 320 L760 480 L600 520 Z M700 320 L600 520"/>
+    <path d="M620 60 L740 40 L770 150 L660 180 Z"/>
+  </g>
+  <!-- geometric play mark -->
+  <g transform="translate(400 275)">
+    <path d="M-150 -170 L170 0 L-150 170 Z" fill="none" stroke="url(#gold)" stroke-width="3"/>
+    <path d="M-110 -110 L90 0 L-110 110 Z" fill="url(#gold)" fill-opacity="0.9"/>
+    <path d="M-110 -110 L-40 0 L-110 110 M-40 0 L90 0" stroke="#0c1530" stroke-opacity="0.35" stroke-width="2" fill="none"/>
+    <path d="M-150 -170 L-110 -110 M170 0 L90 0 M-150 170 L-110 110" stroke="#d4ae55" stroke-opacity="0.6" stroke-width="1.5"/>
+  </g>
+  <rect x="24" y="24" width="752" height="502" fill="none" stroke="#d4ae55" stroke-opacity="0.25"/>
+</svg>
