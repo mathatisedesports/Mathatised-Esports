@@ -161,17 +161,15 @@ window.SITE = {
 
   /* ---------------------------------------------------------------------------
      TEAM (Team page)
-     Replace the placeholders with real people. `image` can point to a photo
-     in assets/img/team/. `socials` is optional — e.g.
+     To add someone, copy a line and change it. Photos live in assets/img/team/
+     (square images work best; assets/img/team-placeholder.svg is a spare
+     placeholder). `tag` is the label on the photo. `socials` is optional — e.g.
        socials: [{ key: "twitch", url: "https://twitch.tv/name" }]
   --------------------------------------------------------------------------- */
   team: [
-    { name: "[Team Member Name]", role: "Founder & Tournament Director", tag: "Competition Structure", bio: "Leads competition design, format structure and the overall direction of Mathatised eSports events.", region: "[Region]", image: "assets/img/team-placeholder.svg", socials: [] },
-    { name: "[Team Member Name]", role: "Head of Broadcast", tag: "Live Production", bio: "Runs production for match days, from stream layout and graphics to the flow of a broadcast.", region: "[Region]", image: "assets/img/team-placeholder.svg", socials: [] },
-    { name: "[Team Member Name]", role: "Lead Caster", tag: "Play-by-Play", bio: "Calls play-by-play and analysis, turning matches into moments the audience remembers.", region: "[Region]", image: "assets/img/team-placeholder.svg", socials: [] },
-    { name: "[Team Member Name]", role: "Social Media & Content", tag: "Player Highlights", bio: "Builds the content around each competition and highlights standout player performances.", region: "[Region]", image: "assets/img/team-placeholder.svg", socials: [] },
-    { name: "[Team Member Name]", role: "Community & Discord Moderation", tag: "Community", bio: "Keeps the community organised, answers players and supports teams through registration and match days.", region: "[Region]", image: "assets/img/team-placeholder.svg", socials: [] },
-    { name: "[Team Member Name]", role: "Operations & Admin", tag: "Operations", bio: "Handles scheduling, seeding administration and match-day operations behind the scenes.", region: "[Region]", image: "assets/img/team-placeholder.svg", socials: [] }
+    { name: "Wali Hassan", role: "Head of Broadcast", tag: "Competition & Broadcast", bio: "Leads competition design, format structure, and the overall direction of Mathatised eSports events, while also overseeing broadcast production and stream operations.", region: "Pakistan", image: "assets/img/team/wali.webp", socials: [] },
+    { name: "Yasar Amad", role: "Player Relations Manager", tag: "Player Relations", bio: "Oversees communication with players and teams, keeping information flowing smoothly throughout the tournament.", region: "Pakistan", image: "assets/img/team/yasar.webp", socials: [] },
+    { name: "Ali Hassan", role: "Lead Caster", tag: "Play-by-Play", bio: "Calls play-by-play and analysis, turning matches into moments the audience remembers.", region: "Pakistan", image: "assets/img/team/ali.webp", socials: [] }
   ],
 
   /* ---------------------------------------------------------------------------
