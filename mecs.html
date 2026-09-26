@@ -10,7 +10,12 @@
   <meta property="og:site_name" content="Mathatised eSports">
   <meta property="og:title" content="MECS — Mathatised eSports Championship Series">
   <meta property="og:description" content="Where competition meets opportunity.">
-  <meta property="og:image" content="/assets/img/og-image.jpg">
+  <meta property="og:image" content="https://mathatised-esports.vercel.app/assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://mathatised-esports.vercel.app/mecs">
+  <meta name="twitter:image" content="https://mathatised-esports.vercel.app/assets/img/og-image.jpg">
+  <link rel="canonical" href="https://mathatised-esports.vercel.app/mecs">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
@@ -19,6 +24,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap">
   <link rel="stylesheet" href="assets/css/styles.css">
   <script>try{if(localStorage.getItem("mx-theme")==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}</script>
+  <!-- Vercel Web Analytics (enable it in the Vercel dashboard: Project > Analytics) -->
+  <script defer src="/_vercel/insights/script.js"></script>
   <script src="assets/js/config.js" defer></script>
   <script src="assets/js/site.js" defer></script>
 </head>
@@ -35,7 +42,7 @@
           <h1 id="hero-title">The Championship Series: where competition meets opportunity.</h1>
           <p class="lead">MECS is our flagship championship. 32 teams, eight groups, a two-legged qualification round and a double-elimination bracket, built so every stage carries weight.</p>
           <div class="hero-actions">
-            <a class="btn btn-gold" data-link="discord">Compete With Us</a>
+            <a class="btn btn-gold" data-link="register">Register Your Team</a>
             <a class="btn btn-light" href="#format">See the Format</a>
           </div>
         </div>
@@ -50,7 +57,7 @@
       <div class="container split">
         <div class="reveal">
           <p class="eyebrow">Player-first</p>
-          <h2 id="platform-title" style="font-size:clamp(1.75rem,3.1vw,2.5rem)">Not just a tournament. A platform.</h2>
+          <h2 id="platform-title" style="font-size:clamp(1.6rem,2.5vw,2.2rem)">Not just a tournament. A platform.</h2>
           <div class="prose" style="margin-top:20px">
             <p>MECS is designed around the players in it. The point isn't another bracket to fill. It's a competitive stage where performances are visible.</p>
             <p>Professional broadcasting, casting, production and social coverage are part of the series, so that competitive performances become moments people see rather than a line in a results table.</p>
@@ -93,11 +100,11 @@
             <p class="panel-lead">Teams register for the series, and the field is set for the group-stage draw. Registration news, requirements and deadlines are announced in the community first.</p>
             <ul class="dot-list panel-cols">
               <li>Registration is open for two weeks</li>
-              <li>Announcements go out in Discord first</li>
+              <li>Open to teams from every region</li>
               <li>32 teams make up the group stage</li>
               <li>Teams are seeded into four pots for the draw</li>
             </ul>
-            <div class="panel-foot"><button class="btn btn-outline btn-sm" type="button" data-tab-next="tab-groups">Next: Group Stage <span data-icon="arrow"></span></button></div>
+            <div class="panel-foot"><a class="btn btn-gold btn-sm" data-link="register">Register Your Team</a><button class="btn btn-outline btn-sm" type="button" data-tab-next="tab-groups">Next: Group Stage <span data-icon="arrow"></span></button></div>
           </div>
 
           <div class="card tabpanel" role="tabpanel" id="panel-groups" aria-labelledby="tab-groups" tabindex="0">
@@ -137,7 +144,7 @@
               <li>Second leg (Sunday): 5 individual matches</li>
               <li>Tied on match wins? Total goals decide it</li>
             </ul>
-            <div class="panel-foot"><a class="btn btn-outline btn-sm" href="#qualification">How aggregate qualification works</a><button class="btn btn-outline btn-sm" type="button" data-tab-next="tab-bracket" style="margin-left:10px">Next: Championship Bracket <span data-icon="arrow"></span></button></div>
+            <div class="panel-foot"><a class="btn btn-outline btn-sm" href="#qualification">How aggregate qualification works</a><button class="btn btn-outline btn-sm" type="button" data-tab-next="tab-bracket">Next: Championship Bracket <span data-icon="arrow"></span></button></div>
           </div>
 
           <div class="card tabpanel" role="tabpanel" id="panel-bracket" aria-labelledby="tab-bracket" tabindex="0" hidden>
@@ -187,7 +194,7 @@
       <div class="container split split--even" style="align-items:start">
         <div class="reveal">
           <p class="eyebrow">Two-legged qualification · 1 week</p>
-          <h2 id="qual-title" style="font-size:clamp(1.75rem,3.1vw,2.5rem)">Ten matches decide it.</h2>
+          <h2 id="qual-title" style="font-size:clamp(1.6rem,2.5vw,2.2rem)">Ten matches decide it.</h2>
           <p class="lead" style="margin-top:16px">16 teams form 8 two-legged matchups. Five individual matches on Saturday, five more on Sunday, and every team plays all ten.</p>
           <div class="legs">
             <div class="leg">
@@ -278,7 +285,7 @@
       <div class="container split split--even">
         <div class="reveal">
           <p class="eyebrow">Seeding</p>
-          <h2 id="seed-title" style="font-size:clamp(1.75rem,3.1vw,2.5rem)">Balanced groups, competitive draw</h2>
+          <h2 id="seed-title" style="font-size:clamp(1.6rem,2.5vw,2.2rem)">Balanced groups, competitive draw</h2>
           <div class="prose" style="margin-top:20px">
             <p>Teams are seeded using the official MECS competitive seeding process. For the 32-team group stage, four pots of eight teams feed the draw, and every group receives one team from each pot.</p>
             <p>The aim is balanced groups while keeping the draw genuinely competitive. Later stages are decided by results and the official MECS competition structure.</p>
@@ -308,7 +315,7 @@
         <h2 id="cta-title">Sixteen teams reach the bracket. One lifts the series.</h2>
         <p>Registration and seeding news goes out in the community first.</p>
         <div class="cta-actions">
-          <a class="btn btn-gold" data-link="discord">Join Discord</a>
+          <a class="btn btn-gold" data-link="register">Register Your Team</a>
           <a class="btn btn-light" href="competitions.html">All Competitions</a>
         </div>
       </div>

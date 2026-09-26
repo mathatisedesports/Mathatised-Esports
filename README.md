@@ -21,8 +21,7 @@ It's a plain static site: HTML, CSS and vanilla JavaScript. There's **no build s
 ### Right after your first deploy
 
 1. **Activate the forms (one-time).** Submit any form on the live site once (for example, the Contact form). FormSubmit then emails an **"Activate Form"** link to `mathatisedesports@gmail.com`. Click it. Messages only start arriving after this step. Also check the spam folder.
-2. **Social share image.** Social platforms need an absolute image URL. In each page's `<head>`, change
-   `content="/assets/img/og-image.jpg"` to `content="https://YOUR-DOMAIN/assets/img/og-image.jpg"`.
+2. **Link previews.** Each page's `<head>` points its share image, `og:url` and canonical link at `https://mathatised-esports.vercel.app`. If you move to a custom domain, find-and-replace that address in all `.html` files.
 
 ---
 

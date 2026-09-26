@@ -30,6 +30,7 @@
   /* Resolve a named link: "email", a social key ("discord"…), or "form:<key>". */
   function resolveLink(key, topic) {
     if (key === "email") return "mailto:" + SITE.email;
+    if (key === "register") return SITE.registrationUrl || social("discord").url;
     if (key.indexOf("form:") === 0) {
       var url = SITE.forms[key.slice(5)];
       if (!isPlaceholder(url)) return url;
@@ -269,9 +270,26 @@
       }).join("");
     },
 
+    regions: function (el) {
+      el.innerHTML = '<ul class="chip-list">' + SITE.openRegions.map(function (r) {
+        return '<li class="chip">' + esc(r) + "</li>";
+      }).join("") + '<li class="chip chip--gold">' + icon("globe") + "Anywhere you play from</li></ul>";
+    },
+
+    /* Featured YouTube video. The HTML placeholder stays if the link can't be read. */
+    video: function (el) {
+      var v = SITE.featuredVideo || {};
+      var m = String(v.url || "").match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/|live\/)([\w-]{11})/);
+      if (!m) return;
+      el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + m[1] + '?rel=0" title="' + esc(v.title || "Mathatised eSports broadcast") + '"' +
+        ' loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"' +
+        ' referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
+      el.classList.add("has-video");
+    },
+
     "spl-stats": function (el) {
       if (SITE.spl.stats && SITE.spl.stats.length) {
-        el.innerHTML = '<dl class="stat-row">' + SITE.spl.stats.map(function (s) {
+        el.innerHTML = '<p class="mini-label">By the numbers</p><dl class="stat-row">' + SITE.spl.stats.map(function (s) {
           return "<div><dt>" + esc(s.label) + "</dt><dd>" + esc(s.value) + "</dd></div>";
         }).join("") + "</dl>";
       } else {
@@ -345,7 +363,7 @@
     }
     toggle.addEventListener("click", function () { setMenu(toggle.getAttribute("aria-expanded") !== "true"); });
     $all("a", menu).forEach(function (a) { a.addEventListener("click", function () { setMenu(false); }); });
-    window.addEventListener("resize", function () { if (window.innerWidth > 1180 && !menu.hidden) setMenu(false); });
+    window.addEventListener("resize", function () { if (window.innerWidth > 1200 && !menu.hidden) setMenu(false); });
 
     $all(".nav-dd-toggle", header).forEach(function (btn) {
       var li = btn.parentNode;

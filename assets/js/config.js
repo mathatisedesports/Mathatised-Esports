@@ -51,6 +51,25 @@ window.SITE = {
   },
 
   /* ---------------------------------------------------------------------------
+     MECS TEAM REGISTRATION
+     Every "Register Your Team" button uses this link. It points to Discord for
+     now — paste a registration form link here when you have one.
+  --------------------------------------------------------------------------- */
+  registrationUrl: "https://discord.gg/EbATfBadDv",
+
+  /* ---------------------------------------------------------------------------
+     FEATURED VIDEO (Home page, "Matches are made to be watched")
+     Any YouTube link works (youtu.be/…, youtube.com/watch?v=…).
+  --------------------------------------------------------------------------- */
+  featuredVideo: {
+    url: "https://youtu.be/6JJDFMlr3z0",
+    title: "SPL Championship 3v3 Grand Final: Team Pigeon Lovers vs Team Top Five"
+  },
+
+  /* Regions shown where we talk about who can compete (everywhere except the SPL page). */
+  openRegions: ["Asia", "The Middle East", "Europe", "Africa", "The Americas", "Oceania"],
+
+  /* ---------------------------------------------------------------------------
      NAVIGATION
   --------------------------------------------------------------------------- */
   nav: [
@@ -129,12 +148,15 @@ window.SITE = {
         ]
       }
     ],
-    /* Add confirmed figures here, e.g. { value: "12,000", label: "Live views" }.
-       While empty, the SPL page shows a clearly marked placeholder instead. */
-    stats: []
+    /* SPL headline figures shown on the SPL page. Edit or add as needed. */
+    stats: [
+      { value: "50,000+", label: "Viewers tuned in" },
+      { value: "100+",    label: "Players competed" },
+      { value: "$250+",   label: "Prize pool awarded" }
+    ]
   },
 
-  /* Countries represented at the SPL (not an exhaustive list). */
+  /* Countries represented at the SPL (shown on the SPL page only; not an exhaustive list). */
   countries: ["Pakistan", "India", "Saudi Arabia", "Jordan", "Singapore", "Malaysia", "Australia"],
 
   /* ---------------------------------------------------------------------------
