@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://mathatised-esports.vercel.app/sitemap.xml
