@@ -66,6 +66,33 @@ window.SITE = {
     title: "SPL Championship 3v3 Grand Final: Team Pigeon Lovers vs Team Top Five"
   },
 
+  /* ---------------------------------------------------------------------------
+     HOME HERO BACKGROUND VIDEO
+     Put the video file(s) in assets/video/ and fill these in, e.g.
+       mp4: "assets/video/hero.mp4"
+     `mobile` is an optional smaller file for phones; without it, phones show
+     the still image instead of the video (faster and saves their data).
+     `poster` is the still shown while the video loads.
+     Leave `mp4` empty to show the brand artwork instead of a video.
+  --------------------------------------------------------------------------- */
+  heroVideo: {
+    mp4: "",
+    webm: "",
+    mobile: "",
+    poster: ""
+  },
+
+  /* ---------------------------------------------------------------------------
+     OFFICIAL DOCUMENTS (MECS page + footer). PDFs live in assets/docs/ and
+     open in the browser's PDF viewer in a new tab.
+  --------------------------------------------------------------------------- */
+  docs: [
+    { title: "MECS Rules & Regulations", file: "assets/docs/mecs-rules-and-regulations.pdf", meta: "PDF · 33 pages",
+      text: "The official rulebook: eligibility, rosters, match procedures, disconnects, disputes and conduct." },
+    { title: "MECS Format & Competition Structure", file: "assets/docs/mecs-format-and-competition-structure.pdf", meta: "PDF · 13 pages",
+      text: "Every stage in detail: registration, groups, two-legged qualification, the Championship Bracket and seeding." }
+  ],
+
   /* Regions shown where we talk about who can compete (everywhere except the SPL page). */
   openRegions: ["Asia", "The Middle East", "Europe", "Africa", "The Americas", "Oceania"],
 
@@ -100,10 +127,10 @@ window.SITE = {
       status: "current",
       statusLabel: "Current",
       logo: "assets/img/mecs-logo.webp",
-      game: "",
+      game: "Rocket League",
       description: "Our flagship championship series. A full competitive structure built so performances are seen, not buried in a bracket.",
       format: "32 teams · Group stage · Two-legged qualification · Double elimination",
-      dates: "Seven-week competitive cycle",
+      dates: "Six-week competitive cycle",
       result: "",
       href: "mecs.html"
     },

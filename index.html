@@ -35,26 +35,30 @@
 
   <main id="main">
     <!-- HERO -->
-    <section class="hero hero--home" aria-labelledby="hero-title">
-      <div class="container hero-inner">
-        <div class="hero-copy">
+    <!-- Full-bleed media hero. The background video is set in config.js (heroVideo);
+         until then the brand artwork is shown. -->
+    <section class="hero-media" data-hero-video aria-labelledby="hero-title">
+      <div class="hero-media__bg">
+        <img class="hero-media__art" src="assets/img/mathatised-mark.webp" alt="" width="900" height="900" fetchpriority="high">
+      </div>
+      <div class="hero-media__shade" aria-hidden="true"></div>
+      <div class="container hero-media__inner">
+        <div class="hero-media__copy">
           <p class="eyebrow">Mathatised eSports</p>
           <h1 id="hero-title">Compete. Perform. <span class="h1-accent">Be seen.</span></h1>
           <p class="lead">The platform where players take on high-level competition, play on live broadcasts, and earn the recognition they deserve.</p>
           <div class="hero-actions">
             <a class="btn btn-gold" href="mecs.html">Explore MECS</a>
-            <a class="btn btn-outline" data-link="discord">Join the Community</a>
+            <a class="btn btn-light" data-link="discord">Join the Community</a>
           </div>
-        </div>
-        <div class="home-visual">
-          <img src="assets/img/mathatised-mark.webp" alt="The Mathatised eSports emblem: a gold M set against navy geometric panels and white silk" width="900" height="900" fetchpriority="high">
-          <ul class="home-stats" aria-label="Mathatised eSports at a glance">
-            <li><span data-icon="globe"></span><strong>Global</strong><span class="stat-label">Open to every region</span></li>
-            <li><span data-icon="broadcast"></span><strong>Live</strong><span class="stat-label">Broadcast matches</span></li>
-            <li><span data-icon="mic"></span><strong>Casted</strong><span class="stat-label">Play-by-play &amp; analysis</span></li>
+          <ul class="hero-points" aria-label="Mathatised eSports at a glance">
+            <li><span data-icon="globe"></span><span><strong>Global</strong> Open to every region</span></li>
+            <li><span data-icon="broadcast"></span><span><strong>Live</strong> Broadcast matches</span></li>
+            <li><span data-icon="mic"></span><span><strong>Casted</strong> Play-by-play &amp; analysis</span></li>
           </ul>
         </div>
       </div>
+      <button class="hero-media__toggle" type="button" hidden></button>
     </section>
 
     <!-- PLAYER-FIRST -->

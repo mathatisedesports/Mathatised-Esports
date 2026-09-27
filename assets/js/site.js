@@ -92,7 +92,11 @@
     school: '<path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
     heart: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
     gamepad: '<path d="M6 12h4M8 10v4"/><path d="M15 13h.01M18 11h.01"/><rect width="20" height="12" x="2" y="6" rx="2"/>',
-    clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>'
+    clock: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+    file: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 13h4M10 17h4M8 9h2"/>',
+    external: '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+    pause: '<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>',
+    play: '<path d="M7 4v16l13-8z"/>'
   };
   function icon(name, cls) {
     var body = ICONS[name] || ICONS.sparkle;
@@ -175,9 +179,12 @@
       { label: "South Asia Premier League", href: "spl.html" },
       { label: "Send Us a Message", href: "contact.html#contact-form" }
     ];
+    (SITE.docs || []).forEach(function (d) { partner.push({ label: d.title, href: d.file, newTab: true }); });
     function links(list) {
       return "<ul>" + list.map(function (l) {
-        return '<li><a href="' + esc(l.href || l.url) + '"' + extAttrs(l.href || l.url) + ">" + esc(l.label) + "</a></li>";
+        var href = l.href || l.url;
+        var attrs = l.newTab ? ' target="_blank" rel="noopener"' : extAttrs(href);
+        return '<li><a href="' + esc(href) + '"' + attrs + ">" + esc(l.label) + "</a></li>";
       }).join("") + "</ul>";
     }
     mount.className = "site-footer";
@@ -267,6 +274,17 @@
           t.placements.map(function (p, i) {
             return '<li class="placement placement--' + (i + 1) + '">' + icon(i === 0 ? "trophy" : "award") + '<span class="place">' + esc(p.place) + '</span><span class="team">' + esc(p.team) + "</span></li>";
           }).join("") + "</ol></article>";
+      }).join("");
+    },
+
+    /* Official PDFs: open in the browser's viewer in a new tab (no download). */
+    docs: function (el) {
+      el.innerHTML = (SITE.docs || []).map(function (d) {
+        return '<article class="card doc-card">' +
+          '<span class="card-icon">' + icon("file") + "</span>" +
+          '<div class="doc-body"><h3 class="card-title">' + esc(d.title) + '</h3><p class="doc-meta">' + esc(d.meta) + "</p><p>" + esc(d.text) + "</p></div>" +
+          '<a class="btn btn-outline btn-sm" href="' + esc(d.file) + '" target="_blank" rel="noopener">Open Document' + icon("external") +
+          '<span class="sr-only"> — ' + esc(d.title) + " (opens in a new tab)</span></a></article>";
       }).join("");
     },
 
@@ -551,6 +569,62 @@
   }
 
   /* ---------------------------------------------------------------------------
+     Home hero background video (config: heroVideo)
+     Kept light: only injected when a file is configured, skipped for
+     reduced-motion / data-saver visitors, phone-sized screens only get a video
+     if a `mobile` file exists, and playback pauses whenever the hero is off
+     screen or the tab is hidden.
+  --------------------------------------------------------------------------- */
+  function initHeroVideo() {
+    var hero = doc.querySelector("[data-hero-video]");
+    var cfg = SITE.heroVideo || {};
+    if (!hero) return;
+    var small = window.matchMedia("(max-width: 760px)").matches;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var saveData = navigator.connection && navigator.connection.saveData;
+    var sources = small ? [[cfg.mobile, "video/mp4"]] : [[cfg.webm, "video/webm"], [cfg.mp4, "video/mp4"]];
+    sources = sources.filter(function (s) { return s[0]; });
+    if (!sources.length || reduce || saveData) return;
+
+    var v = doc.createElement("video");
+    v.className = "hero-media__video";
+    v.muted = true; v.defaultMuted = true; v.loop = true; v.playsInline = true; v.autoplay = true;
+    ["muted", "playsinline", "autoplay", "loop"].forEach(function (a) { v.setAttribute(a, ""); });
+    v.setAttribute("aria-hidden", "true");
+    v.preload = "auto";
+    if (cfg.poster) v.poster = cfg.poster;
+    sources.forEach(function (s) { var el = doc.createElement("source"); el.src = s[0]; el.type = s[1]; v.appendChild(el); });
+    v.addEventListener("playing", function () { hero.classList.add("is-playing"); });
+    /* Safety net: some files don't loop natively — restart from the top. */
+    v.addEventListener("ended", function () { v.currentTime = 0; sync(); });
+    hero.querySelector(".hero-media__bg").appendChild(v);
+
+    var btn = hero.querySelector(".hero-media__toggle");
+    var userPaused = false, onScreen = true;
+    function label() {
+      btn.innerHTML = icon(v.paused ? "play" : "pause");
+      btn.setAttribute("aria-label", v.paused ? "Play background video" : "Pause background video");
+    }
+    function sync() {
+      if (userPaused) return;
+      if (onScreen && !doc.hidden) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      else v.pause();
+    }
+    btn.hidden = false;
+    btn.addEventListener("click", function () {
+      userPaused = !v.paused;
+      if (userPaused) v.pause(); else sync();
+    });
+    v.addEventListener("play", label);
+    v.addEventListener("pause", label);
+    label();
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (e) { onScreen = e[0].isIntersecting; sync(); }, { threshold: 0.05 }).observe(hero);
+    }
+    doc.addEventListener("visibilitychange", sync);
+  }
+
+  /* ---------------------------------------------------------------------------
      Boot
   --------------------------------------------------------------------------- */
   doc.documentElement.classList.add("js");
@@ -561,6 +635,7 @@
   initNav();
   initTabs();
   initForms();
+  initHeroVideo();
   initReveal();
   initCounters();
 })();

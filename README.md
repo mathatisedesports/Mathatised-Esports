@@ -47,6 +47,17 @@ The header, footer, social icons, competition cards, team cards, role cards and 
 
 Page text (headlines, section copy) lives in each `.html` file.
 
+### Homepage background video
+
+1. Put the file in `assets/video/` (for example, `assets/video/hero.mp4`).
+2. In `config.js`, set `heroVideo.mp4` to that path. Optionally, also set `poster` to a still image and `mobile` to a smaller file for phones.
+
+Recommended file: MP4 (H.264), 1920×1080, 10–20 seconds, loops cleanly, no audio, **under 6 MB**. Without a `mobile` file, phones show the still artwork instead, which keeps the page fast on mobile data.
+
+### Official documents
+
+The MECS rulebook and format guide live in `assets/docs/` and are listed under `docs` in `config.js`. To update one, replace the PDF using the same filename. They open in the browser's PDF viewer.
+
 ### Placeholders to replace
 
 - **Google Forms:** in `forms`, replace `[CASTING_GOOGLE_FORM_URL]` and the other placeholders with real links. Until you do, each "Apply…" button opens the on-site contact form with the right topic pre-selected, so no button is ever dead.
