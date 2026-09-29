@@ -472,8 +472,12 @@ dl, dd { margin: 0; }
 /* Roles */
 .role-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .role-card { display: flex; flex-direction: column; }
-.role-card .btn { align-self: flex-start; margin-top: auto; }
+.role-card .btn { align-self: flex-start; margin-top: auto; white-space: normal; max-width: 100%; }
+.role-card { min-width: 0; }
 .role-card p { margin-bottom: 22px; }
+.role-card .role-needs-label { margin: -6px 0 10px; }
+.role-needs { margin-bottom: 24px; }
+.role-needs li { font-size: 0.9rem; }
 
 /* Social icons */
 .social-list { display: flex; flex-wrap: wrap; gap: 10px; }

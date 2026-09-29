@@ -114,9 +114,9 @@
      Header
   --------------------------------------------------------------------------- */
   function brand(extraClass) {
-    return '<a class="brand ' + (extraClass || "") + '" href="index.html" aria-label="Mathatised eSports — home">' +
+    return '<a class="brand ' + (extraClass || "") + '" href="index.html" aria-label="Mathatised Esports — home">' +
       '<img class="brand-mark" src="assets/img/mathatised-mark-160.webp" width="44" height="44" alt="">' +
-      '<span class="brand-text"><span class="brand-name">Mathatised</span><span class="brand-sub">eSports</span></span></a>';
+      '<span class="brand-text"><span class="brand-name">Mathatised</span><span class="brand-sub">Esports</span></span></a>';
   }
 
   function renderHeader() {
@@ -253,7 +253,10 @@
         return '<article class="card role-card">' +
           (numbered ? '<p class="eyebrow eyebrow--sm">Role ' + (i + 1) + "</p>" : '<span class="card-icon">' + icon(r.icon) + "</span>") +
           '<h3 class="card-title">' + esc(r.title) + "</h3><p>" + esc(r.text) + "</p>" +
-          '<a class="btn btn-gold btn-sm" href="' + esc(href) + '"' + extAttrs(href) + ">" + esc(r.cta) + "</a></article>";
+          (r.needs && r.needs.length ? '<p class="mini-label role-needs-label">What we look for</p><ul class="check-list role-needs">' +
+            r.needs.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("") + "</ul>" : "") +
+          '<a class="btn btn-gold btn-sm" href="' + esc(href) + '"' + extAttrs(href) + ">" + esc(r.cta) +
+          (isExternal(href) ? '<span class="sr-only"> (opens a Google Form in a new tab)</span>' : "") + "</a></article>";
       }).join("");
     },
 
@@ -299,7 +302,7 @@
       var v = SITE.featuredVideo || {};
       var m = String(v.url || "").match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/|live\/)([\w-]{11})/);
       if (!m) return;
-      el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + m[1] + '?rel=0" title="' + esc(v.title || "Mathatised eSports broadcast") + '"' +
+      el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + m[1] + '?rel=0" title="' + esc(v.title || "Mathatised Esports broadcast") + '"' +
         ' loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"' +
         ' referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>';
       el.classList.add("has-video");

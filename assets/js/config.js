@@ -6,7 +6,7 @@
    ========================================================================== */
 
 window.SITE = {
-  name: "Mathatised eSports",
+  name: "Mathatised Esports",
   tagline: "Building competitive platforms where players can compete, perform, and be seen.",
   pillars: ["Competition", "Growth", "Opportunity", "Recognition"],
 
@@ -38,16 +38,17 @@ window.SITE = {
   ],
 
   /* ---------------------------------------------------------------------------
-     APPLICATION FORMS (Google Forms)
-     Replace each [PLACEHOLDER] with the real Google Form link.
-     Until a real link is added, the button safely opens the on-site
-     contact form with the matching topic pre-selected — so no link is dead.
+     APPLICATION FORMS (Google Forms) — one per open role (see `roles` below).
+     If a link is ever left empty, that role's button opens the on-site
+     contact form with the role pre-selected instead, so no link is dead.
   --------------------------------------------------------------------------- */
   forms: {
-    casting:           "[CASTING_GOOGLE_FORM_URL]",
-    socialMedia:       "[SOCIAL_MEDIA_GOOGLE_FORM_URL]",
-    discordModeration: "[DISCORD_MODERATION_GOOGLE_FORM_URL]",
-    general:           "[GENERAL_APPLICATION_GOOGLE_FORM_URL]"
+    caster:              "https://forms.gle/8bPbAscxanyp86b26",
+    matchAdmin:          "https://forms.gle/X1AtwqMQ2FNMRsAKA",
+    tournamentAssistant: "https://forms.gle/6dCq2mY6kbLt3Q9BA",
+    socialMediaManager:  "https://forms.gle/VLC8og4AKHaGxkfr5",
+    videoEditor:         "https://forms.gle/LkLpSLoVTQkeAdCt9",
+    graphicDesigner:     "https://forms.gle/SeEJgsEmhUpKaYsn7"
   },
 
   /* ---------------------------------------------------------------------------
@@ -62,8 +63,8 @@ window.SITE = {
      Any YouTube link works (youtu.be/…, youtube.com/watch?v=…).
   --------------------------------------------------------------------------- */
   featuredVideo: {
-    url: "https://youtu.be/6JJDFMlr3z0",
-    title: "SPL Championship 3v3 Grand Final: Team Pigeon Lovers vs Team Top Five"
+    url: "https://www.youtube.com/watch?v=g3ZCgIPvI9U",
+    title: "SPL 2v2 Championship Grand Final: KL Banana vs Fury X BomX"
   },
 
   /* ---------------------------------------------------------------------------
@@ -123,7 +124,7 @@ window.SITE = {
   competitions: [
     {
       code: "MECS",
-      name: "Mathatised eSports Championship Series",
+      name: "Mathatised Esports Championship Series",
       status: "current",
       statusLabel: "Current",
       logo: "assets/img/mecs-logo.webp",
@@ -194,25 +195,36 @@ window.SITE = {
        socials: [{ key: "twitch", url: "https://twitch.tv/name" }]
   --------------------------------------------------------------------------- */
   team: [
-    { name: "Wali Hassan", role: "Head of Broadcast", tag: "Competition & Broadcast", bio: "Leads competition design, format structure, and the overall direction of Mathatised eSports events, while also overseeing broadcast production and stream operations.", region: "Pakistan", image: "assets/img/team/wali.webp", socials: [] },
+    { name: "Wali Hassan", role: "Head of Broadcast", tag: "Competition & Broadcast", bio: "Leads competition design, format structure, and the overall direction of Mathatised Esports events, while also overseeing broadcast production and stream operations.", region: "Pakistan", image: "assets/img/team/wali.webp", socials: [] },
     { name: "Yasar Amad", role: "Player Relations Manager", tag: "Player Relations", bio: "Oversees communication with players and teams, keeping information flowing smoothly throughout the tournament.", region: "Pakistan", image: "assets/img/team/yasar.webp", socials: [] },
     { name: "Ali Hassan", role: "Lead Caster", tag: "Play-by-Play", bio: "Calls play-by-play and analysis, turning matches into moments the audience remembers.", region: "Pakistan", image: "assets/img/team/ali.webp", socials: [] }
   ],
 
   /* ---------------------------------------------------------------------------
-     OPEN ROLES (Team and Join Us pages). Casting stays first.
-     `form` points to a key in `forms` above; `topic` is used for the
-     contact-form fallback while the Google Form link is still a placeholder.
+     OPEN ROLES (Team and Join Us pages), shown in this order.
+     `form` points to a key in `forms` above. `needs` is a short list of
+     what we look for (keep it to 2–3 points); `topic` is only used if the
+     form link is ever empty.
   --------------------------------------------------------------------------- */
   roles: [
-    { title: "Casting", icon: "mic", form: "casting", topic: "Casting application", cta: "Apply for Casting",
-      text: "For people interested in esports commentary, play-by-play, analysis, and bringing matches to life." },
-    { title: "Social Media", icon: "share", form: "socialMedia", topic: "Social media application", cta: "Apply for Social Media",
-      text: "For people interested in content, social strategy, posts, community engagement, and esports media." },
-    { title: "Discord Moderation", icon: "shield", form: "discordModeration", topic: "Discord moderation application", cta: "Apply for Discord Moderation",
-      text: "For people interested in helping maintain and grow the Mathatised eSports Discord community." },
-    { title: "Additional & General Roles", icon: "sparkle", form: "general", topic: "General application", cta: "Apply to Join",
-      text: "Design, observing, statistics, editing or something we haven't listed yet — tell us what you can bring." }
+    { title: "Caster", icon: "mic", form: "caster", topic: "Caster application", cta: "Apply as a Caster",
+      text: "The voice of our live broadcasts. Bring play-by-play excitement or deep analysis to tournament matches and showmatches.",
+      needs: ["Clear microphone and a stable connection", "In-depth game knowledge", "High energy and vocal clarity on stream"] },
+    { title: "Rocket League Match Admin & Referee", icon: "shield", form: "matchAdmin", topic: "Match Admin & Referee application", cta: "Apply as a Match Admin",
+      text: "Oversee live matches, set up private lobbies, enforce the rules and make quick, fair calls that keep the event on track.",
+      needs: ["Deep knowledge of Rocket League competitive rules", "Available during match timings", "Calm, clear decision-making"] },
+    { title: "Tournament Assistant", icon: "users", form: "tournamentAssistant", topic: "Tournament Assistant application", cta: "Apply as a Tournament Assistant",
+      text: "Be the point of contact for teams from registration to the final match, keeping players informed, supported and ready to compete.",
+      needs: ["Strong communication and a player-first mindset", "Reliable on match days", "Comfortable with Discord and tournament workflows"] },
+    { title: "Social Media Manager", icon: "share", form: "socialMediaManager", topic: "Social Media Manager application", cta: "Apply as Social Media Manager",
+      text: "Drive engagement across TikTok, YouTube, Instagram and Discord, covering tournament action and connecting with fans.",
+      needs: ["Strong written English and copywriting", "Up to date with esports trends", "Scheduling and working with designers and editors"] },
+    { title: "Video Editor", icon: "video", form: "videoEditor", topic: "Video Editor application", cta: "Apply as a Video Editor",
+      text: "Bring our content to life, from tournament highlight reels and hype trailers to short-form clips for Shorts, Reels and TikTok.",
+      needs: ["CapCut, Premiere Pro, After Effects, DaVinci or similar", "A portfolio of gaming or esports edits", "Delivers on schedule"] },
+    { title: "Graphic Designer", icon: "layers", form: "graphicDesigner", topic: "Graphic Designer application", cta: "Apply as a Graphic Designer",
+      text: "Build our visual brand: broadcast assets, thumbnails, match cards, roster reveals and tournament graphics.",
+      needs: ["Photoshop, Illustrator, Figma, Picsart or similar", "A feel for esports branding and typography", "Past thumbnail, banner or poster work"] }
   ],
 
   /* Topics offered in the Contact form's dropdown. */
@@ -222,10 +234,7 @@ window.SITE = {
     "Host an event with us",
     "Sponsorship or partnership",
     "Media or broadcast",
-    "Casting application",
-    "Social media application",
-    "Discord moderation application",
-    "General application",
+    "Joining the team",
     "Something else"
   ]
 };

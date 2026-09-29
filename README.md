@@ -1,6 +1,6 @@
-# Mathatised eSports — Website
+# Mathatised Esports — Website
 
-Multi-page website for Mathatised eSports and the Mathatised eSports Championship Series (MECS).
+Multi-page website for Mathatised Esports and the Mathatised Esports Championship Series (MECS).
 
 It's a plain static site: HTML, CSS and vanilla JavaScript. There's **no build step and nothing to install**, so it runs on Vercel, GitHub Pages, Netlify or any static host.
 
@@ -60,7 +60,7 @@ The MECS rulebook and format guide live in `assets/docs/` and are listed under `
 
 ### Placeholders to replace
 
-- **Google Forms:** in `forms`, replace `[CASTING_GOOGLE_FORM_URL]` and the other placeholders with real links. Until you do, each "Apply…" button opens the on-site contact form with the right topic pre-selected, so no button is ever dead.
+- **Open roles:** each role in `roles` points to a Google Form link in `forms`. To add a role, add a form link and a matching entry in `roles`. To close a role, delete its entry. If a form link is ever left empty, that role's button falls back to the contact form.
 - **Team members:** replace the `[Team Member Name]` entries in `team`. Put photos in `assets/img/team/` (square images work best) and point `image` at them.
 - **SPL statistics:** add confirmed figures to `spl.stats`. While it's empty, the SPL page shows a clearly marked placeholder.
 - **Game title:** add `game: "…"` to a competition and it appears on its card.
