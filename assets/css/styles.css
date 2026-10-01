@@ -497,6 +497,9 @@ dl, dd { margin: 0; }
 /* SPL */
 .spl-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
 .spl-card .card-title { font-size: 1.25rem; margin-bottom: 18px; }
+.prize-tag { display: inline-flex; align-items: center; gap: 8px; margin: -6px 0 18px; padding: 6px 12px; border-radius: 999px; background: var(--gold-soft); border: 1px solid var(--gold-line); color: var(--gold-text) !important; font-size: 0.85rem !important; font-weight: 600; }
+.prize-tag .icon { width: 16px; height: 16px; }
+.prize-tag strong { color: var(--heading); font-family: var(--font-head); }
 .mini-label { font-family: var(--font-body); font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 800; color: var(--heading); margin: 28px 0 12px; }
 .placements { border-top: 1px solid var(--border); }
 .placement { display: grid; grid-template-columns: 22px 48px 1fr; align-items: center; gap: 10px; padding: 14px 0; border-bottom: 1px solid var(--border); }
@@ -609,7 +612,10 @@ dl, dd { margin: 0; }
   display: grid; place-items: center; background: var(--navy); color: #fff; font-weight: 800; font-size: 0.8rem;
 }
 .example { margin-top: 20px; padding: 18px 20px; border-radius: var(--radius-sm); background: var(--bg-alt); border: 1px solid var(--border); }
-.example .mini-label { margin: 0 0 10px; }
+.example .prize-tag { display: inline-flex; align-items: center; gap: 8px; margin: -6px 0 18px; padding: 6px 12px; border-radius: 999px; background: var(--gold-soft); border: 1px solid var(--gold-line); color: var(--gold-text) !important; font-size: 0.85rem !important; font-weight: 600; }
+.prize-tag .icon { width: 16px; height: 16px; }
+.prize-tag strong { color: var(--heading); font-family: var(--font-head); }
+.mini-label { margin: 0 0 10px; }
 .example-row { display: grid; grid-template-columns: 1fr auto auto; gap: 16px; padding: 8px 0; font-size: 0.92rem; border-bottom: 1px dashed var(--border-strong); }
 .example-row:last-of-type { border-bottom: 0; }
 .example-row span:first-child { font-weight: 700; color: var(--heading); }
@@ -660,7 +666,12 @@ dl, dd { margin: 0; }
 .pot b { display: block; font-family: var(--font-head); color: var(--heading); font-size: 0.9rem; }
 .pot span { font-size: 0.78rem; color: var(--muted); }
 .pot-arrow { grid-column: 1 / -1; text-align: center; font-size: 0.85rem; color: var(--gold-text); font-weight: 700; padding: 6px 0; }
-.pot-group { grid-column: 1 / -1; padding: 14px; text-align: center; border-radius: var(--radius-sm); background: var(--navy); color: #fff; font-weight: 700; font-size: 0.92rem; }
+.pot-draw.pot-draw--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.week-grid.week-grid--single { grid-template-columns: minmax(0, 1fr); }
+.tl-item--pre .tl-dot { border-style: dashed; color: var(--gold-text); }
+.tl-item--pre .tl-dot .icon { width: 20px; height: 20px; }
+.tl-item--pre .tl-card { background: transparent; box-shadow: none; border-style: dashed; }
+.hero-points.hero-points--facts { margin-top: 26px; padding-top: 0; border-top: 0; }.pot-group { grid-column: 1 / -1; padding: 14px; text-align: center; border-radius: var(--radius-sm); background: var(--navy); color: #fff; font-weight: 700; font-size: 0.92rem; }
 
 /* 10. FORMS ---------------------------------------------------------------- */
 .form-card { padding: 40px; }

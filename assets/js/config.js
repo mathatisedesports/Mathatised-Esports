@@ -119,7 +119,7 @@ window.SITE = {
 
   /* ---------------------------------------------------------------------------
      COMPETITIONS (shown on Home and Competitions pages)
-     `game` is optional — add the game title and it appears on the cards.
+     `game` and `prize` are optional — fill them in and they appear on the cards.
   --------------------------------------------------------------------------- */
   competitions: [
     {
@@ -130,8 +130,9 @@ window.SITE = {
       logo: "assets/img/mecs-logo.webp",
       game: "Rocket League",
       description: "Our flagship championship series. A full competitive structure built so performances are seen, not buried in a bracket.",
-      format: "32 teams · Group stage · Two-legged qualification · Double elimination",
-      dates: "Six-week competitive cycle",
+      format: "24 teams · Group stage · Two-legged qualification · Double elimination",
+      dates: "Four-week competition period",
+      prize: "$150",
       result: "",
       href: "mecs.html"
     },
@@ -145,6 +146,7 @@ window.SITE = {
       description: "One of our previous tournament initiatives: two double-elimination tournaments played across weekends with players from multiple regions.",
       format: "3v3 and 2v2 · 16 teams each · Double elimination · Middle East servers",
       dates: "29 August – 20 September",
+      prize: "3v3: ~$150 · 2v2: $100",
       result: "3v3 Champion — Team Top Five · 2v2 Champion — FuryX BomX",
       href: "spl.html"
     }
@@ -157,6 +159,7 @@ window.SITE = {
     tournaments: [
       {
         name: "SPL 3v3 Tournament",
+        prize: "~$150",
         facts: ["16 participating teams", "Players from multiple regions around the world", "Middle East servers", "Double-elimination format", "Played across two weekends"],
         matchDays: ["29 August", "30 August", "5 September", "6 September"],
         placements: [
@@ -167,6 +170,7 @@ window.SITE = {
       },
       {
         name: "SPL 2v2 Tournament",
+        prize: "$100",
         facts: ["16 participating teams", "Players from multiple regions around the world", "Middle East servers", "Double-elimination format", "Played across two weekends"],
         matchDays: ["12 September", "13 September", "19 September", "20 September"],
         placements: [
@@ -180,7 +184,7 @@ window.SITE = {
     stats: [
       { value: "50,000+", label: "Viewers tuned in" },
       { value: "100+",    label: "Players competed" },
-      { value: "$250+",   label: "Prize pool awarded" }
+      { value: "~$250",   label: "Total prize pool" }
     ]
   },
 

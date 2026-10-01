@@ -216,6 +216,7 @@
         if (c.game) rows.push(["Game", c.game]);
         rows.push(["Format", c.format]);
         rows.push(["Dates", c.dates]);
+        if (c.prize) rows.push(["Prize pool", c.prize]);
         if (c.result) rows.push(["Result", c.result]);
         return '<article class="card comp-card comp-card--' + c.status + '">' +
           '<div class="comp-top">' +
@@ -270,6 +271,7 @@
       el.innerHTML = SITE.spl.tournaments.map(function (t) {
         return '<article class="card spl-card">' +
           '<h3 class="card-title">' + esc(t.name) + "</h3>" +
+          (t.prize ? '<p class="prize-tag">' + icon("trophy") + "<span><strong>" + esc(t.prize) + "</strong> prize pool</span></p>" : "") +
           '<ul class="dot-list">' + t.facts.map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") + "</ul>" +
           '<h4 class="mini-label">Match days</h4><ul class="chip-list chip-list--sm">' +
           t.matchDays.map(function (d) { return '<li class="chip chip--square">' + esc(d) + "</li>"; }).join("") + "</ul>" +

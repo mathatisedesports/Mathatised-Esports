@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MECS — Mathatised Esports Championship Series | Mathatised Esports</title>
-  <meta name="description" content="The Mathatised Esports Championship Series: 32 teams, eight groups, a two-legged qualification round and a 16-team double-elimination Championship Bracket. Format, timeline and seeding explained.">
+  <meta name="description" content="The Mathatised Esports Championship Series: 24 teams, eight groups, a two-legged qualification round and a 12-team double-elimination Championship Bracket, played over four weeks for a $150 prize pool. Format, timeline and seeding explained.">
   <meta name="theme-color" content="#16223f">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Mathatised Esports">
@@ -40,7 +40,12 @@
         <div>
           <p class="eyebrow">Mathatised Esports Championship Series</p>
           <h1 id="hero-title">The Championship Series: where competition meets opportunity.</h1>
-          <p class="lead">MECS is our flagship championship. 32 teams, eight groups, a two-legged qualification round and a double-elimination bracket, built so every stage carries weight.</p>
+          <p class="lead">MECS is our flagship championship. 24 teams, eight groups, a two-legged qualification round and a double-elimination bracket, built so every stage carries weight.</p>
+          <ul class="hero-points hero-points--facts" aria-label="MECS at a glance">
+            <li><span data-icon="trophy"></span><span><strong>$150</strong> Prize pool</span></li>
+            <li><span data-icon="users"></span><span><strong>24</strong> Teams</span></li>
+            <li><span data-icon="calendar"></span><span><strong>4 weeks</strong> Of competition</span></li>
+          </ul>
           <div class="hero-actions">
             <a class="btn btn-gold" data-link="register">Register Your Team</a>
             <a class="btn btn-light" href="#format">See the Format</a>
@@ -96,39 +101,32 @@
           </div>
 
           <div class="card tabpanel" role="tabpanel" id="panel-reg" aria-labelledby="tab-reg" tabindex="0" hidden>
-            <div class="panel-head"><h3>Registration</h3><span class="duration"><span data-icon="clock"></span>1 week</span></div>
-            <p class="panel-lead">Teams register for the series, then every team is reviewed and confirmed before the group-stage draw and seeding. Registration news and deadlines are announced in the community first.</p>
+            <div class="panel-head"><h3>Registration</h3><span class="duration"><span data-icon="calendar"></span>Before kick-off</span></div>
+            <p class="panel-lead">Registration opens ahead of the competition. Every team is reviewed and confirmed before the group-stage draw and seeding. Registration news and deadlines are announced in the community first.</p>
             <ul class="dot-list panel-cols">
-              <li>Registration is open for one week</li>
+              <li>Opens ahead of the competition period</li>
               <li>Open to teams from every region</li>
               <li>All players must be Platinum rank or above</li>
-              <li>32 teams are seeded into four pots for the draw</li>
+              <li>24 teams are seeded into three pots for the draw</li>
             </ul>
             <div class="panel-foot"><a class="btn btn-outline btn-sm" href="#documents">Read the Rules</a><a class="btn btn-gold btn-sm" data-link="register">Register Your Team</a><button class="btn btn-outline btn-sm" type="button" data-tab-next="tab-groups">Next: Group Stage <span data-icon="arrow"></span></button></div>
           </div>
 
           <div class="card tabpanel" role="tabpanel" id="panel-groups" aria-labelledby="tab-groups" tabindex="0">
-            <div class="panel-head"><h3>Group Stage</h3><span class="duration"><span data-icon="clock"></span>2 weeks</span></div>
-            <p class="panel-lead">32 teams, 8 groups of 4, single round-robin. Every group-stage series is BO3.</p>
+            <div class="panel-head"><h3>Group Stage</h3><span class="duration"><span data-icon="clock"></span>1 week</span></div>
+            <p class="panel-lead">24 teams, 8 groups of 3, single round-robin. Every team plays two group-stage series, and every series is BO3.</p>
             <ul class="dot-list panel-cols">
               <li>8 groups: A, B, C, D, E, F, G, H</li>
               <li>Each group is a single round-robin</li>
               <li>All group-stage series are BO3</li>
-              <li>All official match days are weekends</li>
+              <li>Played across one weekend</li>
             </ul>
-            <div class="week-grid">
+            <div class="week-grid week-grid--single">
               <div class="week">
-                <p class="week-title">Week 1</p>
+                <p class="week-title">Group stage weekend</p>
                 <div class="days">
-                  <div class="day"><h4>Saturday</h4><div class="group-pills"><span class="group-pill">Group A</span><span class="group-pill">Group B</span></div></div>
-                  <div class="day"><h4>Sunday</h4><div class="group-pills"><span class="group-pill">Group C</span><span class="group-pill">Group D</span></div></div>
-                </div>
-              </div>
-              <div class="week">
-                <p class="week-title">Week 2</p>
-                <div class="days">
-                  <div class="day"><h4>Saturday</h4><div class="group-pills"><span class="group-pill">Group E</span><span class="group-pill">Group F</span></div></div>
-                  <div class="day"><h4>Sunday</h4><div class="group-pills"><span class="group-pill">Group G</span><span class="group-pill">Group H</span></div></div>
+                  <div class="day"><h4>Saturday</h4><div class="group-pills"><span class="group-pill">Group A</span><span class="group-pill">Group B</span><span class="group-pill">Group C</span><span class="group-pill">Group D</span></div></div>
+                  <div class="day"><h4>Sunday</h4><div class="group-pills"><span class="group-pill">Group E</span><span class="group-pill">Group F</span><span class="group-pill">Group G</span><span class="group-pill">Group H</span></div></div>
                 </div>
               </div>
             </div>
@@ -137,9 +135,9 @@
 
           <div class="card tabpanel" role="tabpanel" id="panel-qual" aria-labelledby="tab-qual" tabindex="0" hidden>
             <div class="panel-head"><h3>Two-Legged Qualification</h3><span class="duration"><span data-icon="clock"></span>1 week</span></div>
-            <p class="panel-lead">The 16 teams that finish 2nd and 3rd in their groups form 8 two-legged matchups. The combined result across all ten matches decides who advances.</p>
+            <p class="panel-lead">The 8 teams that finish 2nd in their groups form 4 two-legged matchups. The combined result across all ten matches decides who advances.</p>
             <ul class="dot-list panel-cols">
-              <li>16 teams, 8 two-legged matchups</li>
+              <li>8 teams, 4 two-legged matchups</li>
               <li>First leg (Saturday): 5 individual matches</li>
               <li>Second leg (Sunday): 5 individual matches</li>
               <li>Tied on match wins? Total goals decide it</li>
@@ -149,9 +147,9 @@
 
           <div class="card tabpanel" role="tabpanel" id="panel-bracket" aria-labelledby="tab-bracket" tabindex="0" hidden>
             <div class="panel-head"><h3>Championship Bracket</h3><span class="duration"><span data-icon="clock"></span>2 weeks</span></div>
-            <p class="panel-lead">8 group winners and 8 qualification winners enter a 16-team double-elimination bracket. A team must lose twice to be eliminated.</p>
+            <p class="panel-lead">8 group winners and 4 qualification winners enter a 12-team double-elimination bracket. A team must lose twice to be eliminated.</p>
             <ul class="dot-list panel-cols">
-              <li>16 teams, double elimination</li>
+              <li>12 teams, double elimination</li>
               <li>Opening rounds BO3, quarterfinals BO5</li>
               <li>Semifinals BO5, bracket finals BO7</li>
               <li>Grand Final BO7, no bracket reset</li>
@@ -176,12 +174,12 @@
             <p class="result"><span data-icon="trophy"></span>Qualify directly for the Championship Bracket</p>
           </article>
           <article class="card advance-card advance-card--playoff">
-            <p class="pos">2nd &amp; 3rd in each group</p>
-            <p class="count">16 teams</p>
+            <p class="pos">2nd in each group</p>
+            <p class="count">8 teams</p>
             <p class="result"><span data-icon="layers"></span>Enter the Two-Legged Qualification Round</p>
           </article>
           <article class="card advance-card advance-card--out">
-            <p class="pos">4th in each group</p>
+            <p class="pos">3rd in each group</p>
             <p class="count">8 teams</p>
             <p class="result"><span data-icon="close"></span>Eliminated</p>
           </article>
@@ -195,7 +193,7 @@
         <div class="reveal">
           <p class="eyebrow">Two-legged qualification · 1 week</p>
           <h2 id="qual-title" style="font-size:clamp(1.6rem,2.5vw,2.2rem)">Ten matches decide it.</h2>
-          <p class="lead" style="margin-top:16px">16 teams form 8 two-legged matchups. Five individual matches on Saturday, five more on Sunday, and every team plays all ten.</p>
+          <p class="lead" style="margin-top:16px">8 teams form 4 two-legged matchups. Five individual matches on Saturday, five more on Sunday, and every team plays all ten.</p>
           <div class="legs">
             <div class="leg">
               <p class="label">First leg · Saturday</p>
@@ -225,27 +223,27 @@
             <p>Both teams win five matches, so Team A advances on more total goals scored across the ten matches.</p>
           </div>
           <div class="outcomes">
-            <p class="outcome outcome--win"><span data-icon="trophy"></span>8 winners → Championship Bracket</p>
-            <p class="outcome outcome--lose"><span data-icon="close"></span>8 losers → Eliminated</p>
+            <p class="outcome outcome--win"><span data-icon="trophy"></span>4 winners → Championship Bracket</p>
+            <p class="outcome outcome--lose"><span data-icon="close"></span>4 losers → Eliminated</p>
           </div>
         </article>
       </div>
     </section>
 
-    <!-- FINAL 16 -->
+    <!-- FINAL 12 -->
     <section class="section" id="bracket" aria-labelledby="bracket-title">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">The final 16</p>
+          <p class="eyebrow">The final 12</p>
           <h2 id="bracket-title">Two paths in. One bracket out.</h2>
           <p class="lead">A team must lose twice to be eliminated from the double-elimination Championship Bracket.</p>
         </div>
-        <div class="bracket-sum reveal" role="group" aria-label="8 group winners plus 8 qualification winners equals 16 teams">
+        <div class="bracket-sum reveal" role="group" aria-label="8 group winners plus 4 qualification winners equals 12 teams">
           <div class="sum-box"><p class="n">8</p><p class="t">Group winners</p></div>
           <span class="sum-op" aria-hidden="true">+</span>
-          <div class="sum-box"><p class="n">8</p><p class="t">Qualification winners</p></div>
+          <div class="sum-box"><p class="n">4</p><p class="t">Qualification winners</p></div>
           <span class="sum-op" aria-hidden="true">=</span>
-          <div class="sum-box sum-box--total"><p class="n">16</p><p class="t">Teams in the bracket</p></div>
+          <div class="sum-box sum-box--total"><p class="n">12</p><p class="t">Teams in the bracket</p></div>
         </div>
         <table class="format-table reveal">
           <caption class="sr-only">Championship Bracket series formats by round</caption>
@@ -266,17 +264,17 @@
       <div class="container">
         <div class="section-head section-head--center">
           <p class="eyebrow">Timeline</p>
-          <h2 id="tl-title">Six weeks to a champion</h2>
-          <p class="lead" style="margin-left:auto;margin-right:auto">Stage durations are fixed. Exact dates are announced in the community.</p>
+          <h2 id="tl-title">Four weeks to a champion</h2>
+          <p class="lead" style="margin-left:auto;margin-right:auto">Registration opens ahead of the competition. Once play begins, stage durations are fixed. Exact dates are announced in the community.</p>
         </div>
         <ol class="timeline">
-          <li class="tl-item reveal"><span class="tl-dot">1</span><div class="card tl-card"><div><h3>Registration</h3><p>Teams sign up, get verified and the field is set.</p></div><span class="tl-when">1 week</span></div></li>
-          <li class="tl-item reveal"><span class="tl-dot">2</span><div class="card tl-card"><div><h3>Group Stage</h3><p>32 teams, 8 groups, BO3 round-robin.</p></div><span class="tl-when">2 weeks</span></div></li>
-          <li class="tl-item reveal"><span class="tl-dot">3</span><div class="card tl-card"><div><h3>Two-Legged Qualification</h3><p>16 teams, 8 matchups, 10 matches each.</p></div><span class="tl-when">1 week</span></div></li>
-          <li class="tl-item reveal"><span class="tl-dot">4</span><div class="card tl-card"><div><h3>Double-Elimination Championship Bracket</h3><p>16 teams. Lose twice and you're out.</p></div><span class="tl-when">2 weeks</span></div></li>
-          <li class="tl-item tl-item--champion reveal"><span class="tl-dot" data-icon="trophy"></span><div class="card tl-card"><div><h3>MECS Champion</h3><p>One team lifts the series.</p></div><span class="tl-when">Week 6</span></div></li>
+          <li class="tl-item tl-item--pre reveal"><span class="tl-dot" data-icon="calendar"></span><div class="card tl-card"><div><h3>Registration</h3><p>Teams sign up, get verified and the field is set.</p></div><span class="tl-when">Before kick-off</span></div></li>
+          <li class="tl-item reveal"><span class="tl-dot">1</span><div class="card tl-card"><div><h3>Group Stage</h3><p>24 teams, 8 groups of 3, BO3 round-robin.</p></div><span class="tl-when">1 week</span></div></li>
+          <li class="tl-item reveal"><span class="tl-dot">2</span><div class="card tl-card"><div><h3>Two-Legged Qualification</h3><p>8 teams, 4 matchups, 10 matches each.</p></div><span class="tl-when">1 week</span></div></li>
+          <li class="tl-item reveal"><span class="tl-dot">3</span><div class="card tl-card"><div><h3>Double-Elimination Championship Bracket</h3><p>12 teams. Lose twice and you're out.</p></div><span class="tl-when">2 weeks</span></div></li>
+          <li class="tl-item tl-item--champion reveal"><span class="tl-dot" data-icon="trophy"></span><div class="card tl-card"><div><h3>MECS Champion</h3><p>One team lifts the series.</p></div><span class="tl-when">Week 4</span></div></li>
         </ol>
-        <p class="tl-total">6 weeks from registration to champion</p>
+        <p class="tl-total">4 weeks from the first match to a champion</p>
       </div>
     </section>
 
@@ -287,22 +285,21 @@
           <p class="eyebrow">Seeding</p>
           <h2 id="seed-title" style="font-size:clamp(1.6rem,2.5vw,2.2rem)">Balanced groups, competitive draw</h2>
           <div class="prose" style="margin-top:20px">
-            <p>Teams are seeded using the official MECS competitive seeding process. For the 32-team group stage, four pots of eight teams feed the draw, and every group receives one team from each pot.</p>
+            <p>Teams are seeded using the official MECS competitive seeding process. For the 24-team group stage, three pots of eight teams feed the draw, and every group receives one team from each pot.</p>
             <p>The aim is balanced groups while keeping the draw genuinely competitive. Later stages are decided by results and the official MECS competition structure.</p>
           </div>
         </div>
         <div class="reveal">
           <div class="seed-stats">
-            <div class="card seed-stat"><p class="n">32</p><p class="t">Teams</p></div>
-            <div class="card seed-stat"><p class="n">4</p><p class="t">Seeding pots</p></div>
+            <div class="card seed-stat"><p class="n">24</p><p class="t">Teams</p></div>
+            <div class="card seed-stat"><p class="n">3</p><p class="t">Seeding pots</p></div>
             <div class="card seed-stat"><p class="n">8</p><p class="t">Teams per pot</p></div>
             <div class="card seed-stat"><p class="n">1</p><p class="t">Team per pot, per group</p></div>
           </div>
-          <div class="pot-draw" aria-hidden="true">
+          <div class="pot-draw pot-draw--3" aria-hidden="true">
             <div class="pot"><b>Pot 1</b><span>8 teams</span></div>
             <div class="pot"><b>Pot 2</b><span>8 teams</span></div>
             <div class="pot"><b>Pot 3</b><span>8 teams</span></div>
-            <div class="pot"><b>Pot 4</b><span>8 teams</span></div>
             <div class="pot-arrow">↓ one team from each pot ↓</div>
             <div class="pot-group">Every group, A to H</div>
           </div>
@@ -324,7 +321,7 @@
 
     <section class="cta-band" aria-labelledby="cta-title">
       <div class="container">
-        <h2 id="cta-title">Sixteen teams reach the bracket. One lifts the series.</h2>
+        <h2 id="cta-title">Twelve teams reach the bracket. One lifts the series.</h2>
         <p>Registration and seeding news goes out in the community first.</p>
         <div class="cta-actions">
           <a class="btn btn-gold" data-link="register">Register Your Team</a>
