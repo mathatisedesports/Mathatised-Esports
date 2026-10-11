@@ -34,10 +34,10 @@
     if (key.indexOf("form:") === 0) {
       var url = SITE.forms[key.slice(5)];
       if (!isPlaceholder(url)) return url;
-      return "contact.html?topic=" + encodeURIComponent(topic || "General application") + "#contact-form";
+      return "/contact?topic=" + encodeURIComponent(topic || "General application") + "#contact-form";
     }
     var s = social(key);
-    return s ? s.url : "index.html";
+    return s ? s.url : "/";
   }
 
   /* ---------------------------------------------------------------------------
@@ -114,7 +114,7 @@
      Header
   --------------------------------------------------------------------------- */
   function brand(extraClass) {
-    return '<a class="brand ' + (extraClass || "") + '" href="index.html" aria-label="Mathatised Esports — home">' +
+    return '<a class="brand ' + (extraClass || "") + '" href="/" aria-label="Mathatised Esports — home">' +
       '<img class="brand-mark" src="assets/img/logo-160.webp" width="44" height="44" alt="">' +
       '<span class="brand-text"><span class="brand-name">Mathatised</span><span class="brand-sub">Esports</span></span></a>';
   }
@@ -174,10 +174,10 @@
     var explore = [];
     SITE.nav.forEach(function (n) { if (!n.children) explore.push(n); });
     var partner = [
-      { label: "Host Your Event", href: "host-your-event.html" },
-      { label: "Become a Sponsor", href: "sponsor.html" },
-      { label: "South Asia Premier League", href: "spl.html" },
-      { label: "Send Us a Message", href: "contact.html#contact-form" }
+      { label: "Host Your Event", href: "/host-your-event" },
+      { label: "Become a Sponsor", href: "/sponsor" },
+      { label: "South Asia Premier League", href: "/spl" },
+      { label: "Send Us a Message", href: "/contact#contact-form" }
     ];
     (SITE.docs || []).forEach(function (d) { partner.push({ label: d.title, href: d.file, newTab: true }); });
     function links(list) {

@@ -111,7 +111,7 @@ The Contact, Host Your Event and Sponsorship forms send email through [FormSubmi
 
 ## Previewing locally
 
-Pages load their shared header and footer with JavaScript, so open the site through a local server rather than double-clicking the files. For example, with Node installed:
+Pages load their shared header and footer with JavaScript, and internal links use clean addresses (`/mecs`, `/contact`), so open the site through a local server rather than double-clicking the files. For example, with Node installed:
 
 ```
 npx serve .

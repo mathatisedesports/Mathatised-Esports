@@ -101,20 +101,20 @@ window.SITE = {
      NAVIGATION
   --------------------------------------------------------------------------- */
   nav: [
-    { page: "home",        label: "Home",        href: "index.html" },
-    { page: "who-we-are",  label: "Who We Are",  href: "who-we-are.html" },
-    { page: "competitions",label: "Competitions",href: "competitions.html" },
-    { page: "mecs",        label: "MECS",        href: "mecs.html" },
-    { page: "team",        label: "Team",        href: "team.html" },
-    { page: "join-us",     label: "Join Us",     href: "join-us.html" },
+    { page: "home",        label: "Home",        href: "/" },
+    { page: "who-we-are",  label: "Who We Are",  href: "/who-we-are" },
+    { page: "competitions",label: "Competitions",href: "/competitions" },
+    { page: "mecs",        label: "MECS",        href: "/mecs" },
+    { page: "team",        label: "Team",        href: "/team" },
+    { page: "join-us",     label: "Join Us",     href: "/join-us" },
     {
       label: "Partner",
       children: [
-        { page: "host-your-event", label: "Host Your Event",  href: "host-your-event.html", text: "We build, run and broadcast it for you." },
-        { page: "sponsor",         label: "Become a Sponsor", href: "sponsor.html",         text: "Put your brand where the competition is." }
+        { page: "host-your-event", label: "Host Your Event",  href: "/host-your-event", text: "We build, run and broadcast it for you." },
+        { page: "sponsor",         label: "Become a Sponsor", href: "/sponsor",         text: "Put your brand where the competition is." }
       ]
     },
-    { page: "contact",     label: "Contact",     href: "contact.html" }
+    { page: "contact",     label: "Contact",     href: "/contact" }
   ],
 
   /* ---------------------------------------------------------------------------
@@ -146,7 +146,7 @@ window.SITE = {
       dates: "Four-week competition period",
       prize: "$150",
       result: "",
-      href: "mecs.html"
+      href: "/mecs"
     },
     {
       code: "SPL",
@@ -160,7 +160,7 @@ window.SITE = {
       dates: "29 August – 20 September",
       prize: "3v3: ~$150 · 2v2: $100",
       result: "3v3 Champion — Team Top Five · 2v2 Champion — FuryX BomX",
-      href: "spl.html"
+      href: "/spl"
     }
   ],
 
