@@ -95,7 +95,7 @@ window.SITE = {
   ],
 
   /* Regions shown where we talk about who can compete (everywhere except the SPL page). */
-  openRegions: ["Asia", "The Middle East", "Europe", "Africa", "The Americas", "Oceania"],
+  openRegions: ["North America", "Europe", "MENA", "South America", "Oceania", "APAC", "Sub-Saharan Africa"],
 
   /* ---------------------------------------------------------------------------
      NAVIGATION
@@ -115,6 +115,18 @@ window.SITE = {
       ]
     },
     { page: "contact",     label: "Contact",     href: "contact.html" }
+  ],
+
+  /* ---------------------------------------------------------------------------
+     KEY NUMBERS (band under the Home hero). Update as they grow.
+     Prize pools: SPL 2v2 $100 + SPL 3v3 ~$150 + MECS $150.
+     Players: SPL 3v3 ~70–80 + SPL 2v2 ~50 + MECS ~60–70.
+  --------------------------------------------------------------------------- */
+  highlights: [
+    { value: "50,000+", label: "Broadcast viewers" },
+    { value: "$400+",   label: "In prize pools" },
+    { value: "180+",    label: "Players competed" },
+    { value: "3",       label: "Championship tournaments" }
   ],
 
   /* ---------------------------------------------------------------------------
@@ -143,7 +155,7 @@ window.SITE = {
       statusLabel: "Completed",
       logo: "assets/img/spl-logo.webp",
       game: "",
-      description: "One of our previous tournament initiatives: two double-elimination tournaments played across weekends with players from multiple regions.",
+      description: "A successful Mathatised Esports championship: two double-elimination tournaments with prize pools and international fields, broadcast live with dedicated casting.",
       format: "3v3 and 2v2 · 16 teams each · Double elimination · Middle East servers",
       dates: "29 August – 20 September",
       prize: "3v3: ~$150 · 2v2: $100",
@@ -183,7 +195,7 @@ window.SITE = {
     /* SPL headline figures shown on the SPL page. Edit or add as needed. */
     stats: [
       { value: "50,000+", label: "Viewers tuned in" },
-      { value: "100+",    label: "Players competed" },
+      { value: "120+",    label: "Players competed" },
       { value: "~$250",   label: "Total prize pool" }
     ]
   },

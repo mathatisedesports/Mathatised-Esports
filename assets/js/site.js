@@ -115,7 +115,7 @@
   --------------------------------------------------------------------------- */
   function brand(extraClass) {
     return '<a class="brand ' + (extraClass || "") + '" href="index.html" aria-label="Mathatised Esports — home">' +
-      '<img class="brand-mark" src="assets/img/mathatised-mark-160.webp" width="44" height="44" alt="">' +
+      '<img class="brand-mark" src="assets/img/logo-160.webp" width="44" height="44" alt="">' +
       '<span class="brand-text"><span class="brand-name">Mathatised</span><span class="brand-sub">Esports</span></span></a>';
   }
 
@@ -290,6 +290,12 @@
           '<div class="doc-body"><h3 class="card-title">' + esc(d.title) + '</h3><p class="doc-meta">' + esc(d.meta) + "</p><p>" + esc(d.text) + "</p></div>" +
           '<a class="btn btn-outline btn-sm" href="' + esc(d.file) + '" target="_blank" rel="noopener">Open Document' + icon("external") +
           '<span class="sr-only"> — ' + esc(d.title) + " (opens in a new tab)</span></a></article>";
+      }).join("");
+    },
+
+    highlights: function (el) {
+      el.innerHTML = (SITE.highlights || []).map(function (h) {
+        return "<div><dt>" + esc(h.label) + "</dt><dd>" + esc(h.value) + "</dd></div>";
       }).join("");
     },
 
