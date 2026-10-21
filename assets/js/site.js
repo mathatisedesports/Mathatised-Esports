@@ -31,6 +31,7 @@
   function resolveLink(key, topic) {
     if (key === "email") return "mailto:" + SITE.email;
     if (key === "register") return SITE.registrationUrl || social("discord").url;
+    if (key.charAt(0) === "/") return key;
     if (key.indexOf("form:") === 0) {
       var url = SITE.forms[key.slice(5)];
       if (!isPlaceholder(url)) return url;
@@ -147,6 +148,16 @@
       return '<li><a href="' + item.href + '"' + (item.page === page ? ' aria-current="page"' : "") + ">" + esc(item.label) + "</a></li>";
     }).join("");
 
+    /* Optional announcement bar above the header (config: announcement) */
+    var ann = SITE.announcement;
+    if (ann && ann.show) {
+      var annHref = resolveLink(ann.link || "register");
+      mount.insertAdjacentHTML("beforebegin", '<div class="announce-bar"><div class="container announce-inner">' +
+        '<span class="announce-label">' + esc(ann.label) + '</span><span class="announce-text">' + esc(ann.text) + '</span>' +
+        (ann.textShort ? '<span class="announce-text announce-text--short">' + esc(ann.textShort) + '</span>' : '') +
+        '<a class="announce-cta" href="' + esc(annHref) + '"' + extAttrs(annHref) + '>' + esc(ann.cta) + icon("arrow") + '</a></div></div>');
+    }
+
     mount.className = "site-header";
     mount.innerHTML =
       '<div class="container header-inner">' + brand() +
@@ -171,15 +182,17 @@
   function renderFooter() {
     var mount = doc.getElementById("site-footer");
     if (!mount) return;
-    var explore = [];
-    SITE.nav.forEach(function (n) { if (!n.children) explore.push(n); });
-    var partner = [
-      { label: "Host Your Event", href: "/host-your-event" },
-      { label: "Become a Sponsor", href: "/sponsor" },
-      { label: "South Asia Premier League", href: "/spl" },
-      { label: "Send Us a Message", href: "/contact#contact-form" }
-    ];
-    (SITE.docs || []).forEach(function (d) { partner.push({ label: d.title, href: d.file, newTab: true }); });
+    /* Four short columns. Menu groups (MECS editions, Partner pages) come from config.js,
+       so a new MECS edition added to the menu shows up here automatically. */
+    var explore = [], competitions = [{ label: "All Competitions", href: "/competitions" }], partner = [];
+    SITE.nav.forEach(function (n) {
+      if (!n.children) { if (n.page !== "competitions" && n.page !== "join-us") explore.push(n); }
+      else if (n.label === "Partner") n.children.forEach(function (c) { partner.push(c); });
+      else n.children.forEach(function (c) { competitions.push(c); });
+    });
+    competitions.push({ label: "SPL", href: "/spl" });
+    partner.push({ label: "Join the Team", href: "/join-us" });
+    var resources = (SITE.docs || []).map(function (d) { return { label: d.short || d.title, href: d.file, newTab: true }; });
     function links(list) {
       return "<ul>" + list.map(function (l) {
         var href = l.href || l.url;
@@ -191,13 +204,12 @@
     mount.innerHTML =
       '<div class="container">' +
       '<div class="footer-grid">' +
-      '<div class="footer-brand">' + brand("brand--light") + "<p>" + esc(SITE.tagline) + "</p>" + socialIcons("dark") + "</div>" +
+      '<div class="footer-brand">' + brand("brand--light") + "<p>" + esc(SITE.tagline) + "</p>" + socialIcons("dark") +
+      '<a class="footer-email" href="mailto:' + esc(SITE.email) + '">' + icon("mail") + esc(SITE.email) + "</a></div>" +
       '<div class="footer-col"><h2 class="footer-title">Explore</h2>' + links(explore) + "</div>" +
+      '<div class="footer-col"><h2 class="footer-title">Competitions</h2>' + links(competitions) + "</div>" +
       '<div class="footer-col"><h2 class="footer-title">Work With Us</h2>' + links(partner) + "</div>" +
-      '<div class="footer-col"><h2 class="footer-title">Community</h2>' + links(SITE.socials) + "</div>" +
-      '<div class="footer-col"><h2 class="footer-title">Contact</h2>' +
-      '<p><a class="footer-email" href="mailto:' + esc(SITE.email) + '">' + esc(SITE.email) + "</a></p>" +
-      '<a class="btn btn-gold btn-sm" href="' + esc(social("discord").url) + '" target="_blank" rel="noopener noreferrer">Join the Community</a></div>' +
+      '<div class="footer-col"><h2 class="footer-title">Documents</h2>' + links(resources) + "</div>" +
       "</div>" +
       '<div class="footer-bottom"><p>&copy; ' + new Date().getFullYear() + " " + esc(SITE.name) + '</p><p class="pillars">' +
       SITE.pillars.map(esc).join(' <span aria-hidden="true">·</span> ') + "</p></div></div>";
@@ -210,12 +222,15 @@
     socials: function (el) { el.innerHTML = socialIcons(el.getAttribute("data-variant")); },
 
     competitions: function (el) {
-      var compact = el.getAttribute("data-variant") === "compact";
-      el.innerHTML = SITE.competitions.map(function (c) {
+      var variant = el.getAttribute("data-variant");
+      var series = el.getAttribute("data-filter"); /* e.g. "MECS" lists only that series' editions */
+      var label = variant === "edition" ? "View Edition" : variant === "compact" ? "Explore Competition" : "View Competition";
+      el.innerHTML = SITE.competitions.filter(function (c) { return !series || c.series === series; }).map(function (c) {
         var rows = [];
         if (c.game) rows.push(["Game", c.game]);
         rows.push(["Format", c.format]);
         rows.push(["Dates", c.dates]);
+        if (c.eligibility) rows.push(["Eligibility", c.eligibility]);
         if (c.prize) rows.push(["Prize pool", c.prize]);
         if (c.result) rows.push(["Result", c.result]);
         return '<article class="card comp-card comp-card--' + c.status + '">' +
@@ -226,7 +241,7 @@
           '<h3 class="comp-name">' + esc(c.name) + "</h3>" +
           '<p class="comp-desc">' + esc(c.description) + "</p>" +
           '<dl class="comp-meta">' + rows.map(function (r) { return "<div><dt>" + r[0] + "</dt><dd>" + esc(r[1]) + "</dd></div>"; }).join("") + "</dl>" +
-          '<a class="btn btn-outline btn-sm" href="' + c.href + '">' + (compact ? "Explore Competition" : "View Competition") + icon("arrow") +
+          '<a class="btn btn-outline btn-sm" href="' + c.href + '">' + label + icon("arrow") +
           '<span class="sr-only"> — ' + esc(c.name) + "</span></a></article>";
       }).join("");
     },
@@ -284,7 +299,8 @@
 
     /* Official PDFs: open in the browser's viewer in a new tab (no download). */
     docs: function (el) {
-      el.innerHTML = (SITE.docs || []).map(function (d) {
+      var only = (el.getAttribute("data-docs") || "").split(",").filter(Boolean); /* e.g. "rules" */
+      el.innerHTML = (SITE.docs || []).filter(function (d) { return !only.length || only.indexOf(d.key) > -1; }).map(function (d) {
         return '<article class="card doc-card">' +
           '<span class="card-icon">' + icon("file") + "</span>" +
           '<div class="doc-body"><h3 class="card-title">' + esc(d.title) + '</h3><p class="doc-meta">' + esc(d.meta) + "</p><p>" + esc(d.text) + "</p></div>" +
@@ -348,6 +364,36 @@
   }
 
   /* ---------------------------------------------------------------------------
+     Opening the files straight from disk (file://): clean links such as /mecs
+     would point at the drive root, so map them to the local .html files.
+     Online (Vercel) nothing changes.
+  --------------------------------------------------------------------------- */
+  function toLocalFile(href) {
+    if (!href || href.charAt(0) !== "/" || href.charAt(1) === "/") return null;
+    var m = href.match(/^([^?#]*)(.*)$/);
+    var path = m[1], rest = m[2];
+    var base = location.href.replace(/[?#].*$/, "").replace(/[^\/]*$/, "");
+    if (path === "/") return base + "index.html" + rest;
+    path = path.slice(1).replace(/\/$/, "");
+    return base + path + (/\.[a-z0-9]+$/i.test(path) ? "" : ".html") + rest;
+  }
+
+  function initLocalLinks() {
+    if (location.protocol !== "file:") return;
+    $all("a[href^='/']").forEach(function (a) {
+      var local = toLocalFile(a.getAttribute("href"));
+      if (local) a.setAttribute("href", local);
+    });
+    /* Catch any link added to the page later */
+    doc.addEventListener("click", function (e) {
+      var a = e.target.closest && e.target.closest("a[href^='/']");
+      if (!a) return;
+      var local = toLocalFile(a.getAttribute("href"));
+      if (local) { e.preventDefault(); location.href = local; }
+    });
+  }
+
+  /* ---------------------------------------------------------------------------
      Theme toggle (light by default; choice remembered)
   --------------------------------------------------------------------------- */
   function initTheme() {
@@ -387,7 +433,7 @@
       toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
       header.classList.toggle("menu-open", open);
       doc.body.classList.toggle("no-scroll", open);
-      if (open) { menu.hidden = false; requestAnimationFrame(function () { menu.classList.add("is-open"); }); }
+      if (open) { menu.style.top = Math.max(0, header.getBoundingClientRect().bottom) + "px"; menu.hidden = false; requestAnimationFrame(function () { menu.classList.add("is-open"); }); }
       else { menu.classList.remove("is-open"); menu.hidden = true; }
     }
     toggle.addEventListener("click", function () { setMenu(toggle.getAttribute("aria-expanded") !== "true"); });
@@ -642,6 +688,7 @@
   renderHeader();
   renderFooter();
   renderAll();
+  initLocalLinks();
   initTheme();
   initNav();
   initTabs();

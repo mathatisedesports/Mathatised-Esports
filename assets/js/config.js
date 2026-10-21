@@ -59,6 +59,20 @@ window.SITE = {
   registrationUrl: "https://discord.gg/EbATfBadDv",
 
   /* ---------------------------------------------------------------------------
+     ANNOUNCEMENT BAR (thin bar above the header on every page).
+     Set show: false to hide it. link can be "register", "discord" or a page
+     like "/mecs#editions".
+  --------------------------------------------------------------------------- */
+  announcement: {
+    show: false,
+    label: "MECS APAC",
+    text: "Registration is open. The action starts 7 November.",
+    textShort: "Registration open · Starts 7 Nov",   // shown on phones
+    cta: "Register now",
+    link: "register"
+  },
+
+  /* ---------------------------------------------------------------------------
      FEATURED VIDEO (Home page, "Matches are made to be watched")
      Any YouTube link works (youtu.be/…, youtube.com/watch?v=…).
   --------------------------------------------------------------------------- */
@@ -88,10 +102,10 @@ window.SITE = {
      open in the browser's PDF viewer in a new tab.
   --------------------------------------------------------------------------- */
   docs: [
-    { title: "MECS Rules & Regulations", file: "assets/docs/mecs-rules-and-regulations.pdf", meta: "PDF · 33 pages",
+    { key: "rules", title: "MECS Rules & Regulations", short: "MECS Rulebook", file: "assets/docs/mecs-rules-and-regulations.pdf", meta: "PDF · 33 pages",
       text: "The official rulebook: eligibility, rosters, match procedures, disconnects, disputes and conduct." },
-    { title: "MECS Format & Competition Structure", file: "assets/docs/mecs-format-and-competition-structure.pdf", meta: "PDF · 13 pages",
-      text: "Every stage in detail: registration, groups, two-legged qualification, the Championship Bracket and seeding." }
+    { key: "format", title: "MECS Format & Competition Structure", short: "MECS Format", file: "assets/docs/mecs-format-and-competition-structure.pdf", meta: "PDF · 13 pages",
+      text: "Every stage in detail: registration, groups, the Qualifiers, the Championship Bracket and seeding." }
   ],
 
   /* Regions shown where we talk about who can compete (everywhere except the SPL page). */
@@ -104,7 +118,14 @@ window.SITE = {
     { page: "home",        label: "Home",        href: "/" },
     { page: "who-we-are",  label: "Who We Are",  href: "/who-we-are" },
     { page: "competitions",label: "Competitions",href: "/competitions" },
-    { page: "mecs",        label: "MECS",        href: "/mecs" },
+    {
+      label: "MECS",
+      children: [
+        { page: "mecs",             label: "MECS Overview",    href: "/mecs",             text: "The series, its mission and every edition." },
+        { page: "mecs-middle-east", label: "MECS Middle East", href: "/mecs-middle-east", text: "The first edition. Live now." },
+        { page: "mecs-apac",        label: "MECS APAC",        href: "/mecs-apac",        text: "Registration open. Starts 7 November." }
+      ]
+    },
     { page: "team",        label: "Team",        href: "/team" },
     { page: "join-us",     label: "Join Us",     href: "/join-us" },
     {
@@ -119,34 +140,54 @@ window.SITE = {
 
   /* ---------------------------------------------------------------------------
      KEY NUMBERS (band under the Home hero). Update as they grow.
-     Prize pools: SPL 2v2 $100 + SPL 3v3 ~$150 + MECS $150.
+     Prize pools: SPL 2v2 $100 + SPL 3v3 ~$150 + MECS Middle East $150 + MECS APAC $150.
      Players: SPL 3v3 ~70–80 + SPL 2v2 ~50 + MECS ~60–70.
   --------------------------------------------------------------------------- */
   highlights: [
     { value: "50,000+", label: "Broadcast viewers" },
-    { value: "$400+",   label: "In prize pools" },
+    { value: "$550+",   label: "In prize pools" },
     { value: "180+",    label: "Players competed" },
     { value: "3",       label: "Championship tournaments" }
   ],
 
   /* ---------------------------------------------------------------------------
      COMPETITIONS (shown on Home and Competitions pages)
-     `game` and `prize` are optional — fill them in and they appear on the cards.
+     `game`, `eligibility` and `prize` are optional; fill them in and they appear on the cards.
+     Entries with series: "MECS" are also listed as editions on the MECS page.
+     Status: "live", "current" (e.g. registration open) or "completed".
   --------------------------------------------------------------------------- */
   competitions: [
     {
+      series: "MECS",
       code: "MECS",
-      name: "Mathatised Esports Championship Series",
-      status: "current",
-      statusLabel: "Current",
+      name: "MECS Middle East",
+      status: "live",
+      statusLabel: "Live now",
       logo: "assets/img/mecs-logo.webp",
       game: "Rocket League",
-      description: "Our flagship championship series. A full competitive structure built so performances are seen, not buried in a bracket.",
+      description: "The first edition of the Mathatised Esports Championship Series, being played now on Middle East servers.",
       format: "24 teams · Group stage · Two-legged qualification · Double elimination",
-      dates: "Four-week competition period",
+      dates: "10 October – 1 November",
+      eligibility: "Platinum rank or above",
       prize: "$150",
       result: "",
-      href: "/mecs"
+      href: "/mecs-middle-east"
+    },
+    {
+      series: "MECS",
+      code: "MECS",
+      name: "MECS APAC",
+      status: "current",
+      statusLabel: "Registration open",
+      logo: "assets/img/mecs-logo.webp",
+      game: "Rocket League",
+      description: "The Mathatised Esports Championship Series comes to the Asia-Pacific region, across four weekends from 7 November.",
+      format: "24 teams · Group stage · Qualifiers · Double elimination",
+      dates: "7–29 November",
+      eligibility: "Champion rank or above",
+      prize: "$150",
+      result: "",
+      href: "/mecs-apac"
     },
     {
       code: "SPL",
@@ -159,7 +200,7 @@ window.SITE = {
       format: "3v3 and 2v2 · 16 teams each · Double elimination · Middle East servers",
       dates: "29 August – 20 September",
       prize: "3v3: ~$150 · 2v2: $100",
-      result: "3v3 Champion — Team Top Five · 2v2 Champion — FuryX BomX",
+      result: "3v3 Champion — Team Top Five · 2v2 Champion — Fury X BomX",
       href: "/spl"
     }
   ],
@@ -186,7 +227,7 @@ window.SITE = {
         facts: ["16 participating teams", "Players from multiple regions around the world", "Middle East servers", "Double-elimination format", "Played across two weekends"],
         matchDays: ["12 September", "13 September", "19 September", "20 September"],
         placements: [
-          { place: "1st", team: "FuryX BomX" },
+          { place: "1st", team: "Fury X BomX" },
           { place: "2nd", team: "Kl Banana" },
           { place: "3rd", team: "UncsWhoDunc" }
         ]
