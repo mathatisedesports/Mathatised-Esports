@@ -89,6 +89,17 @@ Every page has an "Ask us" button that opens a chat assistant.
 - The key is the Vercel environment variable `GEMINI_API_KEY`. It's never in the code. Without it, or when the free daily limit is reached, the chat falls back to the quick answers and the Discord link.
 - Optional: set `GEMINI_MODEL` in Vercel to force a specific Gemini model.
 - **When the site changes** (new edition, dates, a champion, new rules PDF), update `api/knowledge/site.md` (and `rules.md` / `format.md` for new PDFs) and the matching quick answers, or the assistant will give old information.
+- **Discord announcements:** the assistant also reads the latest posts in the staff channels listed in `api/knowledge/discord.json` (live, refreshed every 5 minutes). Pinned posts are always included; other posts from the last 90 days. If an announcement disagrees with the website, the newest announcement wins. Only list channels where staff alone can post.
+
+### Discord bot (`/ask`)
+
+The same assistant answers `/ask` in the Discord server. Code: `api/discord.mjs` (endpoint) and `api/_discord.js` (logic); the shared answering code is `api/_assistant.js`.
+
+- Vercel environment variables: `DISCORD_APPLICATION_ID`, `DISCORD_PUBLIC_KEY`, `DISCORD_BOT_TOKEN` (plus `GEMINI_API_KEY`).
+- Discord Developer Portal: **Bot → Message Content Intent** must be on; **Interactions Endpoint URL** is `https://mathatised-esports.vercel.app/api/discord`.
+- After any change to the command, open `https://mathatised-esports.vercel.app/api/discord?setup` once. It registers `/ask` and checks every connection (keys, channels, permissions).
+- Choose where `/ask` can be used in Discord: **Server Settings → Integrations → the bot → Commands**.
+- `package.json` only exists to install `@vercel/functions` for the bot. There is still no build step.
 
 ---
 
@@ -116,9 +127,13 @@ Every page has an "Ask us" button that opens a chat assistant.
 ├── *.html                 pages
 ├── vercel.json            clean URLs + security headers + assistant function settings
 ├── robots.txt
+├── package.json           installs @vercel/functions (used by the Discord bot); no build step
 ├── api/
-│   ├── chat.js            assistant server function (Gemini)
-│   └── knowledge/         what the assistant knows (site.md, format.md, rules.md)
+│   ├── _assistant.js      shared assistant brain (knowledge, announcements, Gemini)
+│   ├── chat.js            website chat endpoint
+│   ├── discord.mjs        Discord /ask endpoint (+ ?setup)
+│   ├── _discord.js        Discord bot logic
+│   └── knowledge/         site.md, format.md, rules.md, discord.json (announcement channels)
 └── assets/
     ├── css/styles.css     all styling (light + dark theme tokens at the top)
     ├── js/config.js       ← edit links, email, forms, content data here

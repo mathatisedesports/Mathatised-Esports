@@ -1,0 +1,8 @@
+{
+  "name": "mathatised-esports",
+  "private": true,
+  "description": "Mathatised Esports website. Static pages plus two Vercel functions (api/chat.js, api/discord.mjs). No build step.",
+  "dependencies": {
+    "@vercel/functions": "^3.0.0"
+  }
+}
