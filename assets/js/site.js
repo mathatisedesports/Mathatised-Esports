@@ -463,6 +463,31 @@
   }
 
   /* ---------------------------------------------------------------------------
+     Assistant chat button. The chat itself (assets/js/assistant.js) only loads
+     the first time someone opens it, so pages stay light.
+  --------------------------------------------------------------------------- */
+  function initAssistant() {
+    var btn = doc.createElement("button");
+    btn.type = "button";
+    btn.className = "assistant-launcher";
+    btn.setAttribute("aria-controls", "assistant-panel");
+    btn.setAttribute("aria-expanded", "false");
+    btn.setAttribute("aria-label", "Ask the Mathatised Esports assistant");
+    btn.innerHTML = icon("message") + '<span class="assistant-launcher__text">Ask us</span>';
+    doc.body.appendChild(btn);
+    function load() {
+      btn.removeEventListener("click", load);
+      btn.classList.add("is-loading");
+      var s = doc.createElement("script");
+      s.src = "assets/js/assistant.js";
+      s.onload = function () { btn.classList.remove("is-loading"); };
+      s.onerror = function () { btn.classList.remove("is-loading"); s.remove(); btn.addEventListener("click", load); };
+      doc.body.appendChild(s);
+    }
+    btn.addEventListener("click", load);
+  }
+
+  /* ---------------------------------------------------------------------------
      Scroll reveal (skipped for reduced-motion users)
   --------------------------------------------------------------------------- */
   function initReveal() {
@@ -694,6 +719,7 @@
   initTabs();
   initForms();
   initHeroVideo();
+  initAssistant();
   initReveal();
   initCounters();
 })();

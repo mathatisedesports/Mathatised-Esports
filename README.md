@@ -80,6 +80,18 @@ The Contact, Host Your Event and Sponsorship forms send email through [FormSubmi
 
 ---
 
+## The assistant (chat button)
+
+Every page has an "Ask us" button that opens a chat assistant.
+
+- **Suggested questions** are answered instantly from `QUICK_ANSWERS` in `assets/js/assistant.js`.
+- **Typed questions** go to `api/chat.js`, a Vercel function that asks Google Gemini (free tier). It answers only from the files in `api/knowledge/`: `site.md` (website facts), `format.md` and `rules.md` (the two PDFs as text).
+- The key is the Vercel environment variable `GEMINI_API_KEY`. It's never in the code. Without it, or when the free daily limit is reached, the chat falls back to the quick answers and the Discord link.
+- Optional: set `GEMINI_MODEL` in Vercel to force a specific Gemini model.
+- **When the site changes** (new edition, dates, a champion, new rules PDF), update `api/knowledge/site.md` (and `rules.md` / `format.md` for new PDFs) and the matching quick answers, or the assistant will give old information.
+
+---
+
 ## Pages
 
 | Page | File |
@@ -89,6 +101,8 @@ The Contact, Host Your Event and Sponsorship forms send email through [FormSubmi
 | Competitions | `competitions.html` |
 | South Asia Premier League | `spl.html` |
 | MECS | `mecs.html` |
+| MECS Middle East | `mecs-middle-east.html` |
+| MECS APAC | `mecs-apac.html` |
 | Team | `team.html` |
 | Join Us | `join-us.html` |
 | Host Your Event | `host-your-event.html` |
@@ -100,12 +114,16 @@ The Contact, Host Your Event and Sponsorship forms send email through [FormSubmi
 
 ```
 ├── *.html                 pages
-├── vercel.json            clean URLs + security headers
+├── vercel.json            clean URLs + security headers + assistant function settings
 ├── robots.txt
+├── api/
+│   ├── chat.js            assistant server function (Gemini)
+│   └── knowledge/         what the assistant knows (site.md, format.md, rules.md)
 └── assets/
     ├── css/styles.css     all styling (light + dark theme tokens at the top)
     ├── js/config.js       ← edit links, email, forms, content data here
     ├── js/site.js         shared header/footer/components + interactions
+    ├── js/assistant.js    chat window + quick answers
     └── img/               logos, favicons, share image, placeholders
 ```
 
