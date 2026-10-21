@@ -7,9 +7,12 @@
     { "id": "1553436050104254514", "name": "qualification-announcements" },
     { "id": "1553436150184546464", "name": "results-and-standings (Qualification)" },
     { "id": "1553436797332361308", "name": "championship-announcements" },
-    { "id": "1553436937099018411", "name": "results-and-standings (Championship)" }
+    { "id": "1553436937099018411", "name": "results-and-standings (Championship)" },
+    { "id": "1537821055455076392", "name": "registered-teams" }
   ],
+  "_logChannelHelp": "Private staff channel where the bot records strikes, blocks and unblocks (and reads them back). Never list it under 'channels'.",
+  "logChannel": "1562503931026735104",
   "days": 90,
   "messagesPerChannel": 50,
-  "maxChars": 30000
+  "maxChars": 40000
 }

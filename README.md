@@ -101,6 +101,8 @@ The same assistant answers `/ask` in the Discord server. Code: `api/discord.mjs`
 - Choose where `/ask` can be used in Discord: **Server Settings → Integrations → the bot → Commands**.
 - `package.json` only exists to install `@vercel/functions` for the bot. There is still no build step.
 
+**Strikes and blocks** (`api/_moderation.js`): off-topic, abusive or trick questions get a private refusal and a strike; so does spamming (once per 10 minutes). Strike 1 = warning, 2 = blocked from the bot for 30 minutes, 3 = 1 hour, 4+ = 6 hours. Strikes older than 7 days don't count. Staff (members with "Timeout Members") get `/bot-block`, `/bot-unblock` (also clears strikes) and `/bot-strikes`. Everything is recorded in the private staff channel set as `logChannel` in `api/knowledge/discord.json`; the bot reads those records back, so don't delete recent bot messages there.
+
 ---
 
 ## Pages
