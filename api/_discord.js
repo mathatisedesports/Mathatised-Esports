@@ -232,6 +232,7 @@ async function handleStaff(i, opts) {
       lines.push(s.blockedUntil ? "⛔ Blocked until <t:" + Math.floor(s.blockedUntil / 1000) + ":f> (<t:" + Math.floor(s.blockedUntil / 1000) + ":R>)." : "Not blocked.");
       const next = mod.penaltyFor(s.strikes + 1);
       lines.push("Next strike: " + (next ? "blocked for " + mod.formatDuration(next) : "a warning") + ".");
+      lines.push("Ladder: strikes 1–2 warning, 3 = 30 minutes, 4 = 1 hour, 5+ = 6 hours. Strikes clear after 7 days.");
       return editOriginal(i, { content: lines.join("\n") });
     }
   });

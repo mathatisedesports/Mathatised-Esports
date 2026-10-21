@@ -5,7 +5,8 @@
    message, and the bot reads those messages back to know who is blocked.
 
    Strike ladder (strikes older than 7 days don't count):
-     1 = private warning, 2 = 30 minutes, 3 = 1 hour, 4 or more = 6 hours
+     1 and 2 = private warning (saying how many strikes are left),
+     3 = 30 minutes, 4 = 1 hour, 5 or more = 6 hours
 ============================================================================= */
 "use strict";
 
@@ -15,7 +16,8 @@ const path = require("path");
 const DISCORD_API = "https://discord.com/api/v10";
 const MIN = 60 * 1000, HOUR = 60 * MIN, DAY = 24 * HOUR;
 const STRIKE_WINDOW = 7 * DAY;
-const LADDER = [0, 0, 30 * MIN, 1 * HOUR, 6 * HOUR]; /* index = strike number */
+const LADDER = [0, 0, 0, 30 * MIN, 1 * HOUR, 6 * HOUR]; /* index = strike number */
+const FIRST_BLOCK = LADDER.findIndex((ms) => ms > 0);      /* = 3 */
 const COLORS = { strike: 0xd4ae55, block: 0xc0392b, unblock: 0x2e8b57, info: 0x16223f };
 
 function logChannelId() {
@@ -138,11 +140,13 @@ async function addStrike(token, userId, reason, question, kind) {
       "⛔ <@" + userId + "> blocked from the assistant for **" + formatDuration(blockMs) + "** (strike " + strikes + "), until <t:" + Math.floor(until / 1000) + ":f>", COLORS.block);
   }
 
+  const left = FIRST_BLOCK - strikes;
   const message = blockMs
     ? "⛔ That's strike " + strikes + ". You can't use the assistant for **" + formatDuration(blockMs) + "** (until <t:" + Math.floor(until / 1000) + ":t>)."
-    : kind === "spam"
-      ? "⚠️ **Warning:** please don't spam the assistant. Spam and off-topic questions count as strikes, and strikes lead to short blocks from the assistant."
-      : "⚠️ **Warning:** I can only help with Mathatised Esports questions. Off-topic, abusive or spam questions count as strikes, and strikes lead to short blocks from the assistant.";
+    : (kind === "spam"
+        ? "⚠️ **Warning " + strikes + " of " + (FIRST_BLOCK - 1) + ":** please don't spam the assistant."
+        : "⚠️ **Warning " + strikes + " of " + (FIRST_BLOCK - 1) + ":** I can only help with Mathatised Esports questions.") +
+      " **" + left + " more strike" + (left === 1 ? "" : "s") + "** and you'll be blocked from using the assistant for " + formatDuration(LADDER[FIRST_BLOCK]) + ".";
   return { strikes, blockMs, until, message };
 }
 
