@@ -66,8 +66,8 @@
       a: "Discord is the fastest way to reach us, and tournament support, disputes and reports go through the Discord ticket system (Rules 5.3 and 6.1): [join the Discord](" + DISCORD + "). You can also email mathatisedesports@gmail.com or use the [contact form](/contact)." }
   ];
 
-  var GREETING = "Hi! I'm the Mathatised Esports assistant. Ask me about **MECS**, our competitions, the rules, the schedule, joining the team or working with us.";
-  var FALLBACK = "I'm not sure about that one. The quickest way to get an answer is our [Discord](" + DISCORD + "), or you can [send us a message](/contact).";
+  var GREETING = "Hey there! 👋 I'm the Mathatised Esports assistant. Ask me anything about **MECS**, our competitions, the rules, schedules, joining the team or working with us!";
+  var FALLBACK = "Ooh, I don't know that one, sorry! 😅 The quickest way to get an answer is our [Discord](" + DISCORD + "), or you can [send us a message](/contact).";
   var OFFLINE_NOTE = "_The AI assistant isn't available right now, so here's the closest quick answer._";
 
   /* ---------------------------------------------------------------------------

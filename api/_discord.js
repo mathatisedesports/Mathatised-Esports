@@ -60,8 +60,8 @@ const COMMANDS = [
   }
 ];
 
-const BUSY = "I'm getting a lot of questions right now, so I can't answer this one. Please try again in a few minutes, check the latest announcements, or open a support ticket.";
-const UNAVAILABLE = "I can't answer right now. Please check the latest announcements or the rulebook (" + RULEBOOK + "), or open a support ticket.";
+const BUSY = "Phew, everyone's asking at once right now! 😅 Give me a minute and ask again. In the meantime, the latest announcements might already have your answer 👀";
+const UNAVAILABLE = "Ah, I'm having a little moment and can't answer right now 🙏 Try again in a bit, check the announcements or the rulebook (" + RULEBOOK + "), or open a ticket and the team will help you out.";
 
 /* ---------------------------------------------------------------------------
    Request signature check (Discord requires this)
