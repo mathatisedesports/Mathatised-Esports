@@ -51,6 +51,7 @@ module.exports = async function handler(req, res) {
   if (!contents) return res.status(400).json({ error: "bad_request" });
 
   const r = await assistant.answer(contents, "website");
-  if (r.ok) return res.status(200).json({ reply: r.text });
+  /* Discord channel codes mean nothing on the website */
+  if (r.ok) return res.status(200).json({ reply: r.text.replace(/<#\d+>/g, "a channel in our Discord") });
   return res.status(r.error === "busy" ? 429 : 503).json({ error: r.error });
 };

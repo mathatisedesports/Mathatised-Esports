@@ -102,8 +102,17 @@ async function verifySignature(rawBody, signatureHex, timestamp, publicKeyHex) {
 --------------------------------------------------------------------------- */
 const SITE_PATHS = /(^|[\s(])\/(mecs-middle-east|mecs-apac|mecs|spl|competitions|contact|join-us|team|who-we-are|host-your-event|sponsor|assets\/docs\/[\w.-]+)(?=[\s).,!?:;]|$)/g;
 
+/* "#championship-announcements" -> <#id>, which Discord shows as a clickable channel */
+function linkChannels(text) {
+  const channels = assistant.loadDiscordConfig().channels.slice().sort((a, b) => b.name.length - a.name.length);
+  return channels.reduce((t, c) => {
+    const name = String(c.name || "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return name ? t.replace(new RegExp("#" + name + "(?![\\w-])", "gi"), "<#" + c.id + ">") : t;
+  }, String(text));
+}
+
 function toDiscordMarkdown(text) {
-  return String(text)
+  return linkChannels(text)
     .replace(/\[([^\]]+)\]\(https?:\/\/(www\.)?discord\.gg\/[^)\s]*\)/g, "$1")  /* they're already in the Discord */
     .replace(/\]\((\/[^)\s]*)\)/g, (m, p) => "](" + SITE_URL + p + ")")   /* [text](/page) -> full link */
     .replace(SITE_PATHS, (m, before, p) => before + SITE_URL + "/" + p)   /* bare /page -> full link */

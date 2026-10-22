@@ -66,7 +66,7 @@ function cleanDiscordText(text, channelNames) {
       const d = new Date(Number(s) * 1000);
       return d.toLocaleString("en-GB", { weekday: "short", day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit", timeZone: "UTC" }) + " UTC";
     })
-    .replace(/<#(\d+)>/g, (m, id) => "#" + (channelNames[id] || "channel"))
+    .replace(/<#(\d+)>/g, (m, id) => (channelNames[id] ? "#" + channelNames[id] : m)) /* other channels stay as Discord links */
     .replace(/<@&\d+>/g, "@role")
     .replace(/<@!?\d+>/g, "@member")
     .replace(/<a?:(\w+):\d+>/g, ":$1:")
@@ -209,6 +209,7 @@ function systemPrompt(announcements, surface) {
     "- Never predict or hint at who will win, who will advance, a score, a final placement or a champion. Not even as a joke or 'if I had to guess'. Don't rank, compare or rate teams or players.",
     "- Hypothetical questions ('if Team X wins, who do they play?', 'what happens if we lose?'): answer only from the format rules (for example 'in double elimination a loss sends you to the lower bracket'). Never name specific opponents unless an announcement states them.",
     "- When you give a matchup, match time or result from an announcement, say where it's from in a few words, for example '(from the 22 Oct #championship-announcements post)'.",
+    "- When you mention a Discord channel, write it as # followed by the exact name shown in the announcement headers (" + loadDiscordConfig().channels.map((c) => "#" + c.name).join(", ") + "), or copy a channel code like <#123456789> exactly as it appears in an announcement. Don't invent other channel names.",
     "- If the announced date or time of a match has already passed and no result has been posted, say the result hasn't been posted yet. Don't present it as upcoming.",
     "- If a team name isn't mentioned anywhere in the knowledge or announcements, say you can't find that team and suggest checking the spelling or the #registered-teams channel. Never guess whether a team is registered, eliminated or qualified.",
     "- If it's unclear which edition someone means (MECS Middle East or MECS APAC), answer for the one the information is about and say which one it is, or ask them to say which edition.",
@@ -357,4 +358,4 @@ function makeLimiter(perMinute, perDay) {
   };
 }
 
-module.exports = { answer, makeLimiter, getAnnouncements, cleanDiscordText, messageText, systemPrompt, SITE_URL, DISCORD_INVITE };
+module.exports = { answer, makeLimiter, getAnnouncements, cleanDiscordText, messageText, systemPrompt, loadDiscordConfig, tidyAnswer, SITE_URL, DISCORD_INVITE };

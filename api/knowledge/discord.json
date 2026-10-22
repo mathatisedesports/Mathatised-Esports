@@ -1,13 +1,13 @@
 {
-  "_help": "Staff-only Discord channels the assistant reads for the latest announcements. Add each channel's ID (right-click the channel > Copy Channel ID) and a short name. Pinned posts are always included; other posts from the last 'days' days are included, newest first, up to 'maxChars' characters in total.",
+  "_help": "Staff-only Discord channels the assistant reads for the latest announcements. Add each channel's ID (right-click the channel > Copy Channel ID) and a short, unique name (letters, numbers and dashes). In Discord replies, '#name' becomes a clickable link to that channel. Pinned posts are always included; other posts from the last 'days' days are included, newest first, up to 'maxChars' characters in total.",
   "channels": [
     { "id": "1529565626950094899", "name": "announcements" },
     { "id": "1553434772787953765", "name": "group-announcements" },
-    { "id": "1553435057757102240", "name": "results-and-standings (Group Stage)" },
+    { "id": "1553435057757102240", "name": "group-stage-results" },
     { "id": "1553436050104254514", "name": "qualification-announcements" },
-    { "id": "1553436150184546464", "name": "results-and-standings (Qualification)" },
+    { "id": "1553436150184546464", "name": "qualification-results" },
     { "id": "1553436797332361308", "name": "championship-announcements" },
-    { "id": "1553436937099018411", "name": "results-and-standings (Championship)" },
+    { "id": "1553436937099018411", "name": "championship-results" },
     { "id": "1537821055455076392", "name": "registered-teams" }
   ],
   "_logChannelHelp": "Private staff channel where the bot records strikes, blocks and unblocks (and reads them back). Never list it under 'channels'.",
