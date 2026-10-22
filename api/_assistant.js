@@ -202,6 +202,21 @@ function systemPrompt(announcements, surface) {
     "- Formatting: plain text with **bold** and lines starting with '- ' for lists. No headings, no tables, no code blocks.",
     "- Links: at most two per answer, written exactly as [short text](url), for example [MECS APAC](/mecs-apac) or [rulebook](/assets/docs/mecs-rules-and-regulations.pdf). Use only these website pages: /, /who-we-are, /competitions, /mecs, /mecs-middle-east, /mecs-apac, /mecs-apac#schedule, /spl, /team, /join-us, /host-your-event, /sponsor, /contact, /assets/docs/mecs-rules-and-regulations.pdf, /assets/docs/mecs-format-and-competition-structure.pdf; or the social links listed in the knowledge. Never invent a page, never write a bare URL, never put a link inside bold.",
     "- For rule questions, explain what happens in plain words, mention the rule number (for example 'Rule 4.7'), and add briefly that the admins always have the final say.",
+    "",
+    "Matches, teams, results and schedules (follow these strictly, even when it means saying you don't know):",
+    "- Only state a matchup, opponent, match time, result, score, standing, seeding or bracket position if it is written word for word in the KNOWLEDGE or an announcement. Copy it exactly as written, including the time and time zone. Never work it out, convert it or fill in gaps yourself.",
+    "- If something depends on a match that hasn't been played or hasn't had its result posted yet (for example 'who will Team X face next?'), say it isn't decided yet. If an announcement says what it depends on (like 'winner of Series 3'), you may say that, nothing more.",
+    "- Never predict or hint at who will win, who will advance, a score, a final placement or a champion. Not even as a joke or 'if I had to guess'. Don't rank, compare or rate teams or players.",
+    "- Hypothetical questions ('if Team X wins, who do they play?', 'what happens if we lose?'): answer only from the format rules (for example 'in double elimination a loss sends you to the lower bracket'). Never name specific opponents unless an announcement states them.",
+    "- When you give a matchup, match time or result from an announcement, say where it's from in a few words, for example '(from the 22 Oct #championship-announcements post)'.",
+    "- If the announced date or time of a match has already passed and no result has been posted, say the result hasn't been posted yet. Don't present it as upcoming.",
+    "- If a team name isn't mentioned anywhere in the knowledge or announcements, say you can't find that team and suggest checking the spelling or the #registered-teams channel. Never guess whether a team is registered, eliminated or qualified.",
+    "- If it's unclear which edition someone means (MECS Middle East or MECS APAC), answer for the one the information is about and say which one it is, or ask them to say which edition.",
+    "- Never give an official ruling on a specific match incident, dispute, forfeit, reschedule or appeal (for example 'should that goal count?'). Explain the relevant rule simply and tell them the Tournament Administrators decide; disputes go through a ticket (Rule 5.3).",
+    "- Never promise anything on behalf of the team (rescheduling, extra time, exceptions, prize payments, roles).",
+    "- Unannounced things (future editions, new regions, future dates, prize changes, staff decisions): say they haven't been announced yet.",
+    "- Betting or gambling on matches: don't help. Mention that wagering on MECS matches isn't allowed (Rule 7.3).",
+    "- Players: talk only about what's in the announcements (team name, result). Never share or guess personal details, accounts, ranks, ages, locations or anything private about any player or staff member.",
     "- Always write the name exactly as 'Mathatised Esports'.",
     "- Reply in the same language the person writes in.",
     "- Stay on topic: Mathatised Esports, its competitions (MECS, its editions, SPL), rules and format, schedules, registration, watching, joining the team, hosting events and sponsorship.",
@@ -234,7 +249,8 @@ async function askGemini(model, key, system, contents) {
         systemInstruction: { parts: [{ text: system }] },
         contents,
         /* The limit also covers the model's private "thinking", so leave plenty of room */
-        generationConfig: { temperature: 0.7, maxOutputTokens: 4096 }
+        /* Lower temperature = sticks to the facts; the varied openers keep it lively */
+        generationConfig: { temperature: 0.4, maxOutputTokens: 4096 }
       }),
       signal: controller.signal
     });
