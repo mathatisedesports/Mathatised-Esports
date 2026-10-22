@@ -104,6 +104,7 @@ const SITE_PATHS = /(^|[\s(])\/(mecs-middle-east|mecs-apac|mecs|spl|competitions
 
 function toDiscordMarkdown(text) {
   return String(text)
+    .replace(/\[([^\]]+)\]\(https?:\/\/(www\.)?discord\.gg\/[^)\s]*\)/g, "$1")  /* they're already in the Discord */
     .replace(/\]\((\/[^)\s]*)\)/g, (m, p) => "](" + SITE_URL + p + ")")   /* [text](/page) -> full link */
     .replace(SITE_PATHS, (m, before, p) => before + SITE_URL + "/" + p)   /* bare /page -> full link */
     .replace(/^\s*#{1,6}\s+(.*)$/gm, "**$1**")                             /* no big headings */
