@@ -1,7 +1,7 @@
 # Mathatised Esports: website knowledge
 
 Keep this file in step with the website. The assistant answers only from this file,
-format.md and rules.md. Last updated: 21 October 2026.
+format.md and rules.md. Last updated: 1 November 2026.
 
 ## Who we are
 - Name: Mathatised Esports (always spelled exactly like this). Short name: Mathatised.
@@ -10,7 +10,7 @@ format.md and rules.md. Last updated: 21 October 2026.
 - Mission: give players a professionally produced stage to compete against high-level opposition (high-ranked, semi-pro and pro players), be seen and make a name for themselves. We also build a community around competitive Rocket League.
 - What we do: competitive tournaments (seeding, a published rulebook, dedicated match administration), professional live broadcasts, casting and commentary, player exposure through social and video content, competitive opportunities for players across different skill levels, and community.
 - Open to players from every region: North America, Europe, MENA, South America, Oceania, APAC, Sub-Saharan Africa and anywhere else.
-- Numbers: 50,000+ broadcast viewers, $550+ in prize pools, 180+ players competed, 3 championship tournaments.
+- Numbers: 50,000+ broadcast viewers, $400+ in prize pools, 180+ players competed, 3 championship tournaments.
 - Mathatised Esports is independent and is not affiliated with Epic Games, Psyonix or the RLCS.
 
 ## Team
@@ -24,19 +24,21 @@ format.md and rules.md. Last updated: 21 October 2026.
 - Contact form: /contact
 - YouTube: https://www.youtube.com/@Mathatised
 - Twitch: https://twitch.tv/mathatised
+- Kick: https://kick.com/mathatised
 - TikTok: https://www.tiktok.com/@mathatised.esports
 - Instagram: https://www.instagram.com/mathatisedesports/
 - Facebook: https://www.facebook.com/MathatisedEsports
-- Rulebook PDF: /assets/docs/mecs-rules-and-regulations.pdf
-- Format document PDF: /assets/docs/mecs-format-and-competition-structure.pdf
+- Rulebook PDF (one rulebook for SPL, MECS and MECS Regionals): /assets/docs/mathatised-esports-rules-and-regulations.pdf
+- MECS Regionals format document: /assets/docs/mecs-regionals-format.pdf
+- MECS Championship format document (four-week format, MECS Middle East): /assets/docs/mecs-format-and-competition-structure.pdf
 
 ## Website pages
 - Home: /
 - Who We Are: /who-we-are
 - Competitions (all competitions and results): /competitions
-- MECS overview (the series and all editions): /mecs
-- MECS Middle East: /mecs-middle-east
-- MECS APAC: /mecs-apac
+- MECS overview (the series): /mecs
+- MECS Regionals (weekly tournaments, schedule, eligibility): /mecs-regionals
+- MECS Middle East (the original four-week championship): /mecs-middle-east
 - South Asia Premier League (SPL): /spl
 - Team: /team
 - Join Us (open staff roles): /join-us
@@ -45,32 +47,36 @@ format.md and rules.md. Last updated: 21 October 2026.
 - Contact: /contact
 
 ## MECS: Mathatised Esports Championship Series
-- Our flagship Rocket League championship series, run as regional editions under one competitive standard. More regions are planned; new editions are announced in Discord.
-- Purpose: a community-driven platform for players to compete against high-level players and make a name for themselves. The prize pool rewards the champions, but the real prize is the platform and the broadcast exposure.
-- Every edition: 24 teams, 4 weekends of competition (registration is extra, before that), $150 prize pool, live casted broadcasts on official match days. All official match days are Saturdays and Sundays.
-- Group Stage (1 weekend): 24 teams in 8 groups of 3 (A to H), single round-robin, every series BO3. Saturday: Groups A–D. Sunday: Groups E–H. 1st in each group goes straight to the Championship Bracket, 2nd goes to the edition's qualification stage, 3rd is eliminated.
-- Seeding: three seeding pots of eight teams; every group gets one team from each pot. Later stages follow the official MECS seeding process.
-- Championship Bracket (2 weekends): 12 teams (8 group winners plus 4 from the qualification stage), double elimination (lose twice and you're out). Opening rounds BO3; upper and lower Quarterfinals BO5; Semifinals BO5; bracket Finals BO7; Grand Final BO7 with a bracket reset if the lower-bracket team wins the first BO7 (then a second BO7 decides the champion).
-- Weekend 1 of the bracket: opening rounds. Weekend 2: Quarterfinals, Semifinals, Finals and Grand Final.
-- How to register: through the MECS Discord registration process (https://discord.gg/EbATfBadDv). The team Captain/Point of Contact submits each player's Discord ID, Epic Games ID and Rocket League Tracker profile link. A team is confirmed once it is added to the Registered channel in Discord. Up to one substitute per team.
+- Our flagship Rocket League series. MECS has two kinds of events: the weekly **MECS Regionals** (CURRENT, what players can enter now) and the original four-week **MECS Championship** (MECS Middle East, now part of our history).
+- Purpose: a community-driven platform for players to compete against high-level and talented players, grow, get noticed, build recognition and make a name for themselves in a professionally organised, livestreamed environment, with their best moments shared as highlights. When talking about prizes, state the prize facts plainly; never compare prize sizes or say things like "it's not about the money" or "the real prize is…".
+
+## CURRENT: MECS Regionals (weekly regional tournaments)
+- A new regional tournament every weekend, in a rotating region. More frequent chances to compete, for players in different regions.
+- Duration: 2 days, Saturday and Sunday. Match times for each weekend are announced in Discord.
+- Teams: 8 teams per event.
+- Format: 2v2, double elimination (lose once and you drop to the lower bracket; lose twice and you're out).
+- Bracket and series lengths: Saturday = Upper Quarterfinals (BO3), Upper Semifinals (BO3), Lower Round 1 (BO3), Lower Quarterfinal (BO3). Sunday = Lower Semifinal (BO3), Upper Final (BO5), Lower Final (BO5), Grand Final (BO7). Nothing is announced about a bracket reset in the Regionals Grand Final, so don't mention one.
+- Servers (Rule 4.6): Middle East events on ME4, APAC events on Asia SE Maritime, EU events on Europe, by default. Teams can play on a different server or server region if both teams agree and a Tournament Administrator approves it before the match (a team asks the admin, who checks with the opponents).
+- Roster: 2 players in the main lineup, plus 1 optional substitute per team.
+- Eligibility (Rule 3.13): NO rank requirement; players of any rank can enter. The two main-lineup players need a combined peak MMR of at least 2,800, with a 50 MMR tolerance: a combined peak MMR of 2,750 or higher meets the requirement. Each player's peak MMR is their highest peak MMR across all formats (1v1, 2v2, 3v3 and others); the two players' peaks are added together. The substitute does not count towards the combined MMR. Accounts are verified through each player's Rocket League Tracker profile (Rule 3.3). Final eligibility decisions are made by the admins.
+- The old "Champion rank or above" requirement does NOT apply to MECS Regionals.
+- Prize (Rule 11.9): $20 per event. The entire $20 goes to the winning team; no other placements receive prize money. Regionals prizes are paid monthly: the winners of all Regionals completed in a calendar month are paid during the first week of the following month (the 1st to the 7th). International payments may take longer.
+- Champion title: "MECS <Region> <Roman numeral> Champion", for example MECS APAC I Champion, MECS EU I Champion, MECS Middle East I Champion. Each region's events are numbered I, II, III and so on.
+- Broadcast and content: every match is livestreamed with professional casting and production on YouTube, Twitch and Kick. Players' best moments are also turned into highlights and proper edits shared on YouTube Shorts, TikTok, Instagram and Facebook, so performances reach people everywhere, not just on the stream.
+- Regions: rotating between the Middle East, APAC and EU for now, with more regions planned.
+- Schedule: see the MECS REGIONALS SCHEDULE section (exact computed dates). In short: MECS APAC I 7–8 Nov 2026, MECS EU I 14–15 Nov, no Regional on 21–22 Nov, MECS Middle East I 28–29 Nov, then the rotation APAC, EU, Middle East keeps repeating every weekend (APAC II 5–6 Dec, EU II 12–13 Dec, Middle East II 19–20 Dec…).
+- 21–22 Nov 2026: there is no MECS Regional that weekend. A separate one-off event is planned; it is NOT part of the MECS Regionals, and its details will be announced in Discord when the time comes. Don't describe it beyond that.
+- How to register: through the MECS Discord registration process (https://discord.gg/EbATfBadDv). The team Captain/Point of Contact submits each player's Discord ID, Epic Games ID and Rocket League Tracker profile link. A team is confirmed once it is added to the Registered channel in Discord.
 - Entry fee: the website does not mention an entry fee. Ask in Discord for anything not covered here.
+- Rules: the Mathatised Esports Rules & Regulations (one rulebook for SPL, MECS and MECS Regionals; Section 2.9 covers the Regionals) apply to every MECS Regional. The MECS Regionals format document is at /assets/docs/mecs-regionals-format.pdf.
+- Page: /mecs-regionals (bracket at /mecs-regionals#bracket, eligibility and an MMR checker at /mecs-regionals#eligibility, schedule at /mecs-regionals#schedule).
 
-### MECS Middle East (first edition)
-- Status by date: Group Stage 10–11 October 2026 (completed), Two-Legged Qualification Round 17–18 October 2026 (completed), Championship Bracket opening rounds 24–25 October 2026, Quarterfinals to Grand Final 31 October – 1 November 2026. Champion crowned 1 November 2026. Registration is closed.
-- Eligibility: Platinum rank or above. Middle East servers (ME4 is the required server).
-- Prize pool: $150.
-- Qualification stage (this edition only): the Two-Legged Qualification Round. The 8 second-place teams form 4 two-legged matchups. Five individual matches on Saturday (first leg) and five on Sunday (second leg); all ten matches are always played. It is not a BO2, BO5 or BO10. The team with more match wins across the ten matches advances; if match wins are level, total goals scored across all ten matches decides it. 4 winners go to the Championship Bracket, 4 are eliminated.
-- The rulebook applies in full. The format document describes the newer Qualifiers format used from MECS APAC onward; for qualification, MECS Middle East uses the Two-Legged Qualification Round above.
-- Page: /mecs-middle-east. Follow match days in Discord and on YouTube/Twitch.
-
-### MECS APAC
-- Status: registration open (via Discord). The registration closing date is announced in Discord.
-- Dates: Group Stage 7–8 November 2026; Qualifiers 14–15 November 2026; Championship Bracket opening rounds 21–22 November 2026; Quarterfinals to Grand Final 28–29 November 2026. Champion crowned 29 November 2026.
-- Eligibility: Champion rank or above (every player).
-- Prize pool: $150.
-- Qualification stage: the Qualifiers. The 8 second-place teams split into two Swiss-format groups of four (Qualifier Group A plays Saturday, Group B plays Sunday). Each team plays the other three in its group, every series BO3; standings are decided by points from wins and losses. The top 2 in each group (4 teams) go to the Championship Bracket; the bottom 2 in each group are eliminated.
-- Register: https://discord.gg/EbATfBadDv. Page: /mecs-apac.
-
+## PAST: MECS Championship (four-week format) — history only, not open for entry
+### MECS Middle East (the original MECS championship)
+- The first MECS edition, played 10 October to 1 November 2026 on Middle East servers (ME4). Final weekend 31 October – 1 November 2026; champion crowned 1 November 2026 (the champion is announced in Discord).
+- Format: 24 teams, Platinum rank or above, $150 prize pool, four weekends: Group Stage (10–11 Oct: 8 groups of 3, BO3 round-robin; 1st to the bracket, 2nd to qualification, 3rd out), Two-Legged Qualification Round (17–18 Oct: the 8 second-place teams in 4 matchups of ten matches, five per day; most match wins advances, total goals as the tiebreaker; 4 winners go through), and a 12-team double-elimination Championship Bracket (24–25 Oct and 31 Oct – 1 Nov; BO3 opening rounds, BO5 quarterfinals and semifinals, BO7 finals, Grand Final BO7 with a bracket reset). Seeding used three pots of eight.
+- The MECS Championship format document (/assets/docs/mecs-format-and-competition-structure.pdf) describes this four-week championship structure. It does NOT apply to MECS Regionals.
+- Page: /mecs-middle-east.
 ## South Asia Premier League (SPL), concluded
 - A successful Mathatised Esports championship with two double-elimination tournaments, 16 teams each, on Middle East servers, played across weekends with live casted broadcasts. International fields with players from Pakistan, India, Saudi Arabia, Jordan, Singapore, Malaysia, Australia and other regions.
 - SPL 3v3: about $150 prize pool. Match days 29–30 August and 5–6 September. 1st Team Top Five, 2nd Team Pigeon Lovers, 3rd Team Revenant.
@@ -104,4 +110,4 @@ format.md and rules.md. Last updated: 21 October 2026.
 - Enquire with the form on /sponsor or email mathatisedesports@gmail.com.
 
 ## Watching
-- Matches are streamed live with casting on YouTube (https://www.youtube.com/@Mathatised) and Twitch (https://twitch.tv/mathatised). Match-day announcements go out in Discord.
+- Matches are streamed live with casting on YouTube (https://www.youtube.com/@Mathatised), Twitch (https://twitch.tv/mathatised) and Kick (https://kick.com/mathatised). Match-day announcements go out in Discord.

@@ -429,7 +429,7 @@ fieldset.field.is-invalid .check-grid { border-color: #c2413b; }
 .doc-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .doc-card { display: grid; grid-template-columns: auto 1fr; column-gap: 18px; align-items: start; }
 .doc-card .card-icon { margin-bottom: 0; }
-.doc-card .btn { grid-column: 2; justify-self: start; margin-top: 18px; }
+.doc-card .btn, .doc-card .doc-soon { grid-column: 2; justify-self: start; margin-top: 18px; }
 .doc-meta { font-size: 0.72rem !important; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 800; color: var(--gold-text) !important; margin: -4px 0 8px; }
 
 /* 7. SECTIONS & CARDS ------------------------------------------------------ */
@@ -782,6 +782,31 @@ fieldset.field.is-invalid .check-grid { border-color: #c2413b; }
 .tl-item--pre .tl-dot { border-style: dashed; color: var(--gold-text); }
 .tl-item--pre .tl-dot .icon { width: 20px; height: 20px; }
 .tl-item--pre .tl-card { background: transparent; box-shadow: none; border-style: dashed; }
+/* Regionals: next event line in the hero + MMR checker */
+.hero-next { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; padding: 8px 14px; border-radius: 999px; background: rgba(212, 174, 85, 0.14); border: 1px solid rgba(212, 174, 85, 0.45); color: var(--on-navy); font-size: 0.9rem; }
+.hero-next strong { color: #fff; }
+.hero-next .icon { width: 16px; height: 16px; color: var(--gold); }
+.mmr-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 6px; }
+.mmr-hint { margin-top: 10px; font-size: 0.8rem; color: var(--muted); }
+.mmr-result { display: flex; flex-direction: column; gap: 2px; margin-top: 16px; padding: 14px 16px; border-radius: var(--radius-sm); background: var(--bg-alt); border: 1px solid var(--border); }
+.mmr-total { font-family: var(--font-head); font-weight: 800; color: var(--heading); font-size: 1.1rem; }
+.mmr-verdict { font-size: 0.88rem; font-weight: 700; }
+.mmr-result.is-ok { background: var(--gold-soft); border-color: var(--gold); }
+.mmr-result.is-ok .mmr-verdict { color: var(--gold-text); }
+.mmr-result.is-close .mmr-verdict { color: var(--text); }
+.mmr-result.is-short .mmr-verdict { color: var(--muted); }
+@media (max-width: 420px) { .mmr-fields { grid-template-columns: 1fr; } }
+
+/* Regionals schedule */
+.tl-dot--text { font-size: 0.78rem; letter-spacing: 0.02em; }
+.tl-tag { display: block; width: max-content; margin-top: 6px; padding: 3px 8px; border-radius: 999px; background: var(--gold-soft); border: 1px solid var(--gold-line); color: var(--gold-text); font-size: 0.62rem; letter-spacing: 0.12em; }
+.tl-tag--live { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
+.tl-item--live .tl-card { border-color: var(--gold); box-shadow: var(--shadow-lg); }
+.tl-item--live .tl-dot { background: var(--gold); color: var(--on-gold); }
+/* Document not published yet */
+.doc-soon { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: var(--radius-sm); border: 1px dashed var(--border-strong); color: var(--muted); font-size: 0.85rem; font-weight: 700; white-space: nowrap; }
+.doc-soon .icon { width: 16px; height: 16px; }
+.doc-card--soon .card-icon { opacity: 0.6; }
 /* Finished stages */
 .tl-item--done .tl-dot { background: var(--gold-soft); color: var(--gold-text); }
 .tl-done { display: block; margin-top: 4px; font-size: 0.66rem; letter-spacing: 0.14em; color: var(--muted); }
@@ -1003,7 +1028,7 @@ fieldset.field { border: 0; margin: 0; padding: 0; }
   .hero-media__toggle { bottom: 16px; }
   .doc-card { grid-template-columns: 1fr; }
   .doc-card .card-icon { margin-bottom: 16px; }
-  .doc-card .btn { grid-column: 1; }
+  .doc-card .btn, .doc-card .doc-soon { grid-column: 1; }
   .comp-grid, .spl-grid, .role-grid, .g-2, .g-3, .g-4, .g-5, .team-grid, .advance-grid, .visibility-map, .proof, .form-grid, .check-grid, .platform-points, .legs, .outcomes, .panel-cols, .week-grid { grid-template-columns: 1fr; }
   .advance-card--out { grid-column: auto; }
   .journey { grid-template-columns: 1fr; gap: 14px; }

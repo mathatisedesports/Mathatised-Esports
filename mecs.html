@@ -4,12 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MECS — Mathatised Esports Championship Series | Mathatised Esports</title>
-  <meta name="description" content="The Mathatised Esports Championship Series (MECS) is a community-driven Rocket League championship series built to give players a professionally produced stage to compete against high-level opposition and make a name for themselves. Explore every MECS edition, its format and schedule.">
+  <meta name="description" content="The Mathatised Esports Championship Series (MECS) is a community-driven Rocket League series built to give players a professionally produced stage to compete against high-level opposition and make a name for themselves. Weekly MECS Regionals rotate between the Middle East, APAC and EU.">
   <meta name="theme-color" content="#16223f">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Mathatised Esports">
   <meta property="og:title" content="MECS — Mathatised Esports Championship Series">
-  <meta property="og:description" content="A professionally produced stage for players to compete against high-level opposition and make a name for themselves.">
+  <meta property="og:description" content="A professionally produced stage for players to compete against high-level opposition and make a name for themselves. A new MECS Regional every weekend.">
   <meta property="og:image" content="https://mathatised-esports.vercel.app/assets/img/og-image.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -40,34 +40,37 @@
         <div>
           <p class="eyebrow">Mathatised Esports Championship Series</p>
           <h1 id="hero-title">The Championship Series: where competition meets opportunity.</h1>
-          <p class="lead">MECS is our flagship championship series, run as regional editions under one competitive standard and built so every stage carries weight.</p>
+          <p class="lead">MECS is our flagship. Every weekend, a new MECS Regional gives players in a different region a professionally produced stage, a title to fight for and an audience watching.</p>
           <ul class="hero-points hero-points--facts" aria-label="MECS at a glance">
-            <li><span data-icon="users"></span><span><strong>24</strong> Teams per edition</span></li>
-            <li><span data-icon="clock"></span><span><strong>4 weekends</strong> Of competition</span></li>
-            <li><span data-icon="trophy"></span><span><strong>$150</strong> Prize pool per edition</span></li>
+            <li><span data-icon="calendar"></span><span><strong>Every weekend</strong> A new Regional</span></li>
+            <li><span data-icon="globe"></span><span><strong>3 regions</strong> And counting</span></li>
             <li><span data-icon="mic"></span><span><strong>Casted</strong> Live broadcasts</span></li>
+            <li><span data-icon="award"></span><span><strong>MECS</strong> Champion titles</span></li>
           </ul>
+          <p class="hero-next"><span data-icon="flag"></span>Next up: <strong data-render="regionals-next">MECS APAC I · 7–8 Nov</strong></p>
           <div class="hero-actions">
-            <a class="btn btn-gold" href="#editions">Explore the Editions</a>
+            <a class="btn btn-gold" href="/mecs-regionals">Explore MECS Regionals</a>
             <a class="btn btn-light" data-link="discord">Join Discord</a>
           </div>
-        </div>        <div class="hero-art hero-art--framed">
+        </div>
+        <div class="hero-art hero-art--framed">
           <img src="assets/img/mecs-logo.webp" alt="Mathatised Esports Championship Series crest: a ball above the words Championship Series on a navy and gold shield" width="800" height="800">
         </div>
       </div>
     </section>
 
-    <!-- EDITIONS (built from config.js: competitions with series "MECS") -->
+    <!-- MECS EVENTS (built from config.js: competitions with series "MECS") -->
     <section class="section" id="editions" aria-labelledby="editions-title">
       <div class="container">
         <div class="section-head">
-          <p class="eyebrow">Editions</p>
-          <h2 id="editions-title">Find your edition</h2>
-          <p class="lead">Every MECS edition is run to the same competitive standard. Choose an edition to see its format, schedule and how to compete.</p>
+          <p class="eyebrow">Inside MECS</p>
+          <h2 id="editions-title">Where to compete</h2>
+          <p class="lead">Every MECS event is run to the same competitive standard. Choose one to see its format, schedule and how to enter.</p>
         </div>
         <div class="comp-grid" data-render="competitions" data-filter="MECS" data-variant="edition"></div>
       </div>
     </section>
+
     <!-- PLAYER-FIRST -->
     <section class="section" aria-labelledby="platform-title">
       <div class="container split split--center">
@@ -76,7 +79,7 @@
           <h2 id="platform-title" style="font-size:clamp(1.6rem,2.5vw,2.2rem)">Not just a tournament. A platform.</h2>
           <div class="prose" style="margin-top:20px">
             <p>MECS is designed around the players in it. The point isn't another bracket to fill. It's a competitive stage where performances are visible.</p>
-            <p>Professional broadcasting, casting, production and social coverage are part of the series, so that competitive performances become moments people see rather than a line in a results table.</p>
+            <p>Professional broadcasting, casting, production and social coverage are part of every event, so that competitive performances become moments people see rather than a line in a results table.</p>
           </div>
         </div>
         <div class="reveal">
@@ -93,7 +96,7 @@
         </div>
       </div>
       <div class="container">
-        <p class="mission-callout reveal"><strong>MECS is built for the community.</strong> The prize pool rewards the champions, but the real prize is the platform: the chance to test yourself against high-ranked, semi-pro and pro players, to compete with a full broadcast behind you, and to show the world what you're capable of.</p>
+        <p class="mission-callout reveal"><strong>MECS is built for the community.</strong> It's a platform: the chance to test yourself against high-ranked, semi-pro and pro players, to compete with a full broadcast behind you, to see your best plays shared as highlights across our channels, and to show the world what you're capable of.</p>
       </div>
     </section>
 
@@ -102,40 +105,43 @@
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">The MECS standard</p>
-          <h2 id="standard-title">What every edition shares</h2>
-          <p class="lead">Each edition runs on the same foundations, so a MECS title means the same thing wherever it's won.</p>
+          <h2 id="standard-title">What every MECS event shares</h2>
+          <p class="lead">Whatever the region or format, a MECS title means the same thing wherever it's won.</p>
         </div>
         <div class="grid g-3">
-          <article class="card card--hover"><span class="card-icon" data-icon="layers"></span><h3 class="card-title">Group Stage</h3><p>24 teams in 8 groups of 3, single round-robin, every series BO3. Group winners go straight to the Championship Bracket.</p></article>
-          <article class="card card--hover"><span class="card-icon" data-icon="bracket"></span><h3 class="card-title">A path for second place</h3><p>Second-place teams play a qualification stage for the last four places in the bracket. Each edition's page sets out its format.</p></article>
-          <article class="card card--hover"><span class="card-icon" data-icon="trophy"></span><h3 class="card-title">12-team Championship Bracket</h3><p>Double elimination, with series growing from BO3 to BO5 to BO7, and a bracket reset in the Grand Final.</p></article>
-          <article class="card card--hover"><span class="card-icon" data-icon="list"></span><h3 class="card-title">Balanced seeding</h3><p>Three seeding pots of eight teams, with one team from each pot in every group.</p></article>
-          <article class="card card--hover"><span class="card-icon" data-icon="broadcast"></span><h3 class="card-title">Produced broadcasts</h3><p>Live streams with casting and production on official match days, so performances reach an audience.</p></article>
-          <article class="card card--hover"><span class="card-icon" data-icon="award"></span><h3 class="card-title">A prize pool for every edition</h3><p>$150 in every edition, rewarding the champions of each region.</p></article>
+          <article class="card card--hover"><span class="card-icon" data-icon="list"></span><h3 class="card-title">A published rulebook</h3><p>One official Mathatised Esports rulebook covers every event, so everyone plays by the same rules.</p></article>
+          <article class="card card--hover"><span class="card-icon" data-icon="shield"></span><h3 class="card-title">Dedicated match admins</h3><p>Lobbies, results and rulings are handled by our admins, so you can focus on playing.</p></article>
+          <article class="card card--hover"><span class="card-icon" data-icon="broadcast"></span><h3 class="card-title">Broadcast and shared</h3><p>Live on YouTube, Twitch and Kick, with highlights and edits on YouTube Shorts, TikTok, Instagram and Facebook, so performances reach an audience.</p></article>
+          <article class="card card--hover"><span class="card-icon" data-icon="mic"></span><h3 class="card-title">Casting &amp; commentary</h3><p>Play-by-play and analysis that turn your series into moments people remember.</p></article>
+          <article class="card card--hover"><span class="card-icon" data-icon="award"></span><h3 class="card-title">A title to your name</h3><p>Every event crowns a MECS champion, from the MECS Middle East Champion to the MECS APAC I Champion.</p></article>
+          <article class="card card--hover"><span class="card-icon" data-icon="globe"></span><h3 class="card-title">Open across regions</h3><p>The Regionals rotate between the Middle East, APAC and EU, with more regions on the way.</p></article>
         </div>
       </div>
     </section>
+
     <!-- OFFICIAL DOCUMENTS (list is in config.js: docs) -->
-    <section class="section section--alt" id="documents" aria-labelledby="docs-title">
+    <section class="section" id="documents" aria-labelledby="docs-title">
       <div class="container">
         <div class="section-head">
           <p class="eyebrow">Official documents</p>
-          <h2 id="docs-title">Read the full rules and format</h2>
-          <p class="lead">The official MECS rulebook and format document, straight from the MECS Tournament Administration. Both open in your browser.</p>
+          <h2 id="docs-title">Rules and formats</h2>
+          <p class="lead">One rulebook covers every MECS event, and each format has its own document. They open in your browser.</p>
         </div>
-        <div class="doc-grid" data-render="docs" data-docs="rules,format"></div>
+        <div class="doc-grid" data-render="docs" data-docs="rules,regionals-format,format"></div>
       </div>
     </section>
+
     <section class="cta-band" aria-labelledby="cta-title">
       <div class="container">
-        <h2 id="cta-title">24 teams enter. Only one becomes MECS Champion.</h2>
-        <p>MECS APAC registration is open now.</p>
+        <h2 id="cta-title">Eight teams. Two days. A new MECS champion every weekend.</h2>
+        <p>Registration for each Regional opens in our Discord.</p>
         <div class="cta-actions">
-          <a class="btn btn-gold" href="/mecs-apac">Explore MECS APAC</a>
+          <a class="btn btn-gold" href="/mecs-regionals">Explore MECS Regionals</a>
           <a class="btn btn-light" href="/competitions">All Competitions</a>
         </div>
       </div>
-    </section>  </main>
+    </section>
+  </main>
 
   <footer id="site-footer"></footer>
 </body>

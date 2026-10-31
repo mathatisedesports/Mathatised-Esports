@@ -2,6 +2,11 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/mecs-apac", "destination": "/mecs-regionals", "permanent": true },
+    { "source": "/mecs-apac.html", "destination": "/mecs-regionals", "permanent": true },
+    { "source": "/assets/docs/mecs-rules-and-regulations.pdf", "destination": "/assets/docs/mathatised-esports-rules-and-regulations.pdf", "permanent": true }
+  ],
   "functions": {
     "api/chat.js": { "includeFiles": "api/knowledge/**", "maxDuration": 30 },
     "api/discord.mjs": { "includeFiles": "api/knowledge/**", "maxDuration": 30 }

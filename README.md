@@ -32,7 +32,8 @@ Almost everything you'll want to change is in **`assets/js/config.js`**:
 | What | Key in `config.js` |
 |---|---|
 | Contact email (shown on the site, mailto links, form delivery) | `email` |
-| Social links (Discord, YouTube, Twitch, TikTok, Instagram, Facebook) | `socials` |
+| Social links (Discord, YouTube, Twitch, Kick, TikTok, Instagram, Facebook) | `socials` |
+| MECS Regionals schedule (also used by the AI assistant) | `regionals` |
 | Google Form links for applications | `forms` |
 | Navigation menu | `nav` |
 | Competition cards (MECS, SPL) — including an optional `game` field | `competitions` |
@@ -115,7 +116,7 @@ The same assistant answers `/ask` in the Discord server. Code: `api/discord.mjs`
 | South Asia Premier League | `spl.html` |
 | MECS | `mecs.html` |
 | MECS Middle East | `mecs-middle-east.html` |
-| MECS APAC | `mecs-apac.html` |
+| MECS Regionals (weekly; `/mecs-apac` redirects here) | `mecs-regionals.html` |
 | Team | `team.html` |
 | Join Us | `join-us.html` |
 | Host Your Event | `host-your-event.html` |

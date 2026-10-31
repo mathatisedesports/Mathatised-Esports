@@ -20,7 +20,7 @@ const mod = require("./_moderation.js");
 
 const DISCORD_API = "https://discord.com/api/v10";
 const SITE_URL = assistant.SITE_URL;
-const RULEBOOK = SITE_URL + "/assets/docs/mecs-rules-and-regulations.pdf";
+const RULEBOOK = SITE_URL + "/assets/docs/mathatised-esports-rules-and-regulations.pdf";
 const tooFast = assistant.makeLimiter(4, 40); /* per Discord user: per minute, per day */
 const lastSpamStrike = new Map();            /* at most one spam strike per 10 minutes */
 const STAFF_PERMISSION = String(1n << 40n);  /* "Timeout Members" */
@@ -100,7 +100,7 @@ async function verifySignature(rawBody, signatureHex, timestamp, publicKeyHex) {
 /* ---------------------------------------------------------------------------
    Reply formatting
 --------------------------------------------------------------------------- */
-const SITE_PATHS = /(^|[\s(])\/(mecs-middle-east|mecs-apac|mecs|spl|competitions|contact|join-us|team|who-we-are|host-your-event|sponsor|assets\/docs\/[\w.-]+)(?=[\s).,!?:;]|$)/g;
+const SITE_PATHS = /(^|[\s(])\/(mecs-middle-east|mecs-regionals|mecs|spl|competitions|contact|join-us|team|who-we-are|host-your-event|sponsor|assets\/docs\/[\w.-]+)(?=[\s).,!?:;]|$)/g;
 
 /* "#championship-announcements" -> <#id>, which Discord shows as a clickable channel */
 function linkChannels(text) {
@@ -170,7 +170,7 @@ async function handleAsk(i, opts) {
   const token = process.env.DISCORD_BOT_TOKEN;
   const question = String(optionValue(i, "question") || "").trim().slice(0, 500);
   const userId = (i.member && i.member.user && i.member.user.id) || (i.user && i.user.id) || "unknown";
-  if (!question) return privateMessage("Type your question after `/ask`, for example: `/ask When does MECS APAC start?`");
+  if (!question) return privateMessage("Type your question after `/ask`, for example: `/ask When is the next MECS Regional?`");
 
   /* 1. Blocked? (records are cached for 20 seconds; if the log can't be read, let them through) */
   try {

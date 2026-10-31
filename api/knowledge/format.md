@@ -1,6 +1,6 @@
-# MECS Tournament Format & Competition Structure (full text)
+# PAST FORMAT: MECS Championship Format & Competition Structure (full text)
 
-Source: /assets/docs/mecs-format-and-competition-structure.pdf. This describes the current MECS format (with the Qualifiers), used from MECS APAC onward. MECS Middle East used a Two-Legged Qualification Round instead of the Qualifiers (see site.md).
+Source: /assets/docs/mecs-format-and-competition-structure.pdf. This describes the four-week MECS Championship structure (24 teams, groups, a qualification stage, a 12-team bracket). It is history: no event currently open for entry uses it. MECS Middle East used it with a Two-Legged Qualification Round instead of the Qualifiers (see site.md). It does NOT apply to MECS Regionals (8 teams, 2v2, double elimination, 2,800 combined peak MMR, $20).
 
 MATHATISED ESPORTS
 Mathatised Esports Championship Series
@@ -27,7 +27,7 @@ Group Stage (1 weekend), the Qualifiers (1 weekend), and the Championship Bracke
 Registration ope ns ahead of the competition period.
 Registration (Pre-Competition)
 Registration window: 1 week (opens ahead of the competition period)
-Registration will open before the competition period begins and remain open for one week. During this window, eligible te ams may register for MECS. Once registration closes, teams will be reviewed and confirmed before the group-stage draw and seeding process. To be eligible, all players must hold a competitive rank of Champion or above.
+Registration will open before the competition period begins and remain open for one week. During this window, eligible te ams may register for MECS. Once registration closes, teams will be reviewed and confirmed before the group-stage draw and seeding process. To be eligible, all players must hold a competitive rank of Champion or above. (Old four-week format only; MECS Regionals have no rank requirement.)
 3. Group Stage
 Duration: 1 weekend
 Th e 24 participating teams will be divided into 8 groups of 3 teams:

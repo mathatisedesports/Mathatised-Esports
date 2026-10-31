@@ -148,6 +148,73 @@ async function getAnnouncements() {
 }
 
 /* ---------------------------------------------------------------------------
+   MECS Regionals schedule
+   Read from the website's own settings file (assets/js/config.js: regionals),
+   so the website and the assistant always share one schedule. The dates are
+   worked out here in code; the AI only reads the finished list.
+--------------------------------------------------------------------------- */
+const DAY_MS = 24 * 60 * 60 * 1000;
+function roman(n) {
+  const map = [[1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"], [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
+  let out = "";
+  for (const [v, s] of map) while (n >= v) { out += s; n -= v; }
+  return out;
+}
+
+function expandRegionals(cfg, weeksAhead, nowMs) {
+  const now = nowMs || Date.now();
+  const list = (cfg.events || []).map((e) => ({ date: e.date, region: e.region, name: e.name, numbered: e.numbered !== false, format: e.format }));
+  const rot = cfg.rotation;
+  if (rot && rot.from && rot.order && rot.order.length) {
+    const until = now + weeksAhead * 7 * DAY_MS;
+    for (let i = 0, t = Date.parse(rot.from + "T00:00:00Z"); t <= until && i < 520; i++, t += 7 * DAY_MS) {
+      list.push({ date: new Date(t).toISOString().slice(0, 10), region: rot.order[i % rot.order.length], numbered: true });
+    }
+  }
+  list.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+  const count = {};
+  const today = new Date(now).toISOString().slice(0, 10);
+  return list.map((e) => {
+    const sat = Date.parse(e.date + "T00:00:00Z");
+    const sun = new Date(sat + DAY_MS).toISOString().slice(0, 10);
+    let numeral = "";
+    if (e.numbered) { count[e.region] = (count[e.region] || 0) + 1; numeral = roman(count[e.region]); }
+    const name = e.name || "MECS " + e.region + (numeral ? " " + numeral : "");
+    const fmt = (ms) => new Date(ms).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+    return {
+      name, region: e.region, champion: name + " Champion", format: e.format || "2v2",
+      when: fmt(sat) + " – " + fmt(sat + DAY_MS),
+      status: today > sun ? "finished" : today >= e.date ? "happening THIS weekend" : "upcoming"
+    };
+  });
+}
+
+let regionalsCache = { at: 0, text: "" };
+async function getRegionalsSchedule() {
+  if (regionalsCache.text && Date.now() - regionalsCache.at < 10 * 60 * 1000) return regionalsCache.text;
+  try {
+    const res = await fetch(SITE_URL + "/assets/js/config.js", { headers: { "User-Agent": "MathatisedAssistant/1.0" } });
+    if (!res.ok) throw new Error("config.js " + res.status);
+    const sandbox = { window: {} };
+    require("vm").runInNewContext(await res.text(), sandbox, { timeout: 500 });
+    const cfg = sandbox.window.SITE && sandbox.window.SITE.regionals;
+    if (!cfg) throw new Error("no regionals in config.js");
+    const all = expandRegionals(cfg, 12);
+    const past = all.filter((e) => e.status === "finished").slice(-3);
+    const ahead = all.filter((e) => e.status !== "finished").slice(0, 8);
+    const line = (e) => "- " + e.name + ": " + e.when + " (" + e.status + ")" + (e.format !== "2v2" ? ", a special one-off " + e.format + " event" : "") + ". Winner's title: " + e.champion + ".";
+    regionalsCache = {
+      at: Date.now(),
+      text: (past.length ? "Recently finished:\n" + past.map(line).join("\n") + "\n" : "") + "Coming up:\n" + ahead.map(line).join("\n") +
+        "\nAfter these, the rotation (" + ((cfg.rotation && cfg.rotation.order) || []).join(", ") + ") keeps repeating every weekend."
+    };
+  } catch (e) {
+    console.warn("[assistant] regionals schedule unavailable:", e.message);
+  }
+  return regionalsCache.text;
+}
+
+/* ---------------------------------------------------------------------------
    Prompt
 --------------------------------------------------------------------------- */
 /* Ideas for how to open an answer. One is picked at random for each answer so
@@ -159,7 +226,7 @@ const OPENERS = [
   null, null, null, null /* null = no opener: jump straight into the answer */
 ];
 
-function systemPrompt(announcements, surface) {
+function systemPrompt(announcements, surface, schedule) {
   const now = new Date();
   const today = now.toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
   const discord = surface === "discord";
@@ -187,7 +254,7 @@ function systemPrompt(announcements, surface) {
     "- Structure: (1) the direct answer in the first sentence, (2) only the extra details someone would actually want next, (3) one clear next step when there is one (where to register, which page to read, who to ask). Then stop. No closing summary.",
     "- Never repeat yourself. Each fact appears once: if the first sentence gives a date, don't list that same date again below; the list adds the rest.",
     "- Explain things simply, as if to someone new to tournaments. Short sentences. If you use a term like BO3, double elimination or bracket reset, explain it in a few words the first time.",
-    "- Use short names: 'MECS APAC', 'MECS Middle East', 'the Group Stage', not long official titles.",
+    "- Use short names: 'MECS Regionals', 'MECS APAC I', 'MECS Middle East', not long official titles.",
     "- Write dates like 'Sat 7 Nov' or '7–8 Nov'. Don't add the year unless it's needed.",
     "- Use a short list of '- ' lines when there are 3 or more dates, steps or details. Bold the key facts (dates, ranks, prize, deadlines). Make sure every ** you open is closed.",
     "- Answer ONLY with information from the KNOWLEDGE and DISCORD ANNOUNCEMENTS below. Never guess or invent dates, rules, prizes, results, people, prices or links. Being fun never means making things up.",
@@ -200,7 +267,7 @@ function systemPrompt(announcements, surface) {
     "- Fun questions about Mathatised Esports, MECS or Rocket League competition (who will win, are you excited, which team is best) get a short, playful answer that doesn't take sides or make predictions, then point back to something useful.",
     "- Greetings and thanks get a short, warm reply and an offer to help.",
     "- Formatting: plain text with **bold** and lines starting with '- ' for lists. No headings, no tables, no code blocks.",
-    "- Links: at most two per answer, written exactly as [short text](url), for example [MECS APAC](/mecs-apac) or [rulebook](/assets/docs/mecs-rules-and-regulations.pdf). Use only these website pages: /, /who-we-are, /competitions, /mecs, /mecs-middle-east, /mecs-apac, /mecs-apac#schedule, /spl, /team, /join-us, /host-your-event, /sponsor, /contact, /assets/docs/mecs-rules-and-regulations.pdf, /assets/docs/mecs-format-and-competition-structure.pdf; or the social links listed in the knowledge. Never invent a page, never write a bare URL, never put a link inside bold.",
+    "- Links: at most two per answer, written exactly as [short text](url), for example [MECS Regionals](/mecs-regionals) or [rulebook](/assets/docs/mathatised-esports-rules-and-regulations.pdf). Use only these website pages: /, /who-we-are, /competitions, /mecs, /mecs-regionals, /mecs-regionals#bracket, /mecs-regionals#eligibility, /mecs-regionals#schedule, /mecs-middle-east, /spl, /team, /join-us, /host-your-event, /sponsor, /contact, /assets/docs/mathatised-esports-rules-and-regulations.pdf, /assets/docs/mecs-regionals-format.pdf, /assets/docs/mecs-format-and-competition-structure.pdf; or the social links listed in the knowledge. Never invent a page, never write a bare URL, never put a link inside bold.",
     "- For rule questions, explain what happens in plain words, mention the rule number (for example 'Rule 4.7'), and add briefly that the admins always have the final say.",
     "",
     "Matches, teams, results and schedules (follow these strictly, even when it means saying you don't know):",
@@ -212,7 +279,14 @@ function systemPrompt(announcements, surface) {
     "- When you mention a Discord channel, write it as # followed by the exact name shown in the announcement headers (" + loadDiscordConfig().channels.map((c) => "#" + c.name).join(", ") + "), or copy a channel code like <#123456789> exactly as it appears in an announcement. Don't invent other channel names.",
     "- If the announced date or time of a match has already passed and no result has been posted, say the result hasn't been posted yet. Don't present it as upcoming.",
     "- If a team name isn't mentioned anywhere in the knowledge or announcements, say you can't find that team and suggest checking the spelling or the #registered-teams channel. Never guess whether a team is registered, eliminated or qualified.",
-    "- If it's unclear which edition someone means (MECS Middle East or MECS APAC), answer for the one the information is about and say which one it is, or ask them to say which edition.",
+    "",
+    "Current vs past (very important):",
+    "- MECS Regionals are what players can enter NOW: weekly, 2 days, 8 teams, 2v2 plus 1 sub, double elimination, no rank requirement, 2,800 combined peak MMR (±50), $20 to the winning team. Use the MECS REGIONALS SCHEDULE section for dates; its dates are exact and already worked out, so never calculate or guess other weekends.",
+    "- MECS Middle East and the four-week MECS Championship format (24 teams, groups, qualification, 12-team bracket, Champion or Platinum rank, $150) are PAST. Talk about them only as history, never as something to enter.",
+    "- Older announcements may describe 'MECS APAC' as a four-week, 24-team event with Champion rank and a $150 prize pool. That plan was replaced: MECS APAC I is a MECS Regional on 7–8 Nov. Never repeat the old APAC details, and don't talk about what changed; just give the current information.",
+    "- If someone asks about 'MECS' in general or 'the next tournament', answer about the MECS Regionals.",
+    "- If it's unclear which event someone means, say which one your answer is about (for example 'MECS APAC I, the Regional on 7–8 Nov') or ask.",
+    "- There is no MECS Regional on 21–22 Nov. A separate one-off event (not part of the Regionals) is planned; only say its details will be announced in Discord, unless an announcement says more.",
     "- Never give an official ruling on a specific match incident, dispute, forfeit, reschedule or appeal (for example 'should that goal count?'). Explain the relevant rule simply and tell them the Tournament Administrators decide; disputes go through a ticket (Rule 5.3).",
     "- Never promise anything on behalf of the team (rescheduling, extra time, exceptions, prize payments, roles).",
     "- Unannounced things (future editions, new regions, future dates, prize changes, staff decisions): say they haven't been announced yet.",
@@ -229,6 +303,9 @@ function systemPrompt(announcements, surface) {
     "",
     "KNOWLEDGE:",
     loadStaticKnowledge(),
+    "",
+    "MECS REGIONALS SCHEDULE (worked out from the official schedule; exact dates, trust these):",
+    schedule || "(not available right now: say there's a new MECS Regional every weekend and point to /mecs-regionals#schedule)",
     "",
     "DISCORD ANNOUNCEMENTS (from staff-only channels, newest first; pinned posts always included):",
     announcements || "(none available right now)"
@@ -276,10 +353,10 @@ const OFF_TOPIC = "Haha, that one's outside my lane! 😅 I'm all about Mathatis
    - only links to real pages and our own socials survive (others become plain text)
    - a cut-off answer ends cleanly at its last full line, with no broken bold or links
 --------------------------------------------------------------------------- */
-const SITE_PAGES = ["/", "/who-we-are", "/competitions", "/mecs", "/mecs-middle-east", "/mecs-apac", "/spl", "/team",
+const SITE_PAGES = ["/", "/who-we-are", "/competitions", "/mecs", "/mecs-regionals", "/mecs-middle-east", "/spl", "/team",
   "/join-us", "/host-your-event", "/sponsor", "/contact",
-  "/assets/docs/mecs-rules-and-regulations.pdf", "/assets/docs/mecs-format-and-competition-structure.pdf"];
-const OUTSIDE_LINKS = ["discord.gg/EbATfBadDv", "youtube.com/@Mathatised", "twitch.tv/mathatised", "tiktok.com/@mathatised.esports",
+  "/assets/docs/mathatised-esports-rules-and-regulations.pdf", "/assets/docs/mecs-format-and-competition-structure.pdf", "/assets/docs/mecs-regionals-format.pdf"];
+const OUTSIDE_LINKS = ["discord.gg/EbATfBadDv", "youtube.com/@Mathatised", "twitch.tv/mathatised", "kick.com/mathatised", "tiktok.com/@mathatised.esports",
   "instagram.com/mathatisedesports", "facebook.com/MathatisedEsports", "forms.gle/"];
 
 function linkAllowed(url) {
@@ -328,8 +405,12 @@ async function answer(contents, surface) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) return { ok: false, error: "unavailable" };
   let announcements = "";
-  try { announcements = await getAnnouncements(); } catch (e) { console.warn("[assistant] announcements failed", e.message); }
-  const system = systemPrompt(announcements, surface);
+  let schedule = "";
+  await Promise.all([
+    getAnnouncements().then((t) => { announcements = t; }).catch((e) => console.warn("[assistant] announcements failed", e.message)),
+    getRegionalsSchedule().then((t) => { schedule = t; }).catch(() => {})
+  ]);
+  const system = systemPrompt(announcements, surface, schedule);
 
   let lastStatus = 503;
   for (const model of MODELS) {
@@ -358,4 +439,4 @@ function makeLimiter(perMinute, perDay) {
   };
 }
 
-module.exports = { answer, makeLimiter, getAnnouncements, cleanDiscordText, messageText, systemPrompt, loadDiscordConfig, tidyAnswer, SITE_URL, DISCORD_INVITE };
+module.exports = { answer, makeLimiter, getAnnouncements, getRegionalsSchedule, expandRegionals, cleanDiscordText, messageText, systemPrompt, loadDiscordConfig, tidyAnswer, SITE_URL, DISCORD_INVITE };

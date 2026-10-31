@@ -32,7 +32,8 @@ window.SITE = {
     { key: "discord",   label: "Discord",   url: "https://discord.gg/EbATfBadDv" },
     { key: "youtube",   label: "YouTube",   url: "https://www.youtube.com/@Mathatised" },
     { key: "twitch",    label: "Twitch",    url: "https://twitch.tv/mathatised" },
-    { key: "tiktok",    label: "TikTok",    url: "https://www.tiktok.com/@mathatised.esports" },
+    { key: "kick",      label: "Kick",      url: "https://kick.com/mathatised" },
+    { key: "tiktok",   label: "TikTok",    url: "https://www.tiktok.com/@mathatised.esports" },
     { key: "instagram", label: "Instagram", url: "https://www.instagram.com/mathatisedesports/" },
     { key: "facebook",  label: "Facebook",  url: "https://www.facebook.com/MathatisedEsports" }
   ],
@@ -65,9 +66,9 @@ window.SITE = {
   --------------------------------------------------------------------------- */
   announcement: {
     show: false,
-    label: "MECS APAC",
-    text: "Registration is open. The action starts 7 November.",
-    textShort: "Registration open · Starts 7 Nov",   // shown on phones
+    label: "MECS Regionals",
+    text: "MECS APAC I kicks off 7 November. Get your team registered.",
+    textShort: "APAC I · 7–8 Nov",   // shown on phones
     cta: "Register now",
     link: "register"
   },
@@ -98,15 +99,43 @@ window.SITE = {
   },
 
   /* ---------------------------------------------------------------------------
-     OFFICIAL DOCUMENTS (MECS page + footer). PDFs live in assets/docs/ and
+     OFFICIAL DOCUMENTS (MECS pages + footer). PDFs live in assets/docs/ and
      open in the browser's PDF viewer in a new tab.
+     A document with an empty `file` shows as "Coming soon" (no button), so it
+     can be listed before the PDF exists. To publish it, add the PDF to
+     assets/docs/ and put its path in `file`.
   --------------------------------------------------------------------------- */
   docs: [
-    { key: "rules", title: "MECS Rules & Regulations", short: "MECS Rulebook", file: "assets/docs/mecs-rules-and-regulations.pdf", meta: "PDF · 33 pages",
-      text: "The official rulebook: eligibility, rosters, match procedures, disconnects, disputes and conduct." },
-    { key: "format", title: "MECS Format & Competition Structure", short: "MECS Format", file: "assets/docs/mecs-format-and-competition-structure.pdf", meta: "PDF · 13 pages",
-      text: "Every stage in detail: registration, groups, the Qualifiers, the Championship Bracket and seeding." }
+    { key: "rules", title: "Rules & Regulations", short: "Rulebook", file: "assets/docs/mathatised-esports-rules-and-regulations.pdf", meta: "PDF · 34 pages",
+      text: "One official rulebook for SPL, MECS and MECS Regionals: eligibility, rosters, match procedures, disconnects, disputes, conduct and prizes." },
+    { key: "regionals-format", title: "MECS Regionals Format & Competition Structure", short: "Regionals Format", file: "assets/docs/mecs-regionals-format.pdf", meta: "PDF · 11 pages",
+      text: "The weekly Regionals in full: rotation and servers, registration, MMR eligibility, the bracket, the weekend schedule and prizes." },
+    { key: "format", title: "MECS Championship Format & Competition Structure", short: "Championship Format", file: "assets/docs/mecs-format-and-competition-structure.pdf", meta: "PDF · 13 pages",
+      text: "The four-week MECS Championship format: groups, qualification, the Championship Bracket and seeding." }
   ],
+
+  /* ---------------------------------------------------------------------------
+     MECS REGIONALS SCHEDULE
+     Used by the MECS Regionals page AND by the AI assistant (website + Discord),
+     so this is the one place to edit the schedule.
+
+     events:   specific weekends (the Saturday's date). Add `name` to give an
+               event its own name, `numbered: false` to leave it out of
+               that region's I, II, III… count, and `format` (e.g. "1v1")
+               if it isn't the usual 2v2.
+     rotation: from that Saturday on, one event every weekend, cycling through
+               `order`. Add a region to `order` to bring it into the rotation.
+     Each region's events are numbered automatically: MECS APAC I, II, III…
+     The winner is "MECS <Region> <number> Champion", e.g. MECS APAC I Champion.
+  --------------------------------------------------------------------------- */
+  regionals: {
+    events: [
+      { date: "2026-11-07", region: "APAC" },
+      { date: "2026-11-14", region: "EU" }
+    ],
+    rotation: { from: "2026-11-28", order: ["Middle East", "APAC", "EU"] },
+    show: 6   /* how many upcoming weekends the MECS Regionals page lists */
+  },
 
   /* Regions shown where we talk about who can compete (everywhere except the SPL page). */
   openRegions: ["North America", "Europe", "MENA", "South America", "Oceania", "APAC", "Sub-Saharan Africa"],
@@ -121,9 +150,9 @@ window.SITE = {
     {
       label: "MECS",
       children: [
-        { page: "mecs",             label: "MECS Overview",    href: "/mecs",             text: "The series, its mission and every edition." },
-        { page: "mecs-middle-east", label: "MECS Middle East", href: "/mecs-middle-east", text: "The first edition. Live now." },
-        { page: "mecs-apac",        label: "MECS APAC",        href: "/mecs-apac",        text: "Registration open. Starts 7 November." }
+        { page: "mecs",             label: "MECS Overview",    href: "/mecs",             text: "The series, its mission and how to compete." },
+        { page: "mecs-regionals",   label: "MECS Regionals",   href: "/mecs-regionals",   text: "A new region every weekend. APAC I starts 7 Nov." },
+        { page: "mecs-middle-east", label: "MECS Middle East", href: "/mecs-middle-east", text: "The original four-week championship." }
       ]
     },
     { page: "team",        label: "Team",        href: "/team" },
@@ -140,12 +169,12 @@ window.SITE = {
 
   /* ---------------------------------------------------------------------------
      KEY NUMBERS (band under the Home hero). Update as they grow.
-     Prize pools: SPL 2v2 $100 + SPL 3v3 ~$150 + MECS Middle East $150 + MECS APAC $150.
+     Prize pools: SPL 2v2 $100 + SPL 3v3 ~$150 + MECS Middle East $150 (+ $20 per MECS Regional).
      Players: SPL 3v3 ~70–80 + SPL 2v2 ~50 + MECS ~60–70.
   --------------------------------------------------------------------------- */
   highlights: [
     { value: "50,000+", label: "Broadcast viewers" },
-    { value: "$550+",   label: "In prize pools" },
+    { value: "$400+",   label: "In prize pools" },
     { value: "180+",    label: "Players competed" },
     { value: "3",       label: "Championship tournaments" }
   ],
@@ -176,18 +205,18 @@ window.SITE = {
     {
       series: "MECS",
       code: "MECS",
-      name: "MECS APAC",
+      name: "MECS Regionals",
       status: "current",
-      statusLabel: "Registration open",
+      statusLabel: "Every weekend",
       logo: "assets/img/mecs-logo.webp",
       game: "Rocket League",
-      description: "The Mathatised Esports Championship Series comes to the Asia-Pacific region, across four weekends from 7 November.",
-      format: "24 teams · Group stage · Qualifiers · Double elimination",
-      dates: "7–29 November",
-      eligibility: "Champion rank or above",
-      prize: "$150",
+      description: "Weekend tournaments in a different region each time. Eight teams, two days, one MECS champion. First up: MECS APAC I on 7–8 November.",
+      format: "2v2 · 8 teams · Double elimination · Sat & Sun",
+      dates: "Every weekend from 7 November",
+      eligibility: "2,800 combined peak MMR",
+      prize: "$20 to the champion",
       result: "",
-      href: "/mecs-apac"
+      href: "/mecs-regionals"
     },
     {
       code: "SPL",

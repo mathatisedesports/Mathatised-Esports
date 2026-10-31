@@ -97,12 +97,60 @@
     file: '<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 13h4M10 17h4M8 9h2"/>',
     external: '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
     pause: '<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>',
-    play: '<path d="M7 4v16l13-8z"/>'
+    play: '<path d="M7 4v16l13-8z"/>',
+    kick: '<path d="M4 3h5v6h2V6h2V3h7v6h-3v2h-2v2h2v2h3v6h-7v-3h-2v-3H9v6H4z"/>'
   };
   function icon(name, cls) {
     var body = ICONS[name] || ICONS.sparkle;
     return '<svg class="icon i-' + name + " " + (cls || "") + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' + body + "</svg>";
   }
+
+  /* ---------------------------------------------------------------------------
+     MECS Regionals schedule (config.js: regionals) -> exact weekends.
+     The same logic runs in api/_assistant.js for the AI assistant.
+  --------------------------------------------------------------------------- */
+  var DAY_MS = 24 * 60 * 60 * 1000;
+  function roman(n) {
+    var map = [[1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"], [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"]];
+    var out = "";
+    map.forEach(function (p) { while (n >= p[0]) { out += p[1]; n -= p[0]; } });
+    return out;
+  }
+  function regionalsList(weeksAhead) {
+    var cfg = SITE.regionals;
+    if (!cfg) return [];
+    var list = (cfg.events || []).map(function (e) { return { date: e.date, region: e.region, name: e.name, numbered: e.numbered !== false, format: e.format }; });
+    var rot = cfg.rotation;
+    if (rot && rot.from && rot.order && rot.order.length) {
+      var start = Date.parse(rot.from + "T00:00:00Z");
+      var until = Date.now() + (weeksAhead || 12) * 7 * DAY_MS;
+      for (var i = 0, t = start; t <= until && i < 520; i++, t += 7 * DAY_MS) {
+        list.push({ date: new Date(t).toISOString().slice(0, 10), region: rot.order[i % rot.order.length], numbered: true });
+      }
+    }
+    list.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+    var count = {};
+    var today = new Date().toISOString().slice(0, 10);
+    return list.map(function (e) {
+      var sat = Date.parse(e.date + "T00:00:00Z");
+      var sun = new Date(sat + DAY_MS).toISOString().slice(0, 10);
+      var numeral = "";
+      if (e.numbered) { count[e.region] = (count[e.region] || 0) + 1; numeral = roman(count[e.region]); }
+      var name = e.name || ("MECS " + e.region + (numeral ? " " + numeral : ""));
+      return {
+        name: name, region: e.region, numeral: numeral, sat: e.date, sun: sun, format: e.format || "2v2",
+        champion: name + " Champion",
+        status: today > sun ? "completed" : today >= e.date ? "live" : "upcoming",
+        when: weekendLabel(sat)
+      };
+    });
+  }
+  function weekendLabel(sat) {
+    var a = new Date(sat), b = new Date(sat + DAY_MS);
+    var m = function (d) { return d.toLocaleDateString("en-GB", { month: "short", timeZone: "UTC" }); };
+    return a.getUTCDate() + (m(a) === m(b) ? "" : " " + m(a)) + "–" + b.getUTCDate() + " " + m(b);
+  }
+  SITE.regionalsList = regionalsList;
 
   function socialIcons(variant) {
     return '<ul class="social-list ' + (variant ? "social-list--" + variant : "") + '">' +
@@ -192,7 +240,7 @@
     });
     competitions.push({ label: "SPL", href: "/spl" });
     partner.push({ label: "Join the Team", href: "/join-us" });
-    var resources = (SITE.docs || []).map(function (d) { return { label: d.short || d.title, href: d.file, newTab: true }; });
+    var resources = (SITE.docs || []).filter(function (d) { return d.file; }).map(function (d) { return { label: d.short || d.title, href: d.file, newTab: true }; });
     function links(list) {
       return "<ul>" + list.map(function (l) {
         var href = l.href || l.url;
@@ -301,12 +349,67 @@
     docs: function (el) {
       var only = (el.getAttribute("data-docs") || "").split(",").filter(Boolean); /* e.g. "rules" */
       el.innerHTML = (SITE.docs || []).filter(function (d) { return !only.length || only.indexOf(d.key) > -1; }).map(function (d) {
-        return '<article class="card doc-card">' +
+        return '<article class="card doc-card' + (d.file ? "" : " doc-card--soon") + '">' +
           '<span class="card-icon">' + icon("file") + "</span>" +
           '<div class="doc-body"><h3 class="card-title">' + esc(d.title) + '</h3><p class="doc-meta">' + esc(d.meta) + "</p><p>" + esc(d.text) + "</p></div>" +
-          '<a class="btn btn-outline btn-sm" href="' + esc(d.file) + '" target="_blank" rel="noopener">Open Document' + icon("external") +
-          '<span class="sr-only"> — ' + esc(d.title) + " (opens in a new tab)</span></a></article>";
+          (d.file
+            ? '<a class="btn btn-outline btn-sm" href="' + esc(d.file) + '" target="_blank" rel="noopener">Open Document' + icon("external") +
+              '<span class="sr-only"> — ' + esc(d.title) + " (opens in a new tab)</span></a>"
+            : '<span class="doc-soon">' + icon("clock") + "Coming soon</span>") +
+          "</article>";
       }).join("");
+    },
+
+    /* Upcoming MECS Regionals (config.js: regionals) */
+    "regionals-schedule": function (el) {
+      var all = regionalsList(16);
+      var lastDone = all.filter(function (e) { return e.status === "completed"; }).slice(-1);
+      var ahead = all.filter(function (e) { return e.status !== "completed"; }).slice(0, (SITE.regionals && SITE.regionals.show) || 6);
+      var first = true;
+      el.innerHTML = lastDone.concat(ahead).map(function (e) {
+        var tag = e.status === "completed" ? '<span class="tl-done">Completed</span>'
+          : e.status === "live" ? '<span class="tl-tag tl-tag--live">This weekend</span>'
+          : first ? '<span class="tl-tag">Next up</span>' : "";
+        if (e.status !== "completed") first = false;
+        return '<li class="tl-item' + (e.status === "completed" ? " tl-item--done" : "") + (e.status === "live" ? " tl-item--live" : "") + '">' +
+          '<span class="tl-dot tl-dot--text">' + esc(e.numeral || "★") + "</span>" +
+          '<div class="card tl-card"><div><h3>' + esc(e.name) + "</h3><p>" + esc(e.region) + (e.format === "2v2" ? " · 2v2 · 8 teams · Saturday &amp; Sunday" : " · " + esc(e.format) + " special · Saturday &amp; Sunday · $20 to the winner") + "</p></div>" +
+          '<span class="tl-when">' + esc(e.when) + " " + tag + "</span></div></li>";
+      }).join("");
+    },
+
+    /* MECS Regionals MMR checker: two peaks in, eligible or not out */
+    "mmr-check": function (el) {
+      var MIN = 2800, TOL = 50;
+      el.innerHTML =
+        '<div class="mmr-check">' +
+        '<div class="mmr-fields">' +
+        '<div class="field"><label for="mmr-1">Player 1 peak MMR</label><input class="input" id="mmr-1" type="number" inputmode="numeric" min="0" max="3000" placeholder="e.g. 1460"></div>' +
+        '<div class="field"><label for="mmr-2">Player 2 peak MMR</label><input class="input" id="mmr-2" type="number" inputmode="numeric" min="0" max="3000" placeholder="e.g. 1370"></div>' +
+        "</div>" +
+        '<p class="mmr-hint">Use each player\'s highest peak MMR across all formats (1v1, 2v2, 3v3 and so on). Don\'t include your substitute.</p>' +
+        '<div class="mmr-result" aria-live="polite"><span class="mmr-total">Enter both peaks</span><span class="mmr-verdict"></span></div>' +
+        "</div>";
+      var a = el.querySelector("#mmr-1"), b = el.querySelector("#mmr-2");
+      var total = el.querySelector(".mmr-total"), verdict = el.querySelector(".mmr-verdict"), box = el.querySelector(".mmr-result");
+      function update() {
+        var x = parseInt(a.value, 10), y = parseInt(b.value, 10);
+        box.className = "mmr-result";
+        if (isNaN(x) || isNaN(y)) { total.textContent = "Enter both peaks"; verdict.textContent = ""; return; }
+        var sum = x + y;
+        total.textContent = "Combined: " + sum.toLocaleString("en-GB");
+        if (sum >= MIN) { box.classList.add("is-ok"); verdict.textContent = "✓ Meets the requirement"; }
+        else if (sum >= MIN - TOL) { box.classList.add("is-ok"); verdict.textContent = "✓ Meets the requirement (within the 50 MMR tolerance)"; }
+        else { box.classList.add("is-short"); verdict.textContent = (MIN - TOL - sum).toLocaleString("en-GB") + " short of the 2,750 minimum"; }
+      }
+      a.addEventListener("input", update);
+      b.addEventListener("input", update);
+    },
+
+    /* "MECS APAC I · 7–8 Nov" for the next (or current) Regional */
+    "regionals-next": function (el) {
+      var next = regionalsList(8).filter(function (e) { return e.status !== "completed"; })[0];
+      if (next) el.textContent = next.name + " · " + next.when;
     },
 
     highlights: function (el) {
