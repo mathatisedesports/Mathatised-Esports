@@ -109,7 +109,7 @@ window.SITE = {
     { key: "rules", title: "Rules & Regulations", short: "Rulebook", file: "assets/docs/mathatised-esports-rules-and-regulations.pdf", meta: "PDF · 34 pages",
       text: "One official rulebook for SPL, MECS and MECS Regionals: eligibility, rosters, match procedures, disconnects, disputes, conduct and prizes." },
     { key: "regionals-format", title: "MECS Regionals Format & Competition Structure", short: "Regionals Format", file: "assets/docs/mecs-regionals-format.pdf", meta: "PDF · 11 pages",
-      text: "The weekly Regionals in full: rotation and servers, registration, MMR eligibility, the bracket, the weekend schedule and prizes." },
+      text: "The Regionals in full: the monthly schedule and servers, registration, MMR eligibility, the bracket, the weekend schedule and the champion title." },
     { key: "format", title: "MECS Championship Format & Competition Structure", short: "Championship Format", file: "assets/docs/mecs-format-and-competition-structure.pdf", meta: "PDF · 13 pages",
       text: "The four-week MECS Championship format: groups, qualification, the Championship Bracket and seeding." }
   ],
@@ -119,21 +119,24 @@ window.SITE = {
      Used by the MECS Regionals page AND by the AI assistant (website + Discord),
      so this is the one place to edit the schedule.
 
-     events:   specific weekends (the Saturday's date). Add `name` to give an
-               event its own name, `numbered: false` to leave it out of
-               that region's I, II, III… count, and `format` (e.g. "1v1")
-               if it isn't the usual 2v2.
-     rotation: from that Saturday on, one event every weekend, cycling through
-               `order`. Add a region to `order` to bring it into the rotation.
-     Each region's events are numbered automatically: MECS APAC I, II, III…
-     The winner is "MECS <Region> <number> Champion", e.g. MECS APAC I Champion.
+     events:   one-off weekends (the Saturday's date) before the monthly pattern
+               starts. type: "showdown" marks a MECS Middle East 1v1 Showdown.
+     monthly:  from that month on, every month follows the same pattern:
+               weekend 1, 2, 3 = the Regionals in `weekends` (in order), and the
+               LAST weekend of the month = the 1v1 Showdown. In a month with five
+               weekends, the 4th weekend is left open (announced separately) and
+               isn't shown on the website.
+     Numbering is automatic: MECS APAC I, II…; MECS Middle East 1v1 Showdown I,
+     II… The winner is "<event name> Champion", e.g. MECS APAC I Champion.
   --------------------------------------------------------------------------- */
   regionals: {
     events: [
       { date: "2026-11-07", region: "APAC" },
-      { date: "2026-11-14", region: "EU" }
+      { date: "2026-11-14", region: "Middle East", type: "showdown" },
+      { date: "2026-11-21", region: "EU" },
+      { date: "2026-11-28", region: "Middle East" }
     ],
-    rotation: { from: "2026-11-28", order: ["Middle East", "APAC", "EU"] },
+    monthly: { from: "2026-12", weekends: ["Middle East", "APAC", "EU"], lastWeekend: { region: "Middle East", type: "showdown" } },
     show: 6   /* how many upcoming weekends the MECS Regionals page lists */
   },
 
@@ -151,7 +154,7 @@ window.SITE = {
       label: "MECS",
       children: [
         { page: "mecs",             label: "MECS Overview",    href: "/mecs",             text: "The series, its mission and how to compete." },
-        { page: "mecs-regionals",   label: "MECS Regionals",   href: "/mecs-regionals",   text: "A new region every weekend. APAC I starts 7 Nov." },
+        { page: "mecs-regionals",   label: "MECS Regionals",   href: "/mecs-regionals",   text: "Middle East, APAC and EU every month." },
         { page: "mecs-middle-east", label: "MECS Middle East", href: "/mecs-middle-east", text: "The original four-week championship." }
       ]
     },
@@ -169,7 +172,7 @@ window.SITE = {
 
   /* ---------------------------------------------------------------------------
      KEY NUMBERS (band under the Home hero). Update as they grow.
-     Prize pools: SPL 2v2 $100 + SPL 3v3 ~$150 + MECS Middle East $150 (+ $20 per MECS Regional).
+     Prize pools: SPL 2v2 $100 + SPL 3v3 ~$150 + MECS Middle East $150.
      Players: SPL 3v3 ~70–80 + SPL 2v2 ~50 + MECS ~60–70.
   --------------------------------------------------------------------------- */
   highlights: [
@@ -189,36 +192,33 @@ window.SITE = {
     {
       series: "MECS",
       code: "MECS",
-      name: "MECS Middle East",
-      status: "live",
-      statusLabel: "Live now",
-      logo: "assets/img/mecs-logo.webp",
-      game: "Rocket League",
-      description: "The first edition of the Mathatised Esports Championship Series, being played now on Middle East servers.",
-      format: "24 teams · Group stage · Two-legged qualification · Double elimination",
-      dates: "10 October – 1 November",
-      eligibility: "Platinum rank or above",
-      prize: "$150",
-      result: "",
-      href: "/mecs-middle-east"
-    },
-    {
-      series: "MECS",
-      code: "MECS",
       name: "MECS Regionals",
       status: "current",
       statusLabel: "Every weekend",
       logo: "assets/img/mecs-logo.webp",
       game: "Rocket League",
-      description: "Weekend tournaments in a different region each time. Eight teams, two days, one MECS champion. First up: MECS APAC I on 7–8 November.",
+      description: "Weekend tournaments rotating between the Middle East, APAC and EU every month. Eight teams, two days, and a MECS champion crowned every weekend.",
       format: "2v2 · 8 teams · Double elimination · Sat & Sun",
-      dates: "Every weekend from 7 November",
+      dates: "Every month: Middle East, APAC, EU",
       eligibility: "2,800 combined peak MMR",
-      prize: "$20 to the champion",
       result: "",
       href: "/mecs-regionals"
-    },
-    {
+    },    {
+      series: "MECS",
+      code: "MECS",
+      name: "MECS Middle East",
+      status: "completed",
+      statusLabel: "Completed",
+      logo: "assets/img/mecs-logo.webp",
+      game: "Rocket League",
+      description: "The original four-week Mathatised Esports Championship Series, played on Middle East servers.",
+      format: "24 teams · Group stage · Two-legged qualification · Double elimination",
+      dates: "10 October – 1 November",
+      eligibility: "Platinum rank or above",
+      prize: "$150",
+      result: "Champion — Nothing · 2nd Fury X BomX · 3rd 7",
+      href: "/mecs-middle-east"
+    },    {
       code: "SPL",
       name: "South Asia Premier League",
       status: "completed",

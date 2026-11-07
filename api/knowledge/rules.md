@@ -96,7 +96,6 @@ Mathatised will make reasonable efforts to accommodate such limitations but does
 - Eligibility for MECS Regionals is determined by the combined MMR requirement in Section 3.13.
 There is no minimum rank requirement.
 - The default server for each region is set out in Section 4.6.
-- Each MECS Regionals tournament has a $20 prize pool, awarded in full to the winning Team and paid in accordance with Section 11.9.
 - All MECS Regionals matches are livestreamed with casting and commentary on Mathatised Esports' official platforms, in accordance with Section 10.
 - The region, dates, schedule, and registration details for each tournament are announced separately. All other provisions of these Rules apply to MECS Regionals unless this Section or a tournament-specific rule states otherwise.
 3. Player & Team Eligibility
@@ -191,7 +190,7 @@ There is no minimum rank requirement.
 - Players must use supported Rocket League platforms and normal competitive gameplay functionality.
 - Any tournament-specific setting takes precedence for that tournament.
 4.2 — Match Hosting, Server and Team Colors
-- The Match Administrator creates and hosts the private match lobby unless the tournament - specific procedure states otherwise.
+- The Match Administrator creates and hosts the private match lobby unless the tournament- specific procedure states otherwise.
 - Match credentials are provided through the designated Mathatised Esports process.
 - There is no fixed standing Blue/Orange assignment; team colors are determined by the game/lobby unless a tournament-specific instruction says otherwise.
 - For a Middle East tournament, matches are played on ME4 by default; for an APAC tournament, on Asia SE Maritime by default; and for an EU tournament, on Europe by default, in each case unless an approved exception applies.
@@ -487,7 +486,7 @@ Mathatised, and Ali Hassan.
 - For international winners, the applicable sponsor directly makes the international prize transfer to the winning recipient or Team.
 - The responsible payment party and method may be confirmed with the winners after final placements are established.
 11.4 — Prize Payment Timing
-- Except for MECS Regionals prizes, which are paid under Section 11.9, prize payments will generally be made within seven (7) working days of the final results being confirmed for the applicable tournament, subject to timely provision of the required funds and recipient information under this Section.
+- Prize payments will generally be made within seven (7) working days of the final results being confirmed for the applicable tournament, subject to timely provision of the required funds and recipient information under this Section.
 - International payments may take additional time because of international transfer processing and requirements outside Mathatised’s direct control.
 11.5 — Recipient Unable to Receive Payment
 - If a winning Player cannot reasonably receive the prize directly, Mathatised may allow the Player to nominate another person, such as a parent, guardian, or family member, to receive payment on the Player’s behalf.
@@ -505,11 +504,6 @@ Mathatised, and Ali Hassan.
 - Mathatised does not assume responsibility for a sponsor’s failure, withdrawal, delay, or refusal to provide committed prize funds.
 - If a sponsor fails to provide committed funds, Mathatised is not responsible for paying the unpaid portion from its own funds.
 - Mathatised will communicate material payment issues to affected winners and may assist with communication or coordination with the sponsor where reasonably possible.
-11.9 — MECS Regionals Prize and Payment Schedule
-- Each MECS Regionals tournament has a prize pool of $20. The entire prize pool is awarded to the winning Team, and no other placements receive prize money.
-- MECS Regionals prizes are paid monthly rather than after each tournament. The winners of all MECS Regionals tournaments completed during a calendar month are recorded, and all of that month's prizes are paid during the first week of the following month (the 1st to the 7th).
-- For example, if four MECS Regionals tournaments are completed by October 31, all four winning Teams are paid between November 1 and November 7.
-- Sections 11.1, 11.2, 11.3, and 11.5 to 11.8 apply to MECS Regionals prizes. International payments may take additional time as described in Section 11.4.
 12. Appeals, Reviews & Final Decisions
 12.1 — Request for Review
 - A Player or Team affected by an administrative or disciplinary decision may submit a review request through the official Mathatised Esports Discord ticket system.

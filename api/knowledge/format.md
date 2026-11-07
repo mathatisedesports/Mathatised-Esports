@@ -1,6 +1,6 @@
 # PAST FORMAT: MECS Championship Format & Competition Structure (full text)
 
-Source: /assets/docs/mecs-format-and-competition-structure.pdf. This describes the four-week MECS Championship structure (24 teams, groups, a qualification stage, a 12-team bracket). It is history: no event currently open for entry uses it. MECS Middle East used it with a Two-Legged Qualification Round instead of the Qualifiers (see site.md). It does NOT apply to MECS Regionals (8 teams, 2v2, double elimination, 2,800 combined peak MMR, $20).
+Source: /assets/docs/mecs-format-and-competition-structure.pdf. This describes the four-week MECS Championship structure (24 teams, groups, a qualification stage, a 12-team bracket). It is history: no event currently open for entry uses it. MECS Middle East used it with a Two-Legged Qualification Round instead of the Qualifiers (see site.md). It does NOT apply to MECS Regionals (8 teams, 2v2, double elimination, 2,800 combined peak MMR).
 
 MATHATISED ESPORTS
 Mathatised Esports Championship Series

@@ -30,7 +30,8 @@
     "organizer": { "@type": "SportsOrganization", "@id": "https://mathatised-esports.vercel.app/#organization", "name": "Mathatised Esports", "url": "https://mathatised-esports.vercel.app/" },
     "subEvent": [
       { "@type": "SportsEvent", "name": "MECS APAC I", "sport": "Rocket League", "startDate": "2026-11-07", "endDate": "2026-11-08", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode", "location": { "@type": "VirtualLocation", "url": "https://mathatised-esports.vercel.app/mecs-regionals" }, "organizer": { "@id": "https://mathatised-esports.vercel.app/#organization" } },
-      { "@type": "SportsEvent", "name": "MECS EU I", "sport": "Rocket League", "startDate": "2026-11-14", "endDate": "2026-11-15", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode", "location": { "@type": "VirtualLocation", "url": "https://mathatised-esports.vercel.app/mecs-regionals" }, "organizer": { "@id": "https://mathatised-esports.vercel.app/#organization" } },
+      { "@type": "SportsEvent", "name": "MECS Middle East 1v1 Showdown I", "sport": "Rocket League", "startDate": "2026-11-14", "endDate": "2026-11-15", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode", "location": { "@type": "VirtualLocation", "url": "https://mathatised-esports.vercel.app/mecs-regionals" }, "organizer": { "@id": "https://mathatised-esports.vercel.app/#organization" } },
+      { "@type": "SportsEvent", "name": "MECS EU I", "sport": "Rocket League", "startDate": "2026-11-21", "endDate": "2026-11-22", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode", "location": { "@type": "VirtualLocation", "url": "https://mathatised-esports.vercel.app/mecs-regionals" }, "organizer": { "@id": "https://mathatised-esports.vercel.app/#organization" } },
       { "@type": "SportsEvent", "name": "MECS Middle East I", "sport": "Rocket League", "startDate": "2026-11-28", "endDate": "2026-11-29", "eventStatus": "https://schema.org/EventScheduled", "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode", "location": { "@type": "VirtualLocation", "url": "https://mathatised-esports.vercel.app/mecs-regionals" }, "organizer": { "@id": "https://mathatised-esports.vercel.app/#organization" } }
     ]
   }
@@ -64,7 +65,7 @@
             <li><span data-icon="calendar"></span><span><strong>Every weekend</strong> Sat &amp; Sun</span></li>
             <li><span data-icon="users"></span><span><strong>8 teams</strong> 2v2 + 1 sub</span></li>
             <li><span data-icon="bracket"></span><span><strong>Double</strong> elimination</span></li>
-            <li><span data-icon="trophy"></span><span><strong>$20</strong> To the champion</span></li>
+            <li><span data-icon="trophy"></span><span><strong>MECS</strong> Champion title</span></li>
           </ul>
           <p class="hero-next"><span data-icon="flag"></span>Next up: <strong data-render="regionals-next">MECS APAC I · 7–8 Nov</strong></p>
           <div class="hero-actions">
@@ -90,7 +91,7 @@
           <li><span class="num">01</span><h3>Register</h3><p>Sign your team up through the MECS registration process in our Discord.</p></li>
           <li><span class="num">02</span><h3>Eligibility check</h3><p>We check your two main players' combined peak MMR and confirm your spot.</p></li>
           <li><span class="num">03</span><h3>Saturday</h3><p>Upper quarterfinals and semifinals, plus the first lower-bracket rounds. All BO3, live on stream.</p></li>
-          <li><span class="num">04</span><h3>Sunday</h3><p>Lower semifinal, BO5 upper and lower finals, then a BO7 Grand Final to crown the champion.</p></li>
+          <li><span class="num">04</span><h3>Sunday</h3><p>Lower semifinal, BO5 upper and lower finals, then a BO7 Grand Final, with a bracket reset if needed, to crown the champion.</p></li>
         </ol>
       </div>
     </section>
@@ -109,7 +110,7 @@
           <article class="card card--hover"><span class="card-icon" data-icon="gamepad"></span><h3 class="card-title">2v2, plus a sub</h3><p>Two players in your main lineup and one optional substitute ready to step in.</p></article>
           <article class="card card--hover"><span class="card-icon" data-icon="calendar"></span><h3 class="card-title">Two days</h3><p>Saturday and Sunday. Match times for each weekend are posted in our Discord.</p></article>
           <article class="card card--hover"><span class="card-icon" data-icon="broadcast"></span><h3 class="card-title">Live and everywhere</h3><p>Every match is livestreamed with casting on YouTube, Twitch and Kick, and the best moments become highlights and edits on YouTube Shorts, TikTok, Instagram and Facebook.</p></article>
-          <article class="card card--hover"><span class="card-icon" data-icon="award"></span><h3 class="card-title">A title to your name</h3><p>The winners become, for example, <strong>MECS APAC I Champion</strong>, and take the full $20 prize, paid in the first week of the following month.</p></article>
+          <article class="card card--hover"><span class="card-icon" data-icon="award"></span><h3 class="card-title">A title to your name</h3><p>Win the weekend and you're crowned, for example, <strong>MECS APAC I Champion</strong>: a title with your name on it.</p></article>
         </div>
       </div>
     </section>
@@ -141,10 +142,12 @@
               <tr><th scope="row">Upper Final</th><td><span class="bo">BO5</span></td></tr>
               <tr><th scope="row">Lower Final</th><td><span class="bo">BO5</span></td></tr>
               <tr class="is-final"><th scope="row">Grand Final</th><td><span class="bo">BO7</span></td></tr>
+              <tr class="is-final"><th scope="row">Bracket reset (if needed)</th><td><span class="bo">BO7</span></td></tr>
             </tbody>
           </table>
         </div>
-        <p class="note reveal" style="margin-top:22px"><strong>Servers:</strong> Middle East events are played on ME4, APAC events on Asia SE Maritime and EU events on Europe by default. Prefer another server? If both teams agree, ask an admin before your match and you can play there once it's approved (Rule 4.6).</p>
+        <p class="note reveal" style="margin-top:22px"><strong>Bracket reset:</strong> the Upper Final winner reaches the Grand Final undefeated. If the Lower Final winner wins the first BO7, both teams have one loss, so a second BO7 decides the champion.</p>
+        <p class="note reveal" style="margin-top:10px"><strong>Servers:</strong> Middle East events are played on ME4, APAC events on Asia SE Maritime and EU events on Europe by default. Prefer another server? If both teams agree, ask an admin before your match and you can play there once it's approved (Rule 4.6).</p>
       </div>
     </section>
 
@@ -186,12 +189,13 @@
       <div class="container">
         <div class="section-head section-head--center">
           <p class="eyebrow">Schedule</p>
-          <h2 id="tl-title">A new region every weekend</h2>
-          <p class="lead" style="margin-left:auto;margin-right:auto">The Regionals rotate between the Middle East, APAC and EU, with more regions on the way. Match times and registration for each weekend are announced in Discord.</p>
+          <h2 id="tl-title">The monthly schedule</h2>
+          <p class="lead" style="margin-left:auto;margin-right:auto">Every month: the Middle East, APAC and EU Regionals on the first three weekends, and the MECS Middle East 1v1 Showdown on the last weekend. More regions are on the way. Match times and registration are announced in Discord.</p>
         </div>
         <ol class="timeline" data-render="regionals-schedule">
-          <li class="tl-item"><span class="tl-dot tl-dot--text">I</span><div class="card tl-card"><div><h3>MECS APAC I</h3><p>APAC · 8 teams · Saturday &amp; Sunday</p></div><span class="tl-when">7–8 Nov</span></div></li>
-          <li class="tl-item"><span class="tl-dot tl-dot--text">I</span><div class="card tl-card"><div><h3>MECS EU I</h3><p>EU · 8 teams · Saturday &amp; Sunday</p></div><span class="tl-when">14–15 Nov</span></div></li>
+          <li class="tl-item"><span class="tl-dot tl-dot--text">I</span><div class="card tl-card"><div><h3>MECS APAC I</h3><p>APAC · 2v2 · 8 teams · Saturday &amp; Sunday</p></div><span class="tl-when">7–8 Nov</span></div></li>
+          <li class="tl-item tl-item--showdown"><span class="tl-dot tl-dot--text">I</span><div class="card tl-card"><div><h3>MECS Middle East 1v1 Showdown I</h3><p>Middle East · 1v1 · monthly Showdown · details in Discord</p></div><span class="tl-when">14–15 Nov</span></div></li>
+          <li class="tl-item"><span class="tl-dot tl-dot--text">I</span><div class="card tl-card"><div><h3>MECS EU I</h3><p>EU · 2v2 · 8 teams · Saturday &amp; Sunday</p></div><span class="tl-when">21–22 Nov</span></div></li>
           <li class="tl-item"><span class="tl-dot tl-dot--text">I</span><div class="card tl-card"><div><h3>MECS Middle East I</h3><p>Middle East · 2v2 · 8 teams · Saturday &amp; Sunday</p></div><span class="tl-when">28–29 Nov</span></div></li>
         </ol>
       </div>

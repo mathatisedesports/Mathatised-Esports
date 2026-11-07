@@ -25,19 +25,19 @@
     { q: "When is the next MECS Regional?", chip: true,
       k: ["when", "dates", "schedule", "start", "next", "weekend", "november", "december", "timeline"],
       dyn: function () {
-        var list = window.SITE && SITE.regionalsList ? SITE.regionalsList(10).filter(function (e) { return e.status !== "completed"; }).slice(0, 4) : [];
-        if (!list.length) return "There's a new **MECS Regional** every weekend, rotating between the Middle East, APAC and EU. See the [schedule](/mecs-regionals#schedule).";
-        return "A new **MECS Regional** every weekend (Saturday and Sunday):\n\n" +
+        var list = window.SITE && SITE.regionalsList ? SITE.regionalsList(10).filter(function (e) { return e.status !== "completed" && e.type !== "open"; }).slice(0, 4) : [];
+        if (!list.length) return "Every month there are **MECS Regionals** in the Middle East, APAC and EU, plus the MECS Middle East 1v1 Showdown. See the [schedule](/mecs-regionals#schedule).";
+        return "Here's what's coming up (all Saturday and Sunday):\n\n" +
           list.map(function (e) { return "- **" + e.when + ":** " + e.name + (e.status === "live" ? " (this weekend!)" : ""); }).join("\n") +
           "\n\nMatch times are posted in our [Discord](" + DISCORD + "). Full [schedule](/mecs-regionals#schedule).";
       },
-      a: "There's a new **MECS Regional** every weekend, rotating between the Middle East, APAC and EU. See the [schedule](/mecs-regionals#schedule)." },
+      a: "Every month there are **MECS Regionals** in the Middle East, APAC and EU, plus the MECS Middle East 1v1 Showdown on the last weekend. See the [schedule](/mecs-regionals#schedule)." },
     { q: "Who can play? Is there a rank requirement?", chip: true,
       k: ["rank", "eligib", "requirement", "mmr", "who can play", "can i play", "peak", "champion rank"],
       a: "**No rank requirement!** For MECS Regionals, we add up your two main players' **peak MMR**:\n\n- Each player's highest peak MMR **across all formats** (1v1, 2v2, 3v3…) counts\n- The two together need **2,800**, and with the **50 MMR tolerance** a combined **2,750** still meets it\n- Your substitute doesn't count towards it\n\nTry the checker on the [MECS Regionals](/mecs-regionals#eligibility) page. Full details in Rule 3.13. You must play on your main account (Rule 3.2), and players must be at least 13 (Rule 3.1)." },
     { q: "How does the format work?", chip: true,
       k: ["format", "how does", "bracket", "double elimination", "2v2", "teams", "how many teams", "bo3", "bo5", "bo7", "saturday", "sunday", "grand final", "server"],
-      a: "Every **MECS Regional** is a two-day event:\n\n- **8 teams**, **2v2**, with one optional substitute\n- **Double elimination**: lose once and you drop to the lower bracket, lose twice and you're out\n- **Saturday:** Upper Quarterfinals, Upper Semifinals, Lower Round 1 and Lower Quarterfinal (all BO3)\n- **Sunday:** Lower Semifinal (BO3), Upper and Lower Finals (BO5) and the Grand Final (BO7)\n- Livestreamed with casting, and the winners are crowned champion, e.g. **MECS APAC I Champion**\n\nSee [MECS Regionals](/mecs-regionals)." },    { q: "What happens if a player disconnects?", chip: true,
+      a: "Every **MECS Regional** is a two-day event:\n\n- **8 teams**, **2v2**, with one optional substitute\n- **Double elimination**: lose once and you drop to the lower bracket, lose twice and you're out\n- **Saturday:** Upper Quarterfinals, Upper Semifinals, Lower Round 1 and Lower Quarterfinal (all BO3)\n- **Sunday:** Lower Semifinal (BO3), Upper and Lower Finals (BO5) and the Grand Final (BO7, with a bracket reset if the lower-bracket team wins the first series)\n- Livestreamed with casting, and the winners are crowned champion, e.g. **MECS APAC I Champion**\n\nSee [MECS Regionals](/mecs-regionals)." },    { q: "What happens if a player disconnects?", chip: true,
       k: ["disconnect", "dc", "lag", "crash", "connection", "pause", "timeout", "time out"],
       a: "Under **Rule 4.7**, the admin pauses the game and starts a **two-minute timer**. The player can rejoin, or a registered substitute can come in during the pause. If neither happens, the game continues shorthanded when the timer ends.\n\nEach team also gets **one two-minute timeout per series**, between games only (Rule 4.8). The [official rulebook](/assets/docs/mathatised-esports-rules-and-regulations.pdf) has the full details." },
     { q: "Where can I watch the matches?", chip: true,
@@ -52,12 +52,12 @@
     { q: "How can my brand sponsor you?", chip: false,
       k: ["sponsor", "partner", "partnership", "advertis", "brand deal", "collab"],
       a: "Partners can be title or presenting partner, broadcast partner, prize partner, content partner or community partner, or build a custom package. Every package is tailored.\n\nStart on [Become a Sponsor](/sponsor) or email mathatisedesports@gmail.com." },
-    { q: "What's the prize pool?", chip: false,
+    { q: "What do the winners get?", chip: false,
       k: ["prize", "money", "reward", "payout", "paid", "cash", "win"],
-      a: "Each **MECS Regional** has a **$20** prize, and the whole $20 goes to the winning team. Regionals prizes are paid **monthly**: all of a month's winners are paid in the first week of the next month (1st–7th), to one person nominated by each team (Rule 11.9). Plus, your best plays get turned into highlights shared across our channels 🙌" },
+      a: "Every **MECS Regional** is played for the title. Win the weekend and you're crowned champion, for example **MECS APAC I Champion**: the crown, the bragging rights and your name in MECS history 🏆 Your best plays also get turned into highlights shared across our channels." },
     { q: "What about MECS Middle East?", chip: false,
       k: ["middle east", "mena", "me edition", "me4", "two-legged", "two legged", "aggregate"],
-      a: "**MECS Middle East** is our original four-week MECS championship (24 teams, Platinum rank or above, $150), running 10 October to 1 November with the champion crowned on 1 November. See [MECS Middle East](/mecs-middle-east).\n\nLooking to play in the Middle East now? The **MECS Regionals** come to the Middle East regularly. See the [schedule](/mecs-regionals#schedule)." },
+      a: "**MECS Middle East** is our original four-week MECS championship (24 teams, Platinum rank or above, $150), played 10 October to 1 November.\n\n- **1st (Champion):** Nothing (Zwix, Izn, Troyz)\n- **2nd:** Fury X BomX (Zost, V7gro)\n- **3rd:** 7 (HMS, Rdlvv, Sighfive)\n\nSee [MECS Middle East](/mecs-middle-east).\n\nLooking to play in the Middle East now? The **MECS Regionals** come to the Middle East regularly. See the [schedule](/mecs-regionals#schedule)." },
     { q: "Who won the SPL?", chip: false,
       k: ["spl", "south asia", "premier league", "winner", "won", "champion", "results", "fury", "top five"],
       a: "The **South Asia Premier League** had two tournaments:\n\n- **3v3:** Team Top Five won, ahead of Team Pigeon Lovers and Team Revenant\n- **2v2:** Fury X BomX won, ahead of Kl Banana and UncsWhoDunc\n\nMore on the [SPL page](/spl)." },

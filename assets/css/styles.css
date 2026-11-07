@@ -618,6 +618,7 @@ fieldset.field.is-invalid .check-grid { border-color: #c2413b; }
 .placement--2 .icon, .placement--3 .icon { color: var(--muted); }
 .place { font-family: var(--font-head); font-weight: 800; color: var(--heading); font-size: 0.95rem; }
 .placement .team { color: var(--text); font-weight: 600; }
+.placement .team small { display: block; margin-top: 2px; font-size: 0.8rem; font-weight: 500; color: var(--muted); }
 .placement--1 { background: linear-gradient(90deg, var(--gold-soft), transparent 70%); }
 .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
 .stat-row div { display: flex; flex-direction: column-reverse; gap: 4px; padding: 18px 8px; min-width: 0; text-align: center; border-radius: var(--radius-sm); background: var(--gold-soft); border: 1px solid var(--gold-line); }
@@ -803,6 +804,8 @@ fieldset.field.is-invalid .check-grid { border-color: #c2413b; }
 .tl-tag--live { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
 .tl-item--live .tl-card { border-color: var(--gold); box-shadow: var(--shadow-lg); }
 .tl-item--live .tl-dot { background: var(--gold); color: var(--on-gold); }
+.tl-item--showdown .tl-card { border-left: 3px solid var(--gold); }
+.tl-item--showdown .tl-dot { border-style: dashed; }
 /* Document not published yet */
 .doc-soon { display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: var(--radius-sm); border: 1px dashed var(--border-strong); color: var(--muted); font-size: 0.85rem; font-weight: 700; white-space: nowrap; }
 .doc-soon .icon { width: 16px; height: 16px; }

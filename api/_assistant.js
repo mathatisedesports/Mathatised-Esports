@@ -161,34 +161,55 @@ function roman(n) {
   return out;
 }
 
+/* Saturdays (YYYY-MM-DD) in a given UTC year/month */
+function saturdaysOf(year, month) {
+  const out = [];
+  let d = new Date(Date.UTC(year, month, 1));
+  while (d.getUTCDay() !== 6) d = new Date(d.getTime() + DAY_MS);
+  while (d.getUTCMonth() === month) { out.push(d.toISOString().slice(0, 10)); d = new Date(d.getTime() + 7 * DAY_MS); }
+  return out;
+}
+
+/* Same logic as regionalsList() in assets/js/site.js */
 function expandRegionals(cfg, weeksAhead, nowMs) {
   const now = nowMs || Date.now();
-  const list = (cfg.events || []).map((e) => ({ date: e.date, region: e.region, name: e.name, numbered: e.numbered !== false, format: e.format }));
-  const rot = cfg.rotation;
-  if (rot && rot.from && rot.order && rot.order.length) {
-    const until = now + weeksAhead * 7 * DAY_MS;
-    for (let i = 0, t = Date.parse(rot.from + "T00:00:00Z"); t <= until && i < 520; i++, t += 7 * DAY_MS) {
-      list.push({ date: new Date(t).toISOString().slice(0, 10), region: rot.order[i % rot.order.length], numbered: true });
+  const list = (cfg.events || []).map((e) => ({ date: e.date, region: e.region, type: e.type || "regional" }));
+  const mo = cfg.monthly;
+  if (mo && mo.from && mo.weekends) {
+    const until = new Date(now + weeksAhead * 7 * DAY_MS).toISOString().slice(0, 7);
+    let y = +mo.from.slice(0, 4), m = +mo.from.slice(5, 7) - 1;
+    for (let guard = 0; guard < 120; guard++) {
+      const key = y + "-" + String(m + 1).padStart(2, "0");
+      if (key > until) break;
+      const sats = saturdaysOf(y, m);
+      sats.forEach((date, i) => {
+        if (i === sats.length - 1 && mo.lastWeekend) list.push({ date, region: mo.lastWeekend.region, type: mo.lastWeekend.type || "showdown" });
+        else if (i < mo.weekends.length) list.push({ date, region: mo.weekends[i], type: "regional" });
+        else list.push({ date, region: "", type: "open" });
+      });
+      m++; if (m > 11) { m = 0; y++; }
     }
   }
   list.sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
   const count = {};
   const today = new Date(now).toISOString().slice(0, 10);
+  const fmt = (ms) => new Date(ms).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
   return list.map((e) => {
     const sat = Date.parse(e.date + "T00:00:00Z");
     const sun = new Date(sat + DAY_MS).toISOString().slice(0, 10);
-    let numeral = "";
-    if (e.numbered) { count[e.region] = (count[e.region] || 0) + 1; numeral = roman(count[e.region]); }
-    const name = e.name || "MECS " + e.region + (numeral ? " " + numeral : "");
-    const fmt = (ms) => new Date(ms).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+    let name = "Open weekend: event not decided yet (announced in Discord)";
+    if (e.type !== "open") {
+      const k = e.type + ":" + e.region;
+      count[k] = (count[k] || 0) + 1;
+      name = "MECS " + e.region + (e.type === "showdown" ? " 1v1 Showdown " : " ") + roman(count[k]);
+    }
     return {
-      name, region: e.region, champion: name + " Champion", format: e.format || "2v2",
+      name, region: e.region, type: e.type, champion: name + " Champion",
       when: fmt(sat) + " – " + fmt(sat + DAY_MS),
       status: today > sun ? "finished" : today >= e.date ? "happening THIS weekend" : "upcoming"
     };
   });
 }
-
 let regionalsCache = { at: 0, text: "" };
 async function getRegionalsSchedule() {
   if (regionalsCache.text && Date.now() - regionalsCache.at < 10 * 60 * 1000) return regionalsCache.text;
@@ -202,11 +223,11 @@ async function getRegionalsSchedule() {
     const all = expandRegionals(cfg, 12);
     const past = all.filter((e) => e.status === "finished").slice(-3);
     const ahead = all.filter((e) => e.status !== "finished").slice(0, 8);
-    const line = (e) => "- " + e.name + ": " + e.when + " (" + e.status + ")" + (e.format !== "2v2" ? ", a special one-off " + e.format + " event" : "") + ". Winner's title: " + e.champion + ".";
+    const line = (e) => e.type === "open" ? "- " + e.when + ": " + e.name + "." : "- " + e.name + ": " + e.when + " (" + e.status + ")" + (e.type === "showdown" ? ", the monthly 1v1 Showdown (not a 2v2 Regional; details in Discord)" : ", 2v2 Regional") + ". Winner's title: " + e.champion + ".";
     regionalsCache = {
       at: Date.now(),
       text: (past.length ? "Recently finished:\n" + past.map(line).join("\n") + "\n" : "") + "Coming up:\n" + ahead.map(line).join("\n") +
-        "\nAfter these, the rotation (" + ((cfg.rotation && cfg.rotation.order) || []).join(", ") + ") keeps repeating every weekend."
+        "\nEvery month follows the same pattern: weekends 1–3 = " + ((cfg.monthly && cfg.monthly.weekends) || []).join(", ") + " Regionals, last weekend = MECS Middle East 1v1 Showdown."
     };
   } catch (e) {
     console.warn("[assistant] regionals schedule unavailable:", e.message);
@@ -281,14 +302,15 @@ function systemPrompt(announcements, surface, schedule) {
     "- If a team name isn't mentioned anywhere in the knowledge or announcements, say you can't find that team and suggest checking the spelling or the #registered-teams channel. Never guess whether a team is registered, eliminated or qualified.",
     "",
     "Current vs past (very important):",
-    "- MECS Regionals are what players can enter NOW: weekly, 2 days, 8 teams, 2v2 plus 1 sub, double elimination, no rank requirement, 2,800 combined peak MMR (±50), $20 to the winning team. Use the MECS REGIONALS SCHEDULE section for dates; its dates are exact and already worked out, so never calculate or guess other weekends.",
+    "- MECS Regionals are what players can enter NOW: weekly, 2 days, 8 teams, 2v2 plus 1 sub, double elimination, no rank requirement, 2,800 combined peak MMR (±50), played for the champion title. Use the MECS REGIONALS SCHEDULE section for dates; its dates are exact and already worked out, so never calculate or guess other weekends.",
     "- MECS Middle East and the four-week MECS Championship format (24 teams, groups, qualification, 12-team bracket, Champion or Platinum rank, $150) are PAST. Talk about them only as history, never as something to enter.",
     "- Older announcements may describe 'MECS APAC' as a four-week, 24-team event with Champion rank and a $150 prize pool. That plan was replaced: MECS APAC I is a MECS Regional on 7–8 Nov. Never repeat the old APAC details, and don't talk about what changed; just give the current information.",
     "- If someone asks about 'MECS' in general or 'the next tournament', answer about the MECS Regionals.",
     "- If it's unclear which event someone means, say which one your answer is about (for example 'MECS APAC I, the Regional on 7–8 Nov') or ask.",
-    "- There is no MECS Regional on 21–22 Nov. A separate one-off event (not part of the Regionals) is planned; only say its details will be announced in Discord, unless an announcement says more.",
+    "- The MECS Middle East 1v1 Showdown is a separate monthly 1v1 event on the last weekend of each month. Give its dates from the schedule; for its registration and format, say details are announced in Discord unless an announcement says more.",
     "- Never give an official ruling on a specific match incident, dispute, forfeit, reschedule or appeal (for example 'should that goal count?'). Explain the relevant rule simply and tell them the Tournament Administrators decide; disputes go through a ticket (Rule 5.3).",
     "- Never promise anything on behalf of the team (rescheduling, extra time, exceptions, prize payments, roles).",
+    "- Never mention any money, cash prize, prize pool amount or prize payments for the MECS Regionals or the MECS Middle East 1v1 Showdown, even if the rulebook or an announcement mentions one. If asked, say they're played for the title and the crown (e.g. MECS APAC I Champion). Past events (MECS Middle East, SPL) can keep their prize pool facts.",
     "- Unannounced things (future editions, new regions, future dates, prize changes, staff decisions): say they haven't been announced yet.",
     "- Betting or gambling on matches: don't help. Mention that wagering on MECS matches isn't allowed (Rule 7.3).",
     "- Players: talk only about what's in the announcements (team name, result). Never share or guess personal details, accounts, ranks, ages, locations or anything private about any player or staff member.",

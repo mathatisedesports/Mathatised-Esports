@@ -116,16 +116,32 @@
     map.forEach(function (p) { while (n >= p[0]) { out += p[1]; n -= p[0]; } });
     return out;
   }
+  /* Saturdays (YYYY-MM-DD) in a given UTC year/month */
+  function saturdaysOf(year, month) {
+    var out = [], d = new Date(Date.UTC(year, month, 1));
+    while (d.getUTCDay() !== 6) d = new Date(d.getTime() + DAY_MS);
+    while (d.getUTCMonth() === month) { out.push(d.toISOString().slice(0, 10)); d = new Date(d.getTime() + 7 * DAY_MS); }
+    return out;
+  }
+  /* Every event (past and upcoming): { name, region, type: "regional"|"showdown"|"open", status, when… } */
   function regionalsList(weeksAhead) {
     var cfg = SITE.regionals;
     if (!cfg) return [];
-    var list = (cfg.events || []).map(function (e) { return { date: e.date, region: e.region, name: e.name, numbered: e.numbered !== false, format: e.format }; });
-    var rot = cfg.rotation;
-    if (rot && rot.from && rot.order && rot.order.length) {
-      var start = Date.parse(rot.from + "T00:00:00Z");
-      var until = Date.now() + (weeksAhead || 12) * 7 * DAY_MS;
-      for (var i = 0, t = start; t <= until && i < 520; i++, t += 7 * DAY_MS) {
-        list.push({ date: new Date(t).toISOString().slice(0, 10), region: rot.order[i % rot.order.length], numbered: true });
+    var list = (cfg.events || []).map(function (e) { return { date: e.date, region: e.region, type: e.type || "regional" }; });
+    var mo = cfg.monthly;
+    if (mo && mo.from && mo.weekends) {
+      var until = new Date(Date.now() + (weeksAhead || 12) * 7 * DAY_MS).toISOString().slice(0, 7);
+      var y = +mo.from.slice(0, 4), m = +mo.from.slice(5, 7) - 1;
+      for (var guard = 0; guard < 120; guard++) {
+        var key = y + "-" + (m < 9 ? "0" : "") + (m + 1);
+        if (key > until) break;
+        var sats = saturdaysOf(y, m);
+        sats.forEach(function (date, i) {
+          if (i === sats.length - 1 && mo.lastWeekend) list.push({ date: date, region: mo.lastWeekend.region, type: mo.lastWeekend.type || "showdown" });
+          else if (i < mo.weekends.length) list.push({ date: date, region: mo.weekends[i], type: "regional" });
+          else list.push({ date: date, region: "", type: "open" });
+        });
+        m++; if (m > 11) { m = 0; y++; }
       }
     }
     list.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
@@ -134,11 +150,16 @@
     return list.map(function (e) {
       var sat = Date.parse(e.date + "T00:00:00Z");
       var sun = new Date(sat + DAY_MS).toISOString().slice(0, 10);
-      var numeral = "";
-      if (e.numbered) { count[e.region] = (count[e.region] || 0) + 1; numeral = roman(count[e.region]); }
-      var name = e.name || ("MECS " + e.region + (numeral ? " " + numeral : ""));
+      var numeral = "", name = "To be announced";
+      if (e.type !== "open") {
+        var k = e.type + ":" + e.region;
+        count[k] = (count[k] || 0) + 1;
+        numeral = roman(count[k]);
+        name = "MECS " + e.region + (e.type === "showdown" ? " 1v1 Showdown " : " ") + numeral;
+      }
       return {
-        name: name, region: e.region, numeral: numeral, sat: e.date, sun: sun, format: e.format || "2v2",
+        name: name, region: e.region, type: e.type, numeral: numeral, sat: e.date, sun: sun,
+        format: e.type === "showdown" ? "1v1" : "2v2",
         champion: name + " Champion",
         status: today > sun ? "completed" : today >= e.date ? "live" : "upcoming",
         when: weekendLabel(sat)
@@ -362,7 +383,7 @@
 
     /* Upcoming MECS Regionals (config.js: regionals) */
     "regionals-schedule": function (el) {
-      var all = regionalsList(16);
+      var all = regionalsList(16).filter(function (e) { return e.type !== "open"; });
       var lastDone = all.filter(function (e) { return e.status === "completed"; }).slice(-1);
       var ahead = all.filter(function (e) { return e.status !== "completed"; }).slice(0, (SITE.regionals && SITE.regionals.show) || 6);
       var first = true;
@@ -371,9 +392,9 @@
           : e.status === "live" ? '<span class="tl-tag tl-tag--live">This weekend</span>'
           : first ? '<span class="tl-tag">Next up</span>' : "";
         if (e.status !== "completed") first = false;
-        return '<li class="tl-item' + (e.status === "completed" ? " tl-item--done" : "") + (e.status === "live" ? " tl-item--live" : "") + '">' +
+        return '<li class="tl-item' + (e.type === "showdown" ? " tl-item--showdown" : "") + (e.status === "completed" ? " tl-item--done" : "") + (e.status === "live" ? " tl-item--live" : "") + '">' +
           '<span class="tl-dot tl-dot--text">' + esc(e.numeral || "★") + "</span>" +
-          '<div class="card tl-card"><div><h3>' + esc(e.name) + "</h3><p>" + esc(e.region) + (e.format === "2v2" ? " · 2v2 · 8 teams · Saturday &amp; Sunday" : " · " + esc(e.format) + " special · Saturday &amp; Sunday · $20 to the winner") + "</p></div>" +
+          '<div class="card tl-card"><div><h3>' + esc(e.name) + "</h3><p>" + esc(e.region) + (e.type === "showdown" ? " · 1v1 · monthly Showdown · details in Discord" : " · 2v2 · 8 teams · Saturday &amp; Sunday") + "</p></div>" +
           '<span class="tl-when">' + esc(e.when) + " " + tag + "</span></div></li>";
       }).join("");
     },
@@ -408,7 +429,7 @@
 
     /* "MECS APAC I · 7–8 Nov" for the next (or current) Regional */
     "regionals-next": function (el) {
-      var next = regionalsList(8).filter(function (e) { return e.status !== "completed"; })[0];
+      var next = regionalsList(8).filter(function (e) { return e.status !== "completed" && e.type !== "open"; })[0];
       if (next) el.textContent = next.name + " · " + next.when;
     },
 
